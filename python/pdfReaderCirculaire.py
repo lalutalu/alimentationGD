@@ -1,5 +1,6 @@
 import re
 import PyPDF2
+from reportlab.pdfgen import canvas
 
 noCode = 0
 PERCENTAGE = 14.95
@@ -12,7 +13,6 @@ class Product:
         self.code39 = code39
         self.weight = weight
         self.unit = unit
-        pass
 
 def extract_product_name(product_line: str) -> str:
     pattern = r'IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})'
@@ -97,11 +97,38 @@ def extract_weight(product_line: str) -> tuple:
 def calculate_new_price(ogPrice: float) -> float:
     return ogPrice * (1 + PERCENTAGE / 100)
 
+def create_product_pdf(products, output_pdf_path):
+    c = canvas.Canvas(output_pdf_path)
+
+    y_position = 750  # Starting y-position for the first line
+    page_height = 800  # Height of each page
+
+    for product in products:
+        c.drawString(100, y_position, f"Product Name: {product.name}")
+        c.drawString(100, y_position - 20, f"Original Price: {product.prixOg}")
+        c.drawString(100, y_position - 40, f"New Price: {product.prixNew}")
+        c.drawString(100, y_position - 60, f"Product Code: {product.code39}")
+        c.drawString(100, y_position - 80, f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
+
+        y_position -= 100  # Adjust the y-position for the next line
+
+        if y_position <= 0:
+            # Start a new page
+            c.showPage()
+            y_position = page_height
+
+    c.save()
+
 pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
 combined_lines = extract_product_with_details(pdf_path)
-    
+
+# Create a list to store Product objects
+products = []
+
 for line in combined_lines:
     weight, unit = extract_weight(line)
+
+    # Create a Product object for each product line
     product = Product(
         name=extract_product_name(line),
         prixOg=extract_original_price(line),
@@ -110,14 +137,22 @@ for line in combined_lines:
         weight=weight,
         unit=unit
     )
-    print(product.name)
-    print(product.prixOg)
-    print(product.prixNew)
-    print(product.code39)
-    print(product.weight, product.unit)
-    print("-----")
-    
-#     if extract_product_code(line) == "No Code":
-#         noCode += 1
 
-# print(noCode)
+    # Append the Product object to the list
+    products.append(product)
+
+# Now, 'products' list contains instances of the Product class with extracted information
+
+# Print and save the information to a new PDF
+output_pdf_path = "products_information.pdf"
+create_product_pdf(products, output_pdf_path)
+
+# Display product information
+for product in products:
+    print("Product Name:", product.name)
+    print("Original Price:", product.prixOg)
+    print("New Price:", product.prixNew)
+    print("Product Code:", product.code39)
+    print(f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
+    print("-----")
+
