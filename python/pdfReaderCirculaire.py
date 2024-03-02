@@ -2,6 +2,17 @@ import re
 import PyPDF2
 
 noCode = 0
+PERCENTAGE = 14.95
+
+class Product:
+    def __init__(self, name, prixOg, prixNew, code39, weight, unit) -> None:
+        self.name = name
+        self.prixOg = prixOg
+        self.prixNew = prixNew
+        self.code39 = code39
+        self.weight = weight
+        self.unit = unit
+        pass
 
 def extract_product_name(product_line: str) -> str:
     pattern = r'IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})'
@@ -83,20 +94,30 @@ def extract_weight(product_line: str) -> tuple:
         return (weight, unit)
 
 
+def calculate_new_price(ogPrice: float) -> float:
+    return ogPrice * (1 + PERCENTAGE / 100)
+
 pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
 combined_lines = extract_product_with_details(pdf_path)
     
-
-
 for line in combined_lines:
     weight, unit = extract_weight(line)
-    print(extract_product_name(line))
-    print("Original Price: ", extract_original_price(line))
-    print(extract_product_code(line))
-    print(f"Quantity: {extract_quantity(line)}, Weight: {weight} {unit}")
+    product = Product(
+        name=extract_product_name(line),
+        prixOg=extract_original_price(line),
+        prixNew=calculate_new_price(float(extract_original_price(line))),
+        code39=extract_product_code(line),
+        weight=weight,
+        unit=unit
+    )
+    print(product.name)
+    print(product.prixOg)
+    print(product.prixNew)
+    print(product.code39)
+    print(product.weight, product.unit)
     print("-----")
     
-    if extract_product_code(line) == "No Code":
-        noCode += 1
+#     if extract_product_code(line) == "No Code":
+#         noCode += 1
 
-print(noCode)
+# print(noCode)
