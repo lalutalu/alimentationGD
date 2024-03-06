@@ -96,32 +96,31 @@ def extract_weight(product_line: str) -> tuple:
 
 
 def calculate_new_price(ogPrice: float) -> float:
-    return ogPrice * (1 + PERCENTAGE / 100)
+    new_price = ogPrice * (1 + PERCENTAGE / 100)
+    return round(new_price, 2)
 
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
 
     y_position = 750
     page_height = 800
-    line_height = 120  # Adjust the line height based on your requirements
+    line_height = 20
+    font_size = 10
 
     for product in products:
-        c.drawString(100, y_position, f"Product Name: {product.name}")
-        c.drawString(100, y_position - 20, f"New Price: {product.prixNew}")
-        c.drawString(100, y_position - 40, f"Product Code: {product.code39}")
-        c.drawString(100, y_position - 60, f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
-
+        c.setFont("Helvetica", font_size)
+        c.drawString(50, y_position, f"Nom: {product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, Unité: {product.weight} {product.unit}, Code39: {product.code39}")
+        
         barcode = code39.Standard39(product.code39)
-        barcode.drawOn(c, 100, y_position - 80)
+        barcode.drawOn(c, 50, y_position - line_height)
 
-        y_position -= line_height
+        y_position -= 2 * line_height
 
         if y_position <= 0:
             c.showPage()
             y_position = page_height
 
     c.save()
-
 pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
 combined_lines = extract_product_with_details(pdf_path)
 
