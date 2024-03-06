@@ -1,6 +1,8 @@
 import re
 import PyPDF2
 from reportlab.pdfgen import canvas
+from reportlab.graphics.barcode import code39
+# from PIL import Image
 
 noCode = 0
 PERCENTAGE = 14.95
@@ -100,35 +102,35 @@ def calculate_new_price(ogPrice: float) -> float:
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
 
-    y_position = 750  # Starting y-position for the first line
-    page_height = 800  # Height of each page
+    y_position = 750
+    page_height = 800
 
     for product in products:
         c.drawString(100, y_position, f"Product Name: {product.name}")
-        c.drawString(100, y_position - 20, f"Original Price: {product.prixOg}")
         c.drawString(100, y_position - 40, f"New Price: {product.prixNew}")
         c.drawString(100, y_position - 60, f"Product Code: {product.code39}")
         c.drawString(100, y_position - 80, f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
 
-        y_position -= 100  # Adjust the y-position for the next line
+        barcode = code39.Standard39(product.code39)
+        barcode.drawOn(c, 100, y_position - 100)
+
+        y_position -= 200
 
         if y_position <= 0:
-            # Start a new page
             c.showPage()
             y_position = page_height
 
     c.save()
 
+
 pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
 combined_lines = extract_product_with_details(pdf_path)
 
-# Create a list to store Product objects
 products = []
 
 for line in combined_lines:
     weight, unit = extract_weight(line)
 
-    # Create a Product object for each product line
     product = Product(
         name=extract_product_name(line),
         prixOg=extract_original_price(line),
@@ -138,16 +140,11 @@ for line in combined_lines:
         unit=unit
     )
 
-    # Append the Product object to the list
     products.append(product)
 
-# Now, 'products' list contains instances of the Product class with extracted information
 
-# Print and save the information to a new PDF
 output_pdf_path = "products_information.pdf"
 create_product_pdf(products, output_pdf_path)
-
-# Display product information
 for product in products:
     print("Product Name:", product.name)
     print("Original Price:", product.prixOg)
@@ -155,4 +152,3 @@ for product in products:
     print("Product Code:", product.code39)
     print(f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
     print("-----")
-
