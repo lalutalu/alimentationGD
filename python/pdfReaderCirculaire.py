@@ -144,8 +144,6 @@ def create_product_pdf(products, output_pdf_path):
 
     c.save()
 
-
-
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
 
@@ -153,7 +151,7 @@ def create_product_pdf(products, output_pdf_path):
     page_height = 800
     line_height = 20
     font_size = 10
-    text_field_width = 200
+    text_field_width = 30
 
     for product_index, product in enumerate(products):
         c.setFont("Helvetica", font_size)
