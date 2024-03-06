@@ -109,7 +109,7 @@ def create_product_pdf(products, output_pdf_path):
 
     for product in products:
         c.setFont("Helvetica", font_size)
-        c.drawString(50, y_position, f"Nom: {product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, Unité: {product.weight} {product.unit}, Code39: {product.code39}")
+        c.drawString(50, y_position, f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, Unité: {product.weight} {product.unit}, Code39: {product.code39}")
         
         barcode = code39.Standard39(product.code39)
         barcode.drawOn(c, 50, y_position - line_height)
