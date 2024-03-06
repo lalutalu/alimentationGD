@@ -2,7 +2,6 @@ import re
 import PyPDF2
 from reportlab.pdfgen import canvas
 from reportlab.graphics.barcode import code39
-# from PIL import Image
 
 noCode = 0
 PERCENTAGE = 14.95
@@ -104,24 +103,24 @@ def create_product_pdf(products, output_pdf_path):
 
     y_position = 750
     page_height = 800
+    line_height = 120  # Adjust the line height based on your requirements
 
     for product in products:
         c.drawString(100, y_position, f"Product Name: {product.name}")
-        c.drawString(100, y_position - 40, f"New Price: {product.prixNew}")
-        c.drawString(100, y_position - 60, f"Product Code: {product.code39}")
-        c.drawString(100, y_position - 80, f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
+        c.drawString(100, y_position - 20, f"New Price: {product.prixNew}")
+        c.drawString(100, y_position - 40, f"Product Code: {product.code39}")
+        c.drawString(100, y_position - 60, f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
 
         barcode = code39.Standard39(product.code39)
-        barcode.drawOn(c, 100, y_position - 100)
+        barcode.drawOn(c, 100, y_position - 80)
 
-        y_position -= 200
+        y_position -= line_height
 
         if y_position <= 0:
             c.showPage()
             y_position = page_height
 
     c.save()
-
 
 pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
 combined_lines = extract_product_with_details(pdf_path)
