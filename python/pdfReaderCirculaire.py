@@ -1,7 +1,9 @@
 import re
 import PyPDF2
 from reportlab.pdfgen import canvas
+from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.graphics.barcode import code39
+from reportlab.lib.colors import black
 
 noCode = 0
 PERCENTAGE = 14.95
@@ -99,6 +101,7 @@ def calculate_new_price(ogPrice: float) -> float:
     new_price = ogPrice * (1 + PERCENTAGE / 100)
     return round(new_price, 2)
 
+
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
 
@@ -106,25 +109,89 @@ def create_product_pdf(products, output_pdf_path):
     page_height = 800
     line_height = 20
     font_size = 10
+    text_field_width = 200
 
-    for product in products:
+    for product_index, product in enumerate(products):
         c.setFont("Helvetica", font_size)
-        c.drawString(50, y_position, f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, Unité: {product.weight} {product.unit}, Code39: {product.code39}")
-        
+
+        product_info = (
+            f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(product_line)}, "
+            f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
+        )
+        c.drawString(50, y_position, product_info)
+
         barcode = code39.Standard39(product.code39)
         barcode.drawOn(c, 50, y_position - line_height)
 
-        y_position -= 2 * line_height
+        form = c.acroForm
+        field_name = f'zip_code_{product_index}'
+        form.textfield(
+            name=field_name,
+            tooltip=f'Zip Code for {product.name}',
+            x=10,
+            y=y_position - 2 * line_height,  # Adjust the y-coordinate
+            width=text_field_width,
+            height=font_size,
+            textColor=black,
+            forceBorder=True,
+        )
+
+        y_position -= 3 * line_height  # Adjust line spacing
 
         if y_position <= 0:
             c.showPage()
             y_position = page_height
 
     c.save()
-pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
-combined_lines = extract_product_with_details(pdf_path)
+
+
+
+def create_product_pdf(products, output_pdf_path):
+    c = canvas.Canvas(output_pdf_path)
+
+    y_position = 750
+    page_height = 800
+    line_height = 20
+    font_size = 10
+    text_field_width = 200
+
+    for product_index, product in enumerate(products):
+        c.setFont("Helvetica", font_size)
+
+        product_info = (
+            f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, "
+            f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
+        )
+        c.drawString(50, y_position, product_info)
+
+        barcode = code39.Standard39(product.code39)
+        barcode.drawOn(c, 50, y_position - line_height)
+
+        form = c.acroForm
+        field_name = f'zip_code_{product_index}'
+        form.textfield(
+            name=field_name,
+            tooltip=f'Zip Code for {product.name}',
+            x=10,
+            y=y_position - 2 * line_height,  # Adjust the y-coordinate
+            width=text_field_width,
+            height=font_size,
+            textColor=black,
+            forceBorder=True,
+        )
+
+        y_position -= 3 * line_height  # Adjust line spacing
+
+        if y_position <= 0:
+            c.showPage()
+            y_position = page_height
+
+    c.save()
+
 
 products = []
+pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
+combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
     weight, unit = extract_weight(line)
