@@ -40,15 +40,6 @@ def extract_product_upc(product_line: str) -> str:
         return "No UPC"
 
 def extract_product_code(product_line: str) -> str:
-    match = re.search(r'\b(\d{7})[A-Za-z]?\b', product_line)
-
-    if match:
-        return match.group(1)
-    else:
-        print(f"No Code: {product_line}")
-        return "No Code"
-
-
 def extract_product_with_details(pdf_path: str) -> [str]:
     with open(pdf_path, 'rb') as pdf:
         reader = PyPDF2.PdfReader(pdf, strict=False)
@@ -188,7 +179,7 @@ def create_product_pdf(products, output_pdf_path):
 
 
 products = []
-pdf_path = "circulaire-25-janvier-au-8-fev.pdf"
+pdf_path = "commande.PDF"
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
