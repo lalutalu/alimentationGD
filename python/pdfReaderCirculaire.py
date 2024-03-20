@@ -39,8 +39,18 @@ def extract_product_upc(product_line: str) -> str:
     else:
         return "No UPC"
 
+
 def extract_product_code(product_line: str) -> str:
-def extract_product_with_details(pdf_path: str) -> [str]:
+    match = re.search(r'\b(\d{7})[A-Za-z]?\b', product_line)
+
+    if match:
+        return match.group(1)
+    else:
+        print(f"No Code: {product_line}")
+        return "No Code"
+
+
+def extract_product_with_details(pdf_path: str) -> list:
     with open(pdf_path, 'rb') as pdf:
         reader = PyPDF2.PdfReader(pdf, strict=False)
         product_lines = []
@@ -93,47 +103,47 @@ def calculate_new_price(ogPrice: float) -> float:
     return round(new_price, 2)
 
 
-def create_product_pdf(products, output_pdf_path):
-    c = canvas.Canvas(output_pdf_path)
-
-    y_position = 750
-    page_height = 800
-    line_height = 20
-    font_size = 10
-    text_field_width = 200
-
-    for product_index, product in enumerate(products):
-        c.setFont("Helvetica", font_size)
-
-        product_info = (
-            f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(product_line)}, "
-            f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
-        )
-        c.drawString(50, y_position, product_info)
-
-        barcode = code39.Standard39(product.code39)
-        barcode.drawOn(c, 50, y_position - line_height)
-
-        form = c.acroForm
-        field_name = f'zip_code_{product_index}'
-        form.textfield(
-            name=field_name,
-            tooltip=f'Zip Code for {product.name}',
-            x=10,
-            y=y_position - 2 * line_height,  # Adjust the y-coordinate
-            width=text_field_width,
-            height=font_size,
-            textColor=black,
-            forceBorder=True,
-        )
-
-        y_position -= 3 * line_height  # Adjust line spacing
-
-        if y_position <= 0:
-            c.showPage()
-            y_position = page_height
-
-    c.save()
+# def create_product_pdf(products, output_pdf_path):
+#     c = canvas.Canvas(output_pdf_path)
+#
+#     y_position = 750
+#     page_height = 800
+#     line_height = 20
+#     font_size = 10
+#     text_field_width = 200
+#
+#     for product_index, product in enumerate(products):
+#         c.setFont("Helvetica", font_size)
+#
+#         product_info = (
+#             f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(product_line)}, "
+#             f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
+#         )
+#         c.drawString(50, y_position, product_info)
+#
+#         barcode = code39.Standard39(product.code39)
+#         barcode.drawOn(c, 50, y_position - line_height)
+#
+#         form = c.acroForm
+#         field_name = f'zip_code_{product_index}'
+#         form.textfield(
+#             name=field_name,
+#             tooltip=f'Zip Code for {product.name}',
+#             x=10,
+#             y=y_position - 2 * line_height,  # Adjust the y-coordinate
+#             width=text_field_width,
+#             height=font_size,
+#             textColor=black,
+#             forceBorder=True,
+#         )
+#
+#         y_position -= 3 * line_height  # Adjust line spacing
+#
+#         if y_position <= 0:
+#             c.showPage()
+#             y_position = page_height
+#
+#     c.save()
 
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
@@ -204,5 +214,5 @@ for product in products:
     print("Original Price:", product.prixOg)
     print("New Price:", product.prixNew)
     print("Product Code:", product.code39)
-    print(f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
+    # print(f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
     print("-----")
