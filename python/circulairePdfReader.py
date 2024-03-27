@@ -8,6 +8,7 @@ from reportlab.lib.colors import black
 noCode = 0
 PERCENTAGE = 14.95
 
+
 class Product:
     def __init__(self, name, prixOg, prixNew, code39, weight, unit) -> None:
         self.name = name
@@ -16,6 +17,7 @@ class Product:
         self.code39 = code39
         self.weight = weight
         self.unit = unit
+
 
 def extract_product_name(product_line: str) -> str:
     pattern = r'IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})'
@@ -27,6 +29,7 @@ def extract_product_name(product_line: str) -> str:
         return result
     else:
         return "No Name"
+
 
 def extract_product_upc(product_line: str) -> str:
     pattern = r'IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})'
@@ -72,13 +75,16 @@ def extract_product_with_details(pdf_path: str) -> list:
 
         return product_lines
 
+
 def extract_original_price(product_line: str) -> str:
     match = re.search(r'\b(\d+\.\d+)\s+', product_line)
     return match.group(1) if match else "No Original Price"
 
+
 def extract_quantity(product_line: str) -> str:
     match = re.search(r'\d+\s+(\d+)', product_line)
     return match.group(1) if match else "No Quantity"
+
 
 def extract_weight(product_line: str) -> tuple:
     match = re.search(r'\d+\s+(\d+)\s+([A-Za-z]+)', product_line)
@@ -103,48 +109,6 @@ def calculate_new_price(ogPrice: float) -> float:
     return round(new_price, 2)
 
 
-# def create_product_pdf(products, output_pdf_path):
-#     c = canvas.Canvas(output_pdf_path)
-#
-#     y_position = 750
-#     page_height = 800
-#     line_height = 20
-#     font_size = 10
-#     text_field_width = 200
-#
-#     for product_index, product in enumerate(products):
-#         c.setFont("Helvetica", font_size)
-#
-#         product_info = (
-#             f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(product_line)}, "
-#             f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
-#         )
-#         c.drawString(50, y_position, product_info)
-#
-#         barcode = code39.Standard39(product.code39)
-#         barcode.drawOn(c, 50, y_position - line_height)
-#
-#         form = c.acroForm
-#         field_name = f'zip_code_{product_index}'
-#         form.textfield(
-#             name=field_name,
-#             tooltip=f'Zip Code for {product.name}',
-#             x=10,
-#             y=y_position - 2 * line_height,  # Adjust the y-coordinate
-#             width=text_field_width,
-#             height=font_size,
-#             textColor=black,
-#             forceBorder=True,
-#         )
-#
-#         y_position -= 3 * line_height  # Adjust line spacing
-#
-#         if y_position <= 0:
-#             c.showPage()
-#             y_position = page_height
-#
-#     c.save()
-
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
 
@@ -158,13 +122,14 @@ def create_product_pdf(products, output_pdf_path):
         c.setFont("Helvetica", font_size)
 
         product_info = (
-            f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, "
+            f"{product.name}, Prix: ${product.prixNew}, Quantité: {
+                extract_quantity(line)}, "
             f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
         )
         c.drawString(50, y_position, product_info)
 
         barcode = code39.Standard39(product.code39)
-        barcode.drawOn(c, 50, y_position - line_height)
+        barcode.drawOn(c, 50 + + 440, y_position)
 
         form = c.acroForm
         field_name = f'zip_code_{product_index}'
@@ -172,7 +137,7 @@ def create_product_pdf(products, output_pdf_path):
             name=field_name,
             tooltip=f'Zip Code for {product.name}',
             x=10,
-            y=y_position - 2 * line_height,  # Adjust the y-coordinate
+            y=y_position,  # Adjust the y-coordinate
             width=text_field_width,
             height=font_size,
             textColor=black,
@@ -189,7 +154,7 @@ def create_product_pdf(products, output_pdf_path):
 
 
 products = []
-pdf_path = "commande.PDF"
+pdf_path = "../pdfs/3-27-2024.PDF"
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
@@ -214,5 +179,4 @@ for product in products:
     print("Original Price:", product.prixOg)
     print("New Price:", product.prixNew)
     print("Product Code:", product.code39)
-    # print(f"Quantity: {extract_quantity(line)}, Weight: {product.weight} {product.unit}")
     print("-----")
