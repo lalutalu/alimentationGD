@@ -122,8 +122,7 @@ def create_product_pdf(products, output_pdf_path):
         c.setFont("Helvetica", font_size)
 
         product_info = (
-            f"{product.name}, Prix: ${product.prixNew}, Quantité: {
-                extract_quantity(line)}, "
+            f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, "
             f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
         )
         c.drawString(50, y_position, product_info)
@@ -154,7 +153,7 @@ def create_product_pdf(products, output_pdf_path):
 
 
 products = []
-pdf_path = "../pdfs/3-27-2024.PDF"
+pdf_path = "../pdfs/04-03-2024.pdf"
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
