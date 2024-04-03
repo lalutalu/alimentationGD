@@ -171,7 +171,7 @@ for line in combined_lines:
     products.append(product)
 
 
-output_pdf_path = "products_information.pdf"
+output_pdf_path = "../pdfs/nouveau.pdf"
 create_product_pdf(products, output_pdf_path)
 for product in products:
     print("Product Name:", product.name)
