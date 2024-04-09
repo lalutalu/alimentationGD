@@ -209,7 +209,7 @@ def create_product_pdf(
     order_info = order_details[0]
     c.setFont("Helvetica", 18)
 
-    c.drawString(50, y_position + 50, order_info)
+    c.drawString(50, y_position + 50, " ".join(order_info))
 
     realClientInfo = client_info[0]
     y_position -= line_height
