@@ -1,5 +1,6 @@
 import re
 import PyPDF2
+import os
 from reportlab.pdfgen import canvas
 from reportlab.graphics.barcode import code39
 import smtplib
@@ -11,7 +12,7 @@ import tkinter as tk
 from tkinter import filedialog
 
 pdf_path = ""
-new_pdf_path = "../pdfs/new_order.pdf"
+new_pdf_path = os.path.join("..", "pdfs", "new_order.pdf")
 
 
 class Product:
@@ -53,7 +54,8 @@ def create_gui():
                     get_client_info(combined_lines),
                     new_pdf_path,
                 )
-                send_emails(new_pdf_path, order_details)
+                print("DONE!!")
+                # send_emails(new_pdf_path, order_details)
 
             except Exception as e:
                 print("An error occurred:", e)  # Handle potential errors
@@ -207,9 +209,10 @@ def create_product_pdf(
     line_height = 20
 
     order_info = order_details[0]
+    order_info = " ".join(order_info)
     c.setFont("Helvetica", 18)
 
-    c.drawString(50, y_position + 50, " ".join(order_info))
+    c.drawString(50, y_position + 50, order_info)
 
     realClientInfo = client_info[0]
     y_position -= line_height
@@ -222,7 +225,7 @@ def create_product_pdf(
         c.drawString(50, y_position - 20, product.code39)
         c.drawString(50, y_position - 40, product.details)
 
-        barcode = code39.Standard39(product.details)
+        barcode = code39.Standard39(product.details, barWidth=0.5,barHeight=20)
         barcode.drawOn(c, 350, y_position)
 
         y_position -= 3 * line_height
