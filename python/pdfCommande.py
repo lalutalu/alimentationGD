@@ -1,10 +1,7 @@
-from math import prod
 import re
 import PyPDF2
 from reportlab.pdfgen import canvas
-from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.graphics.barcode import code39
-from reportlab.lib.colors import black, linearlyInterpolatedColor
 
 
 class Product:
@@ -12,6 +9,7 @@ class Product:
         self.name = name
         self.details = details
         self.code39 = code39
+
 
 def extract_sku(text_output: list) -> list:
   sku_regex = r'SKU\s*:\s*(\d{7})'
@@ -32,6 +30,8 @@ def extract_pdf_lines(pdf_path: str) -> list:
             page = reader.pages[page_num]
             content = page.extract_text()
             lines = content.splitlines()
+            for line in lines:
+                print(line)
             extracted_lines.extend(lines)
 
     return extracted_lines
@@ -63,6 +63,33 @@ def extract_order_details(lines: list) -> list:
         results.append("Commande # not found")
   return results
 
+def get_order_total(lines: list[str]) -> list[str]:
+  total_lines = []
+  for line in lines:
+    if "Total" in line:
+      total_lines.append(line)
+  return total_lines
+
+def get_order_sub_total(lines: list[str]) -> list[str]:
+  total_lines = []
+  for line in lines:
+    if "Sous-total" in line:
+      total_lines.append(line)
+  return total_lines
+
+def get_order_tax(lines: list[str]) -> list[str]:
+  total_lines = []
+  for line in lines:
+    if "Taxe" in line:
+      total_lines.append(line)
+  return total_lines
+
+def get_order_expedition(lines: list[str]) -> list[str]:
+  total_lines = []
+  for line in lines:
+    if "Expédition" in line:
+      total_lines.append(line)
+  return total_lines
 
 def extract_price_quantities(lines: list) -> list:
     results = []
@@ -88,7 +115,7 @@ def create_product(names: list, skus: list, details: list) -> list:
      return products
 
 
-def create_product_pdf(products, order_details, output_pdf_path):
+def create_product_pdf(products, order_details, subtotal, tax, expedition, total, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
 
     y_position = 750
@@ -115,15 +142,32 @@ def create_product_pdf(products, order_details, output_pdf_path):
             c.showPage()
             y_position = page_height
 
+    c.setFont("Helvetica", 14)
+
+    realSubTotal = subtotal[0]
+    y_position -= line_height  # Move down one line
+    c.drawString(350, y_position, f"{realSubTotal}")  # Format subtotal with 2 decimal places
+
+    realTax = tax[0]
+    y_position -= line_height  # Move down one line
+    c.drawString(350, y_position, f"{realTax}")  # Format total with 2 decimal places
+
+    realExpedition = expedition[0]
+    y_position -= line_height  # Move down one line
+    c.drawString(350, y_position, f"{realExpedition}")  # Format total with 2 decimal places
+
+    realTotal = total[0]
+    y_position -= line_height  # Move down one line
+    c.drawString(350, y_position, f"{realTotal}")  # Format total with 2 decimal places
+
     c.save()
 
 
 if __name__ == "__main__":
-    pdf_path = "../pdfs/order2.pdf"
+    pdf_path = "../pdfs/order.pdf"
     new_pdf_path = "../pdfs/new_order.pdf"
     combined_lines = extract_pdf_lines(pdf_path)
-    print(combined_lines)
     order_details = extract_order_details(combined_lines)
     products = []
     products = create_product(extract_product_names(combined_lines), extract_sku(combined_lines), extract_price_quantities(combined_lines))
-    create_product_pdf(products, extract_order_details(combined_lines) ,new_pdf_path)
+    create_product_pdf(products, extract_order_details(combined_lines), get_order_sub_total(combined_lines), get_order_tax(combined_lines), get_order_expedition(combined_lines),get_order_total(combined_lines) ,new_pdf_path)
