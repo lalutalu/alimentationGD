@@ -3,17 +3,21 @@ import PyPDF2
 import os
 from reportlab.pdfgen import canvas
 from reportlab.graphics.barcode import code39
+from dotenv import load_dotenv
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import tkinter as tk
+import tkinter.messagebox as messagebox
 from tkinter import filedialog
 
+
+load_dotenv()
 pdf_path = ""
 new_pdf_path = os.path.join("..", "pdfs", "new_order.pdf")
-
+gmail_key = os.getenv("GMAIL_KEY")
 
 class Product:
     def __init__(self, name, details, code39) -> None:
@@ -21,11 +25,25 @@ class Product:
         self.details = details
         self.code39 = code39
 
+import tkinter as tk
+from tkinter import filedialog, messagebox
+
 
 def create_gui():
     root = tk.Tk()
     root.geometry("500x500")
     root.title("Choisir PDF pour Code 39")
+    root.configure(bg="#f2f2f2")
+
+    button_style = {
+        "font": ("Arial", 14, "bold"),
+        "bg": "#cc2143",
+        "fg": "#f2f2f2",
+        "padx": 20,
+        "pady": 20,
+        "relief": tk.GROOVE,
+    }
+
 
     def choose_file():
         global pdf_path
@@ -54,25 +72,87 @@ def create_gui():
                     get_client_info(combined_lines),
                     new_pdf_path,
                 )
-                print("DONE!!")
-                # send_emails(new_pdf_path, order_details)
+                send_emails(new_pdf_path, order_details)
+                messagebox.showinfo("Succes!", "PDF généré et envoyé avec succès!")
 
             except Exception as e:
-                print("An error occurred:", e)  # Handle potential errors
+                messagebox.showerror("Erreur!", f"Une erreur est survenue: {str(e)}")
         else:
-            print("Please choose a PDF file first.")
+            messagebox.showinfo("Erreur!", f"Veuillez choisir un PDF valide!")
 
-    # Create buttons for file selection, submission, and quitting
-    file_button = tk.Button(root, text="Choose PDF", command=choose_file)
-    file_button.pack()
 
-    submit_button = tk.Button(root, text="Submit", command=submit)
-    submit_button.pack()
+    # Separate frame for buttons
+    button_frame = tk.Frame(root, pady=20)
+    button_frame.pack()
 
-    quit_button = tk.Button(root, text="Quit", command=root.destroy)
-    quit_button.pack()
+    # Define buttons with styling
+    file_button = tk.Button(
+        button_frame, text="Choisir PDF!", command=choose_file, **button_style
+    )
+    file_button.pack(side=tk.LEFT)
+
+    submit_button = tk.Button(
+        button_frame, text="Soumettre", command=submit, **button_style
+    )
+    submit_button.pack(side=tk.LEFT, padx=10)
+
+    quit_button = tk.Button(
+        button_frame, text="Quitter", command=root.destroy, **button_style
+    )
+    quit_button.pack(side=tk.LEFT)
 
     root.mainloop()
+
+# def create_gui():
+#     root = tk.Tk()
+#     root.geometry("500x500")
+#     root.title("Choisir PDF pour Code 39")
+#
+#     def choose_file():
+#         global pdf_path
+#         file_path = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
+#         if file_path:
+#             pdf_path = file_path
+#
+#     def submit():
+#         if pdf_path:
+#             try:
+#                 combined_lines = extract_pdf_lines(pdf_path)
+#                 order_details = extract_order_details(combined_lines)
+#                 products = []
+#                 products = create_product(
+#                     extract_product_names(combined_lines),
+#                     extract_sku(combined_lines),
+#                     extract_price_quantities(combined_lines),
+#                 )
+#                 create_product_pdf(
+#                     products,
+#                     extract_order_details(combined_lines),
+#                     get_order_sub_total(combined_lines),
+#                     get_order_tax(combined_lines),
+#                     get_order_expedition(combined_lines),
+#                     get_order_total(combined_lines),
+#                     get_client_info(combined_lines),
+#                     new_pdf_path,
+#                 )
+#                 send_emails(new_pdf_path, order_details)
+#                 messagebox.showinfo("Succes!", "PDF genere envoye avec succes!")
+#
+#             except Exception as e:
+#                 messagebox.showinfo("Erreur!", f"{str(e)}")
+#         else:
+#             messagebox.showinfo("Erreur!", f"Veuillez Choisir Un pdf valide!")
+#
+#     file_button = tk.Button(root, text="Choisir pdf!", command=choose_file)
+#     file_button.pack()
+#
+#     submit_button = tk.Button(root, text="Soumettre", command=submit)
+#     submit_button.pack()
+#
+#     quit_button = tk.Button(root, text="Quitter", command=root.destroy)
+#     quit_button.pack()
+#
+#     root.mainloop()
 
 
 def extract_sku(text_output: list) -> list:
@@ -260,7 +340,7 @@ def create_product_pdf(
 
 
 def send_emails(file_path, order_info):
-    password = "vvxa jihc uefx vhwr"
+    password = gmail_key
 
     smtp_port = 587
     smtp_server = "smtp.gmail.com"
