@@ -225,7 +225,7 @@ def create_product_pdf(
         c.drawString(50, y_position - 20, product.code39)
         c.drawString(50, y_position - 40, product.details)
 
-        barcode = code39.Standard39(product.details, barWidth=0.5,barHeight=20)
+        barcode = code39.Standard39(product.details, barWidth=1,barHeight=35)
         barcode.drawOn(c, 350, y_position)
 
         y_position -= 3 * line_height
