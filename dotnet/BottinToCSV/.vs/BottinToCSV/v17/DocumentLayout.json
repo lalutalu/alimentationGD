@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\BottinToCSV\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|d:\\bottintocsv\\filecreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:filecreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|d:\\bottintocsv\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|d:\\bottintocsv\\pdfdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:pdfdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|d:\\bottintocsv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\BottinToCSV\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\BottinToCSV\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAxwA8AAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-28T02:06:45.945Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FileCreation.cs",
+              "DocumentMoniker": "D:\\BottinToCSV\\FileCreation.cs",
+              "RelativeDocumentMoniker": "FileCreation.cs",
+              "ToolTip": "D:\\BottinToCSV\\FileCreation.cs",
+              "RelativeToolTip": "FileCreation.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T07:59:59.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PdfDataParsing.cs",
+              "DocumentMoniker": "D:\\BottinToCSV\\PdfDataParsing.cs",
+              "RelativeDocumentMoniker": "PdfDataParsing.cs",
+              "ToolTip": "D:\\BottinToCSV\\PdfDataParsing.cs",
+              "RelativeToolTip": "PdfDataParsing.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAAAFAAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-28T03:31:55.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\BottinToCSV\\Product.cs",
+              "RelativeDocumentMoniker": "Product.cs",
+              "ToolTip": "D:\\BottinToCSV\\Product.cs",
+              "RelativeToolTip": "Product.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-28T03:38:06.374Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

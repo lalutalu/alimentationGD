@@ -1,0 +1,15 @@
+D:\IntroToRegex\RegexDemo\bin\Debug\net8.0\test.txt
+D:\IntroToRegex\RegexDemo\bin\Debug\net8.0\RegexDemo.exe
+D:\IntroToRegex\RegexDemo\bin\Debug\net8.0\RegexDemo.deps.json
+D:\IntroToRegex\RegexDemo\bin\Debug\net8.0\RegexDemo.runtimeconfig.json
+D:\IntroToRegex\RegexDemo\bin\Debug\net8.0\RegexDemo.dll
+D:\IntroToRegex\RegexDemo\bin\Debug\net8.0\RegexDemo.pdb
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\RegexDemo.GeneratedMSBuildEditorConfig.editorconfig
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\RegexDemo.AssemblyInfoInputs.cache
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\RegexDemo.AssemblyInfo.cs
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\RegexDemo.csproj.CoreCompileInputs.cache
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\RegexDemo.dll
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\refint\RegexDemo.dll
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\RegexDemo.pdb
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\RegexDemo.genruntimeconfig.cache
+D:\IntroToRegex\RegexDemo\obj\Debug\net8.0\ref\RegexDemo.dll
