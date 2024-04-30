@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\BottinToCSV\\BottinToCSV.csproj": {}
+    "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {}
   },
   "projects": {
-    "D:\\BottinToCSV\\BottinToCSV.csproj": {
+    "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BottinToCSV\\BottinToCSV.csproj",
+        "projectUniqueName": "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
         "projectName": "BottinToCSV",
-        "projectPath": "D:\\BottinToCSV\\BottinToCSV.csproj",
+        "projectPath": "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
         "packagesPath": "C:\\Users\\lalutalu\\.nuget\\packages\\",
-        "outputPath": "D:\\BottinToCSV\\obj\\",
+        "outputPath": "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lalutalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[32.0.1, )"
+            },
             "iTextSharp": {
               "target": "Package",
               "version": "[5.5.13.3, )"

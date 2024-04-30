@@ -4,34 +4,35 @@ public class PdfParser
 {
     public static void Main(string[] args)
     {
-        string filePath = "D:\\BottinToCSV\\files\\bottin.pdf";
+        string filePath = "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\files\\bottin.pdf";
         PdfDataParsing pdfDataParsing = new PdfDataParsing();
+        FileCreation fileCreation = new FileCreation();
+        int counter = 0;
         try
         {
             // Parse the PDF and extract information
             List<string> parsedData = PdfDataParsing.ParsePdf(filePath);
 
-            // Process or store the parsed data as needed
-            int counter = 0;
-            //Console.WriteLine($"Extracted data from {parsedData.Count} pages.");
-            foreach (var data in parsedData)
+            if (parsedData.Count > 1)
             {
-                //Console.WriteLine(data);
-
-                // Isolate product names using regex
-                List<string> productNames = PdfDataParsing.ParseProductName(data);
-                foreach (string name in productNames)
-                {
-                    Console.WriteLine($"Product Name: {name}");
-                }
-
-                counter++;
+                Console.WriteLine("Warning: ParsePdf returned multiple records. Using only the first page.");
             }
+
+            List<Product> products = new List<Product>();
+            foreach (var dataString in parsedData) // Iterate through each data string
+            {
+                counter++;
+                Product product = pdfDataParsing.ParseProducts(dataString);
+                product.HandleID = $"Produit_{counter}";
+                Console.WriteLine($"HANDLE_ID: {product.HandleID},Code39: {product.Code39}, Name: {product.Nom}, Quantity: {product.Quantite}, Unit: {product.Format}, Price: {product.Prix}");
+                products.Add(product);
+            }
+
+            fileCreation.CreateFile(products);
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error parsing PDF: {ex.Message}");
         }
-
     }
 }

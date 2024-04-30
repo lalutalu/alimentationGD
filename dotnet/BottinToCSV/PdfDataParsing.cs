@@ -17,89 +17,93 @@ namespace BottinToCSV
                 for (int i = 39; i <= totalPages; i++)
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
-                    string pageData = pageText;
-                    dataObjects.Add(pageData);
+
+                    // Call LineSplitter to split the page text
+                    List<string> lines = LineSplitter.SplitLines(pageText);
+
+                    foreach (string line in lines)
+                    {
+                        // Add each split line to dataObjects for further processing
+                        dataObjects.Add(line);
+                    }
                 }
             }
             return dataObjects;
         }
-        public List<string> ParseProductName(string dataString)
+        public Product ParseProducts(string dataString)
         {
-            List<string> productNames = new List<string>();
-            string pattern = @"(?<= \s*\d{7} \s+)((?:\S+\s*)+)(?= \d+)";
-            MatchCollection matches = Regex.Matches(dataString, pattern);
+            Product product = new Product();
+            product.Code39 = ParseCode39(dataString);
+            product.Nom = ParseNames(dataString);
+            product.Quantite = ParseQuantity(dataString);
+            product.Format = ParseUnit(dataString);
+            product.Prix = ParsePrix(dataString);
 
-            foreach (Match match in matches)
-            {
-                productNames.Add(match.Value);
-            }
-            return productNames;
-        }
-        public List<string> ParsePackage(string dataString)
-        {
-            List<string> packages = new List<string>();
-            string pattern = @"";
-            MatchCollection matches = Regex.Matches(dataString, pattern);
-
-            foreach (Match match in matches)
-            {
-                packages.Add(match.Value);
-            }
-            return packages;
+            return product;
         }
 
-        public List<string> ParseQuantity(string dataString)
+        public string ParseCode39(string InitialString)
         {
-            List<string> quantity = new List<string>();
-            string pattern = @"";
-            MatchCollection matches = Regex.Matches(dataString, pattern);
-
-            foreach (Match match in matches)
+            string pattern = @"^\d{7}";
+            Match match = Regex.Match(InitialString, pattern);
+            if (match.Success)
             {
-                quantity.Add(match.Value);
+                return match.Value;
             }
-            return quantity;
-        }
-        public List<double> ParsePrix(string dataString)
-        {
-            List<string> initialPrices = new List<string>();
-            List<double> newPrices = new List<double>();
-            string pattern = @"";
-            MatchCollection matches = Regex.Matches(dataString, pattern);
-
-            foreach (Match match in matches)
-            {
-                initialPrices.Add(match.Value);
-            }
-
-            foreach (string price in initialPrices)
-            {
-                var newPrice = CalculateNewPrice(price);
-                newPrices.Add(newPrice);
-
-            }
-            return newPrices;
+            return "";
         }
 
-        public List<string> ParseCode39(string dataString)
+        public string ParseNames(string InitialString)
         {
-            List<string> codes = new List<string>();
-            string patternCode39 = @"\d{7}";
-            MatchCollection matches = Regex.Matches(dataString, patternCode39);
-
-            foreach (Match match in matches)
+            string pattern = @"\d{7}\s(.*?)(?=\s\d{1,2}\s\d+)";
+            Match match = Regex.Match(InitialString, pattern);
+            if (match.Success)
             {
-                codes.Add(match.Value);
+                return match.Groups[1].Value;
             }
-            return codes;
+            return "";
         }
 
-        public double CalculateNewPrice(string initialPrice)
+        public string ParseQuantity(string InitialString)
         {
-            double price = double.Parse(initialPrice);
-            double newPrice = price / 0.70;
+            string pattern = @"\d{7}\s(.*?)(?=\s\d{1,2}\s\d+)\s(\d+)";
+            Match match = Regex.Match(InitialString, pattern);
+            if (match.Success)
+            {
+                return match.Groups[2].Value;
+            }
+            return "";
+        }
+
+        public string ParseUnit(string InitialString)
+        {
+            string pattern = @"\d{7}\s.*?(?=\s\d{1,2}\s\d+)\s\d+\s(\d+[A-Z]+)";
+            Match match = Regex.Match(InitialString, pattern);
+            if (match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+            return "";
+        }
+
+        public double ParsePrix(string dataString)
+        {
+            string pattern = @"\d{1,4}$";
+            Match match = Regex.Match(dataString, pattern);
+
+            if (match.Success)
+            {
+                var newPrice = CalculateNewPrice(double.Parse(match.Value));
+                return newPrice;
+            }
+
+            return 0;
+        }
+
+        public double CalculateNewPrice(double initialPrice)
+        {
+            double newPrice = initialPrice / 0.70;
             return newPrice;
-
         }
     }
 }
