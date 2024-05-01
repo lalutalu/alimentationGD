@@ -6,24 +6,38 @@ namespace BottinToCSV
 {
     public class PdfDataParsing
     {
+        // Change Page Values everytime a bottin is changed
         public static List<string> ParsePdf(string filePath)
         {
             List<string> dataObjects = new List<string>();
-
             using (PdfReader reader = new PdfReader(filePath))
             {
                 int totalPages = reader.NumberOfPages;
-
                 for (int i = 39; i <= totalPages; i++)
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
-
-                    // Call LineSplitter to split the page text
                     List<string> lines = LineSplitter.SplitLines(pageText);
-
                     foreach (string line in lines)
                     {
-                        // Add each split line to dataObjects for further processing
+                        dataObjects.Add(line);
+                    }
+                }
+            }
+            return dataObjects;
+        }
+        // Change Page Values everytime a bottin is changed
+        public static List<string> ParsePdfDelete(string filePath)
+        {
+            List<string> dataObjects = new List<string>();
+            using (PdfReader reader = new PdfReader(filePath))
+            {
+                int totalPages = reader.NumberOfPages;
+                for (int i = 9; i <= 11; i++)
+                {
+                    string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
+                    List<string> lines = LineSplitter.SplitLines(pageText);
+                    foreach (string line in lines)
+                    {
                         dataObjects.Add(line);
                     }
                 }
@@ -111,7 +125,8 @@ namespace BottinToCSV
 
             if (match.Success)
             {
-                var newPrice = CalculateNewPrice(double.Parse(match.Value));
+                var newPrice = double.Parse(match.Value) / 100;
+                newPrice = CalculateNewPrice(newPrice);
                 return newPrice;
             }
 

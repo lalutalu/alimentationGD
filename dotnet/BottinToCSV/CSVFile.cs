@@ -54,6 +54,17 @@ namespace BottinToCSV
                 }
             }
         }
+        public static void DeleteProducts(List<Product> old_products, List<Product> products_deleted)
+        {
+            foreach (var oldProduct in old_products)
+            {
+                Product newProduct = products_deleted.FirstOrDefault(p => p.Code39 == oldProduct.Code39);
+                if (newProduct != null)
+                {
+                    old_products.RemoveAll(p => p.Code39 == newProduct.Code39);
+                }
+            }
+        }
     }
 }
 
