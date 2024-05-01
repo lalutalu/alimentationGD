@@ -20,7 +20,7 @@ class Product:
 
 
 def extract_product_name(product_line: str) -> str:
-    pattern = r'IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})'
+    pattern = r"IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})"
     match = re.search(pattern, product_line)
 
     if match:
@@ -32,7 +32,7 @@ def extract_product_name(product_line: str) -> str:
 
 
 def extract_product_upc(product_line: str) -> str:
-    pattern = r'IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})'
+    pattern = r"IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})"
     match = re.search(pattern, product_line)
 
     if match:
@@ -44,7 +44,7 @@ def extract_product_upc(product_line: str) -> str:
 
 
 def extract_product_code(product_line: str) -> str:
-    match = re.search(r'\b(\d{7})[A-Za-z]?\b', product_line)
+    match = re.search(r"\b(\d{7})[A-Za-z]?\b", product_line)
 
     if match:
         return match.group(1)
@@ -54,7 +54,7 @@ def extract_product_code(product_line: str) -> str:
 
 
 def extract_product_with_details(pdf_path: str) -> list:
-    with open(pdf_path, 'rb') as pdf:
+    with open(pdf_path, "rb") as pdf:
         reader = PyPDF2.PdfReader(pdf, strict=False)
         product_lines = []
 
@@ -62,11 +62,11 @@ def extract_product_with_details(pdf_path: str) -> list:
             page = reader.pages[page_num]
             content = page.extract_text()
 
-            lines = content.split('\n')
+            lines = content.split("\n")
             product_line = ""
 
             for line in lines:
-                if re.match(r'^IMPACT-\d+\s+', line):
+                if re.match(r"^IMPACT-\d+\s+", line):
                     product_line = line
                 elif product_line:
                     product_line += f" {line}"
@@ -77,25 +77,25 @@ def extract_product_with_details(pdf_path: str) -> list:
 
 
 def extract_original_price(product_line: str) -> str:
-    match = re.search(r'\b(\d+\.\d+)\s+', product_line)
+    match = re.search(r"\b(\d+\.\d+)\s+", product_line)
     return match.group(1) if match else "No Original Price"
 
 
 def extract_quantity(product_line: str) -> str:
-    match = re.search(r'\d+\s+(\d+)', product_line)
+    match = re.search(r"\d+\s+(\d+)", product_line)
     return match.group(1) if match else "No Quantity"
 
 
 def extract_weight(product_line: str) -> tuple:
-    match = re.search(r'\d+\s+(\d+)\s+([A-Za-z]+)', product_line)
+    match = re.search(r"\d+\s+(\d+)\s+([A-Za-z]+)", product_line)
 
     if match:
         return match.groups()
     else:
-        weight_match = re.search(r'(\d+)\D*$', product_line)
+        weight_match = re.search(r"(\d+)\D*$", product_line)
         weight = weight_match.group(1) if weight_match else "No Weight"
 
-        unit_match = re.search(r'([^\d]+)$', product_line)
+        unit_match = re.search(r"([^\d]+)$", product_line)
         unit = unit_match.group(1).strip() if unit_match else "No Unit"
 
         if weight == "No Weight" and unit == "No Unit":
@@ -128,13 +128,13 @@ def create_product_pdf(products, output_pdf_path):
         c.drawString(50, y_position, product_info)
 
         barcode = code39.Standard39(product.code39)
-        barcode.drawOn(c, 50 + + 440, y_position)
+        barcode.drawOn(c, 50 + +440, y_position)
 
         form = c.acroForm
-        field_name = f'zip_code_{product_index}'
+        field_name = f"zip_code_{product_index}"
         form.textfield(
             name=field_name,
-            tooltip=f'Zip Code for {product.name}',
+            tooltip=f"Zip Code for {product.name}",
             x=10,
             y=y_position,  # Adjust the y-coordinate
             width=text_field_width,
@@ -153,7 +153,7 @@ def create_product_pdf(products, output_pdf_path):
 
 
 products = []
-pdf_path = "../pdfs/04-03-2024.pdf"
+pdf_path = "../pdfs/circulaire-metro.pdf"
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
@@ -165,7 +165,7 @@ for line in combined_lines:
         prixNew=calculate_new_price(float(extract_original_price(line))),
         code39=extract_product_code(line),
         weight=weight,
-        unit=unit
+        unit=unit,
     )
 
     products.append(product)

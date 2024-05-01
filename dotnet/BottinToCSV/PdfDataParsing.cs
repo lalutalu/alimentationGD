@@ -55,7 +55,7 @@ namespace BottinToCSV
 
         public string ParseNames(string InitialString)
         {
-            string pattern = @"\d{7}\s(.*?)(?=\s\d{1,2}\s\d+)";
+            string pattern = @"^\d+\s+(.*?)(?=\s+\d+\s+\d+)";
             Match match = Regex.Match(InitialString, pattern);
             if (match.Success)
             {
@@ -64,13 +64,22 @@ namespace BottinToCSV
             return "";
         }
 
-        public string ParseQuantity(string InitialString)
+        public string ParseQuantity(string initialString)
         {
             string pattern = @"\d{7}\s(.*?)(?=\s\d{1,2}\s\d+)\s(\d+)";
-            Match match = Regex.Match(InitialString, pattern);
+            Match match = Regex.Match(initialString, pattern);
             if (match.Success)
             {
                 return match.Groups[2].Value;
+            }
+            else
+            {
+                pattern = @"\d{7}\s(.*?)\s(\d+)";
+                match = Regex.Match(initialString, pattern);
+                if (match.Success)
+                {
+                    return match.Groups[2].Value;
+                }
             }
             return "";
         }
@@ -82,6 +91,15 @@ namespace BottinToCSV
             if (match.Success)
             {
                 return match.Groups[1].Value;
+            }
+            else
+            {
+                pattern = @"\d{7}\s.*?(?:\s+\S+\s+)(\d+[A-Z]+)";
+                match = Regex.Match(InitialString, pattern);
+                if (match.Success)
+                {
+                    return match.Groups[1].Value;
+                }
             }
             return "";
         }

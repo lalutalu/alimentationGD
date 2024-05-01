@@ -7,10 +7,13 @@ public class PdfParser
         string filePath = "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\files\\bottin.pdf";
         PdfDataParsing pdfDataParsing = new PdfDataParsing();
         FileCreation fileCreation = new FileCreation();
+        CSVFile file = new CSVFile();
         int counter = 0;
+        List<Product> old_products = new List<Product>();
+        old_products = file.ReadCSVFile();
+        Console.WriteLine(old_products.Count);
         try
         {
-            // Parse the PDF and extract information
             List<string> parsedData = PdfDataParsing.ParsePdf(filePath);
 
             if (parsedData.Count > 1)
@@ -19,16 +22,19 @@ public class PdfParser
             }
 
             List<Product> products = new List<Product>();
-            foreach (var dataString in parsedData) // Iterate through each data string
+            foreach (var datastring in parsedData)
             {
                 counter++;
-                Product product = pdfDataParsing.ParseProducts(dataString);
+                // Console.WriteLine(dataString);
+                Product product = pdfDataParsing.ParseProducts(datastring);
                 product.HandleID = $"Produit_{counter}";
-                Console.WriteLine($"HANDLE_ID: {product.HandleID},Code39: {product.Code39}, Name: {product.Nom}, Quantity: {product.Quantite}, Unit: {product.Format}, Price: {product.Prix}");
+                // Console.WriteLine($"HANDLE_ID: {product.HandleID}, Code39: {product.Code39}, Name: {product.Nom}, Quantity: {product.Quantite}, Unit: {product.Format}, Price: {product.Prix}");
                 products.Add(product);
-            }
 
-            fileCreation.CreateFile(products);
+            }
+            CSVFile.UpdatePrices(old_products, products);
+            fileCreation.CreateFile(old_products);
+            Console.WriteLine("Produits.csv crée sur le bureau!");
         }
         catch (Exception ex)
         {

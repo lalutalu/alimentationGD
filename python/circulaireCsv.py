@@ -257,7 +257,6 @@ def create_csv(filepath, products):
                 }
             )
 
-    print(f"CSV file '{filepath}' created successfully.")
 
 
 pdf_products = []
@@ -294,3 +293,4 @@ for line in combined_lines:
                 csv_product.handleid = csv_product.handleid
                 break
     create_csv(new_csv_path, csv_products)
+    print(f"CSV file '{new_csv_path}' created successfully.")
