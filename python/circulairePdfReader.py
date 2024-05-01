@@ -77,8 +77,11 @@ def extract_product_with_details(pdf_path: str) -> list:
 
 
 def extract_original_price(product_line: str) -> str:
-    match = re.search(r"\b(\d+\.\d+)\s+", product_line)
-    return match.group(1) if match else "No Original Price"
+    match = re.findall(r"\b(\d+\.\d+)\s+", product_line)
+    if len(match) >= 3:
+        return match[2]  # Return the third element (index 2) if at least 3 matches exist
+    else:
+        return "No Original Price"
 
 
 def extract_quantity(product_line: str) -> str:
@@ -105,7 +108,7 @@ def extract_weight(product_line: str) -> tuple:
 
 
 def calculate_new_price(ogPrice: float) -> float:
-    new_price = ogPrice * (1 + PERCENTAGE / 100)
+    new_price = ogPrice / 0.87
     return round(new_price, 2)
 
 
@@ -169,7 +172,6 @@ for line in combined_lines:
     )
 
     products.append(product)
-
 
 output_pdf_path = "../pdfs/nouveau.pdf"
 create_product_pdf(products, output_pdf_path)

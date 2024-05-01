@@ -9,10 +9,9 @@ public class PdfParser
         FileCreation fileCreation = new FileCreation();
         CSVFile file = new CSVFile();
         int counter = 0;
-        List<Product> old_products = new List<Product>();
+        List<Product> old_products = file.ReadCSVFile();
         List<string> parsedData = PdfDataParsing.ParsePdf(filePath);
         List<string> deleteData = PdfDataParsing.ParsePdfDelete(filePath);
-        old_products = file.ReadCSVFile();
         Console.WriteLine(old_products.Count);
         try
         {
