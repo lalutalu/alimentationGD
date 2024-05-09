@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {}
+    "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {
+    "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
+        "projectUniqueName": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
         "projectName": "BottinToCSV",
-        "projectPath": "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
+        "projectPath": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
         "packagesPath": "C:\\Users\\lalutalu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\obj\\",
+        "outputPath": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lalutalu\\AppData\\Roaming\\NuGet\\NuGet.Config",

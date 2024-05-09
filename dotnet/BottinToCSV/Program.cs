@@ -4,18 +4,15 @@ public class PdfParser
 {
     public static void Main(string[] args)
     {
-        string filePath = "C:\\Users\\lalutalu\\Desktop\\work\\alimentationgd\\dotnet\\BottinToCSV\\files\\bottin.pdf";
+        string filePath = "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\files\\bottin.pdf";
         PdfDataParsing pdfDataParsing = new PdfDataParsing();
         FileCreation fileCreation = new FileCreation();
         CSVFile file = new CSVFile();
         int counter = 0;
-        List<Product> old_products = file.ReadCSVFile();
         List<string> parsedData = PdfDataParsing.ParsePdf(filePath);
         List<string> deleteData = PdfDataParsing.ParsePdfDelete(filePath);
-        Console.WriteLine(old_products.Count);
         try
         {
-
             if (parsedData.Count > 1)
             {
                 Console.WriteLine("Warning: ParsePdf returned multiple records. Using only the first page.");
@@ -37,9 +34,8 @@ public class PdfParser
                 products.Add(product);
 
             }
-            CSVFile.UpdatePrices(old_products, products);
-            CSVFile.DeleteProducts(old_products, productsToBeDeleted);
-            fileCreation.CreateFile(old_products);
+            CSVFile.DeleteProducts(products, productsToBeDeleted);
+            fileCreation.CreateFile(products);
             Console.WriteLine("Produits.csv crée sur le bureau!");
         }
         catch (Exception ex)

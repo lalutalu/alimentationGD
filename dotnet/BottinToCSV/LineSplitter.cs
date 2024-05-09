@@ -31,7 +31,6 @@ namespace BottinToCSV
                     lines.Add(line);
                 }
             }
-
             return lines;
         }
     }

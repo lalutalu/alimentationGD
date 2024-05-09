@@ -6,7 +6,6 @@ namespace BottinToCSV
 {
     public class PdfDataParsing
     {
-        // Change Page Values everytime a bottin is changed
         public static List<string> ParsePdf(string filePath)
         {
             List<string> dataObjects = new List<string>();
@@ -17,7 +16,8 @@ namespace BottinToCSV
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
                     List<string> lines = LineSplitter.SplitLines(pageText);
-                    foreach (string line in lines)
+                    List<string> linesToProcess = new List<string>(lines);
+                    foreach (string line in linesToProcess)
                     {
                         dataObjects.Add(line);
                     }
@@ -25,7 +25,6 @@ namespace BottinToCSV
             }
             return dataObjects;
         }
-        // Change Page Values everytime a bottin is changed
         public static List<string> ParsePdfDelete(string filePath)
         {
             List<string> dataObjects = new List<string>();
@@ -36,9 +35,14 @@ namespace BottinToCSV
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
                     List<string> lines = LineSplitter.SplitLines(pageText);
-                    foreach (string line in lines)
+                    List<string> linesToProcess = new List<string>(lines);
+                    foreach (string line in linesToProcess)
                     {
                         dataObjects.Add(line);
+                        if (line.Contains(@"PRODUITS RETIRES TEMPORAIREMENT\r\n"))
+                        {
+                            return dataObjects;
+                        };
                     }
                 }
             }
@@ -98,25 +102,57 @@ namespace BottinToCSV
             return "";
         }
 
-        public string ParseUnit(string InitialString)
+        public string ParseUnit(string initialString)
         {
-            string pattern = @"\d{7}\s.*?(?=\s\d{1,2}\s\d+)\s\d+\s(\d+[A-Z]+)";
-            Match match = Regex.Match(InitialString, pattern);
-            if (match.Success)
+            if (initialString.Contains("ELASTIQUES EN SAC (5 LB)"))
             {
-                return match.Groups[1].Value;
+                Console.WriteLine(initialString);
             }
-            else
+
+            if (initialString.Contains("CADENAS CUIVRE ASSORTIS"))
             {
-                pattern = @"\d{7}\s.*?(?:\s+\S+\s+)(\d+[A-Z]+)";
-                match = Regex.Match(InitialString, pattern);
+                return "1";
+            }
+
+            string[] patterns = {
+        @"\d{7}\s.*?(?=\s\d{1,2}\s\d+)\s\d+\s((\d+x)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
+        @"((\d+x)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
+    };
+
+            foreach (string pattern in patterns)
+            {
+                Match match = Regex.Match(initialString, pattern);
                 if (match.Success)
                 {
-                    return match.Groups[1].Value;
+                    string unit = match.Groups[4].Value.ToUpper();
+                    string number = match.Groups[1].Value;
+
+                    // If the captured group ends with "x", capture the next number
+                    if (number.EndsWith("x") || number.EndsWith("X"))
+                    {
+                        int startIndex = match.Index + match.Length;
+                        Match nextNumberMatch = Regex.Match(initialString.Substring(startIndex), @"\d+(\.\d+)?");
+                        if (nextNumberMatch.Success)
+                        {
+                            number += "x" + nextNumberMatch.Value;
+                        }
+                    }
+
+                    // Check for letters and numbers after the unit
+                    if (match.Groups.Count > 5 && match.Groups[5].Success)
+                    {
+                        string extra = match.Groups[5].Value.Trim();
+                        return number + " " + unit + extra;
+                    }
+
+                    return number + " " + unit;
                 }
             }
+
             return "";
         }
+
+
 
         public double ParsePrix(string dataString)
         {

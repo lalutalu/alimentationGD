@@ -23,7 +23,7 @@
                     string handleId = product.HandleID + ",";
                     string fieldType = product.fieldType + ",";
                     string name = product.Nom + ",";
-                    string description = $"{product.Quantite}" + ",";
+                    string description = $"{product.Quantite}" + "X" + $"{product.Format}";
                     string productImageUrl = "" + ",";
                     string collection = "metro" + ",";
                     string sku = product.Code39 + ",";
