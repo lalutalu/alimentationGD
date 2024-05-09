@@ -104,20 +104,19 @@ namespace BottinToCSV
 
         public string ParseUnit(string initialString)
         {
-            if (initialString.Contains("ELASTIQUES EN SAC (5 LB)"))
+            if (initialString.Contains("GATORADE G2 ORANGE"))
             {
                 Console.WriteLine(initialString);
             }
-
             if (initialString.Contains("CADENAS CUIVRE ASSORTIS"))
             {
-                return "1";
+                return "1UN";
             }
 
             string[] patterns = {
-        @"\d{7}\s.*?(?=\s\d{1,2}\s\d+)\s\d+\s((\d+x)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
-        @"((\d+x)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
-    };
+                @"\d{7}\s.*?(?=\s\d{1,2}\s\d+)\s\d+\s((\d+x)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
+                @"((\d+X)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
+            };
 
             foreach (string pattern in patterns)
             {
@@ -127,7 +126,6 @@ namespace BottinToCSV
                     string unit = match.Groups[4].Value.ToUpper();
                     string number = match.Groups[1].Value;
 
-                    // If the captured group ends with "x", capture the next number
                     if (number.EndsWith("x") || number.EndsWith("X"))
                     {
                         int startIndex = match.Index + match.Length;
@@ -138,7 +136,6 @@ namespace BottinToCSV
                         }
                     }
 
-                    // Check for letters and numbers after the unit
                     if (match.Groups.Count > 5 && match.Groups[5].Success)
                     {
                         string extra = match.Groups[5].Value.Trim();
@@ -151,8 +148,6 @@ namespace BottinToCSV
 
             return "";
         }
-
-
 
         public double ParsePrix(string dataString)
         {

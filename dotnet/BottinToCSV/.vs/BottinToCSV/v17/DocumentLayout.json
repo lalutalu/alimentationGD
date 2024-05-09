@@ -44,7 +44,7 @@
               "RelativeDocumentMoniker": "PdfDataParsing.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\PdfDataParsing.cs",
               "RelativeToolTip": "PdfDataParsing.cs",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAAAGgAAAAIAAAA",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAgwHUAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-28T03:31:55.376Z",
               "IsPinned": true,
@@ -61,8 +61,7 @@
               "ViewState": "AQIAABIAAAAAAAAAAAAAACQAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-28T02:06:45.945Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -98,8 +97,7 @@
               "RelativeToolTip": "CSVFile.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAD8AAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-01T16:56:45.443Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-01T16:56:45.443Z"
             },
             {
               "$type": "Document",
@@ -111,8 +109,7 @@
               "RelativeToolTip": "FileCreation.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAYwBoAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T07:59:59.814Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T07:59:59.814Z"
             }
           ]
         }
