@@ -12,7 +12,9 @@ namespace BottinToCSV
             using (PdfReader reader = new PdfReader(filePath))
             {
                 int totalPages = reader.NumberOfPages;
-                for (int i = 39; i <= totalPages; i++)
+                Console.WriteLine("Entrez le numéro de la page avec le titre commande du bottin: ");
+                int startOfProducts = int.Parse(Console.ReadLine());
+                for (int i = startOfProducts; i <= totalPages; i++)
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
                     List<string> lines = LineSplitter.SplitLines(pageText);
@@ -31,7 +33,11 @@ namespace BottinToCSV
             using (PdfReader reader = new PdfReader(filePath))
             {
                 int totalPages = reader.NumberOfPages;
-                for (int i = 9; i <= 11; i++)
+                Console.WriteLine("Entrez le numéro de la page de PRODUITS ENLEVES: ");
+                int startDelete = int.Parse(Console.ReadLine());
+                Console.WriteLine("Entrez le numéro de la dernière page de PRODUITS ENLEVES: ");
+                int endDelete = int.Parse(Console.ReadLine());
+                for (int i = startDelete; i <= endDelete; i++)
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
                     List<string> lines = LineSplitter.SplitLines(pageText);
@@ -41,6 +47,7 @@ namespace BottinToCSV
                         dataObjects.Add(line);
                         if (line.Contains(@"PRODUITS RETIRES TEMPORAIREMENT\r\n"))
                         {
+                            Console.WriteLine(dataObjects.Count);
                             return dataObjects;
                         };
                     }
@@ -104,10 +111,6 @@ namespace BottinToCSV
 
         public string ParseUnit(string initialString)
         {
-            if (initialString.Contains("GATORADE G2 ORANGE"))
-            {
-                Console.WriteLine(initialString);
-            }
             if (initialString.Contains("CADENAS CUIVRE ASSORTIS"))
             {
                 return "1UN";

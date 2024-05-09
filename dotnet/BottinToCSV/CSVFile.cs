@@ -6,7 +6,7 @@ namespace BottinToCSV
     {
         public List<Product> ReadCSVFile()
         {
-            string filePath = "C:\\Users\\lalutalu\\Desktop\\LastWeek.csv";
+            string filePath = "C:\\Users\\lalutalu\\Desktop\\last_week.csv";
             List<Product> products = new List<Product>();
 
             if (!File.Exists(filePath))
