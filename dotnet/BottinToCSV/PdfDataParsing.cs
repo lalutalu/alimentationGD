@@ -46,7 +46,7 @@ namespace BottinToCSV
       if (pageText.ToUpper().Contains("BOTTIN DE COMMANDE"))
       {
         startAddingProducts = true;
-        Console.WriteLine($"Found 'BOTTIN DE COMMANDE' on page {i}");
+        //Console.WriteLine($"Found 'BOTTIN DE COMMANDE' on page {i}");
       }
 
       if (startAddingProducts)
@@ -171,7 +171,6 @@ namespace BottinToCSV
                             number += "x" + nextNumberMatch.Value;
                         }
                     }
-
                     if (match.Groups.Count > 5 && match.Groups[5].Success)
                     {
                         string extra = match.Groups[5].Value.Trim();
@@ -185,20 +184,28 @@ namespace BottinToCSV
             return "";
         }
 
-        //public double ParsePrix(string dataString)
-        //{
-        //    string pattern = @"\d{1,4}$";
-        //    Match match = Regex.Match(dataString, pattern);
+        public double ParsePrix(string dataString)
+        {
+            string pattern = @"\d{1,4}$";
+            Match match = Regex.Match(dataString, pattern);
 
-        //    if (match.Success)
-        //    {
-        //        var newPrice = double.Parse(match.Value) / 100;
-        //        newPrice = CalculateNewPrice(newPrice);
-        //        return newPrice;
-        //    }
-
-        //    return 0;
-        //}
+            if (match.Success)
+            {
+                var newPrice = double.Parse(match.Value) / 100;
+                newPrice = CalculateNewPrice(newPrice);
+                return Math.Round(newPrice,2);
+            }
+            string pattern1 = @"\d{1,4}";
+            MatchCollection matches = Regex.Matches(dataString, pattern1);
+            if (matches.Count > 0) { 
+                Match lastMatch = matches[matches.Count - 1];
+                Console.WriteLine(lastMatch.Value);
+                var newPrice = double.Parse(lastMatch.Value) / 100;
+                newPrice = CalculateNewPrice(newPrice);
+                return Math.Round(newPrice,2);
+            }
+            return 0;
+        }
 
         //public double ParsePrix(string dataString)
         //{
@@ -218,27 +225,26 @@ namespace BottinToCSV
         //    return 0;
         //}
 
-        public double ParsePrix(string dataString)
-        {
-            // Regex to capture digits, optionally followed by "**"
-            string pattern = @"\d+(?:\*\*)?";
-            Match match = Regex.Match(dataString, pattern);
+        //public double ParsePrix(string dataString)
+        //{
+        //    // Regex to capture digits, optionally followed by "**"
+        //    string pattern = @"\d+(?:\*\*)?";
+        //    Match match = Regex.Match(dataString, pattern);
 
-            if (match.Success)
-            {
-                // Extract only the digits from the captured value
-                string priceString = Regex.Match(match.Value, @"\d+").Value;
-                double price = double.Parse(priceString) / 100;
+        //    if (match.Success)
+        //    {
+        //        // Extract only the digits from the captured value
+        //        string priceString = Regex.Match(match.Value, @"\d+").Value;
+        //        Console.WriteLine(priceString);
+        //        double price = double.Parse(priceString) / 100;
+        //        // Round the price to two decimal places
+        //        price = Math.Round(price, 2);
+        //        return price;
+        //    }
 
-                // Round the price to two decimal places
-                price = Math.Round(price, 2);
-
-                return price;
-            }
-
-            // Handle cases where no match is found (return 0)
-            return 0;
-        }
+        //    // Handle cases where no match is found (return 0)
+        //    return 0;
+        //}
 
 
         public double CalculateNewPrice(double initialPrice)

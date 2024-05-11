@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BottinToCSV")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7b6b4b43718829d4db5d7c70f8ed55af39649df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9daf6bcefba94fb70a79543193791b15d3e3fe9")]
 [assembly: System.Reflection.AssemblyProductAttribute("BottinToCSV")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BottinToCSV")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
