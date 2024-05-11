@@ -3,14 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsv\\csvfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:csvfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsv\\pdfdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:pdfdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,8 +11,16 @@
       "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:linesplitter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsv\\filecreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:filecreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsv\\csvfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|solutionrelative:csvfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{71BBF55D-CAE0-4FC9-BA01-02ADFB5A8927}|BottinToCSV.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsv\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,17 +34,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 253,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "PdfDataParsing.cs",
               "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\PdfDataParsing.cs",
               "RelativeDocumentMoniker": "PdfDataParsing.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\PdfDataParsing.cs",
               "RelativeToolTip": "PdfDataParsing.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAjwAsAAAATAAAA",
+              "ViewState": "AQIAAM0AAAAAAAAAAAAAAPEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-28T03:31:55.376Z",
               "IsPinned": true,
@@ -52,13 +52,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwA8AAAAnAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAC0AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-28T02:06:45.945Z",
               "IsPinned": true,
@@ -79,33 +79,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "LineSplitter.cs",
               "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\LineSplitter.cs",
               "RelativeDocumentMoniker": "LineSplitter.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\LineSplitter.cs",
               "RelativeToolTip": "LineSplitter.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAQwCQAAAABAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAAA+wBcAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-08T18:36:55.655Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "CSVFile.cs",
               "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\CSVFile.cs",
               "RelativeDocumentMoniker": "CSVFile.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\CSVFile.cs",
               "RelativeToolTip": "CSVFile.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAYwEIAAAAEAAAA",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAQwEIAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-01T16:56:45.443Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "FileCreation.cs",
               "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\FileCreation.cs",
               "RelativeDocumentMoniker": "FileCreation.cs",

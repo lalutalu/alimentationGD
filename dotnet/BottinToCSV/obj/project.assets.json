@@ -11,7 +11,7 @@
           "lib/BouncyCastle.Crypto.dll": {}
         }
       },
-      "CsvHelper/32.0.1": {
+      "CsvHelper/32.0.2": {
         "type": "package",
         "compile": {
           "lib/net8.0/CsvHelper.dll": {
@@ -52,15 +52,15 @@
         "lib/BouncyCastle.Crypto.dll"
       ]
     },
-    "CsvHelper/32.0.1": {
-      "sha512": "1sPpPUlSGCU2BRZmU+NZ2Le/AO2BBQTRZPZvNmfIgrDiVgLC6oD6b9QDFFf5AHhNsU+cAAbGoAcnnWq5a7VPlw==",
+    "CsvHelper/32.0.2": {
+      "sha512": "h+Ilvdqr2kE2+SMJiRB6Cerf4CCXR5pFgcNsCLj2t3TgzIDuGlchqJaVLHqL8ZIyBdDyMq125LL6shC0ZtFnUw==",
       "type": "package",
-      "path": "csvhelper/32.0.1",
+      "path": "csvhelper/32.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "csvhelper.32.0.1.nupkg.sha512",
+        "csvhelper.32.0.2.nupkg.sha512",
         "csvhelper.nuspec",
         "lib/net462/CsvHelper.dll",
         "lib/net462/CsvHelper.xml",
@@ -99,7 +99,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "CsvHelper >= 32.0.1",
+      "CsvHelper >= 32.0.2",
       "iTextSharp >= 5.5.13.3"
     ]
   },
@@ -149,7 +149,7 @@
         "dependencies": {
           "CsvHelper": {
             "target": "Package",
-            "version": "[32.0.1, )"
+            "version": "[32.0.2, )"
           },
           "iTextSharp": {
             "target": "Package",

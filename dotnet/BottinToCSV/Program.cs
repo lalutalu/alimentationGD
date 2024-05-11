@@ -4,7 +4,7 @@ public class PdfParser
 {
     public static void Main(string[] args)
     {
-        //string filePath = "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\files\\old_bottin.pdf";
+        //string filePath = "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\files\\2024-05-10.pdf";
         string filePath;
         do
         {
@@ -22,16 +22,15 @@ public class PdfParser
         CSVFile file = new CSVFile();
         int counter = 0;
         List<string> parsedData = PdfDataParsing.ParsePdf(filePath);
-        List<Product> lastWeek = file.ReadCSVFile();
-        List<string> deleteData = PdfDataParsing.ParsePdfDelete(filePath);
+        //List<string> deleteData = PdfDataParsing.ParsePdfDelete(filePath);
         try
         {
-            List<Product> productsToBeDeleted = new List<Product>();
-            foreach (var datastring in deleteData)
-            {
-                Product product = pdfDataParsing.ParseProducts(datastring);
-                productsToBeDeleted.Add(product);
-            }
+            //    List<Product> productsToBeDeleted = new List<Product>();
+            //    foreach (var datastring in deleteData)
+            //    {
+            //        Product product = pdfDataParsing.ParseProducts(datastring);
+            //        productsToBeDeleted.Add(product);
+            //    }
 
             List<Product> products = new List<Product>();
             foreach (var datastring in parsedData)
@@ -42,8 +41,9 @@ public class PdfParser
                 products.Add(product);
 
             }
-            CSVFile.UpdatePrices(lastWeek, products);
-            CSVFile.DeleteProducts(products, productsToBeDeleted);
+            //CSVFile.UpdatePrices(lastWeek, products);
+            //CSVFile.DeleteProducts(products, productsToBeDeleted);
+            Console.WriteLine(products.Count);
             fileCreation.CreateFile(products);
             Console.WriteLine("Produits.csv crée sur le bureau!");
         }

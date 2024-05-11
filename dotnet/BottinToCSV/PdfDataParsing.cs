@@ -6,27 +6,60 @@ namespace BottinToCSV
 {
     public class PdfDataParsing
     {
+        //public static List<string> ParsePdf(string filePath)
+        //{
+        //    List<string> dataObjects = new List<string>();
+        //    using (PdfReader reader = new PdfReader(filePath))
+        //    {
+        //        int totalPages = reader.NumberOfPages;
+        //        Console.WriteLine("Entrez le numéro de la page avec le titre commande du bottin: ");
+        //        int startOfProducts = int.Parse(Console.ReadLine());
+        //        for (int i = startOfProducts; i <= totalPages; i++)
+        //        {
+        //            string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
+        //            Console.WriteLine(pageText);
+        //            List<string> lines = LineSplitter.SplitLines(pageText);
+        //            List<string> linesToProcess = new List<string>(lines);
+        //            foreach (string line in linesToProcess)
+        //            {
+        //                dataObjects.Add(line);
+        //            }
+        //        }
+        //    }
+        //    return dataObjects;
+        //}
+
         public static List<string> ParsePdf(string filePath)
-        {
-            List<string> dataObjects = new List<string>();
-            using (PdfReader reader = new PdfReader(filePath))
-            {
-                int totalPages = reader.NumberOfPages;
-                Console.WriteLine("Entrez le numéro de la page avec le titre commande du bottin: ");
-                int startOfProducts = int.Parse(Console.ReadLine());
-                for (int i = startOfProducts; i <= totalPages; i++)
-                {
-                    string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
-                    List<string> lines = LineSplitter.SplitLines(pageText);
-                    List<string> linesToProcess = new List<string>(lines);
-                    foreach (string line in linesToProcess)
-                    {
-                        dataObjects.Add(line);
-                    }
-                }
-            }
-            return dataObjects;
-        }
+{
+  List<string> dataObjects = new List<string>();
+  bool startAddingProducts = false; // Flag to control product line capturing
+
+  using (PdfReader reader = new PdfReader(filePath))
+  {
+    int totalPages = reader.NumberOfPages;
+
+    for (int i = 1; i <= totalPages; i++) // Start from page 1
+    {
+      string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
+
+      // Check if page contains "BOTTIN DE COMMANDE" (case-insensitive)
+      if (pageText.ToUpper().Contains("BOTTIN DE COMMANDE"))
+      {
+        startAddingProducts = true;
+        Console.WriteLine($"Found 'BOTTIN DE COMMANDE' on page {i}");
+      }
+
+      if (startAddingProducts)
+      {
+        List<string> lines = LineSplitter.SplitLines(pageText);
+        dataObjects.AddRange(lines);
+      }
+    }
+  }
+
+  return dataObjects;
+}
+
         public static List<string> ParsePdfDelete(string filePath)
         {
             List<string> dataObjects = new List<string>();
@@ -69,7 +102,7 @@ namespace BottinToCSV
 
         public string ParseCode39(string InitialString)
         {
-            string pattern = @"^\d{7}";
+            string pattern = @"\d{7}";
             Match match = Regex.Match(InitialString, pattern);
             if (match.Success)
             {
@@ -152,24 +185,65 @@ namespace BottinToCSV
             return "";
         }
 
+        //public double ParsePrix(string dataString)
+        //{
+        //    string pattern = @"\d{1,4}$";
+        //    Match match = Regex.Match(dataString, pattern);
+
+        //    if (match.Success)
+        //    {
+        //        var newPrice = double.Parse(match.Value) / 100;
+        //        newPrice = CalculateNewPrice(newPrice);
+        //        return newPrice;
+        //    }
+
+        //    return 0;
+        //}
+
+        //public double ParsePrix(string dataString)
+        //{
+        //    // Try with the first pattern for end-of-line prices
+        //    //string pattern1 = @"\d{1,4}$";
+        //    string pattern1 = @"\d+(?:\*\*)?$";
+        //    Match match = Regex.Match(dataString, pattern1);
+
+        //    if (match.Success)
+        //    {
+        //        var newPrice = double.Parse(match.Value) / 100;
+        //        Console.WriteLine(newPrice);
+        //        newPrice = CalculateNewPrice(newPrice);
+        //        return newPrice;
+        //    }
+        //    //Console.WriteLine(dataString + ": " + 0);
+        //    return 0;
+        //}
+
         public double ParsePrix(string dataString)
         {
-            string pattern = @"\d{1,4}$";
+            // Regex to capture digits, optionally followed by "**"
+            string pattern = @"\d+(?:\*\*)?";
             Match match = Regex.Match(dataString, pattern);
 
             if (match.Success)
             {
-                var newPrice = double.Parse(match.Value) / 100;
-                newPrice = CalculateNewPrice(newPrice);
-                return newPrice;
+                // Extract only the digits from the captured value
+                string priceString = Regex.Match(match.Value, @"\d+").Value;
+                double price = double.Parse(priceString) / 100;
+
+                // Round the price to two decimal places
+                price = Math.Round(price, 2);
+
+                return price;
             }
 
+            // Handle cases where no match is found (return 0)
             return 0;
         }
 
+
         public double CalculateNewPrice(double initialPrice)
         {
-            double newPrice = initialPrice / 0.70;
+            double newPrice = Math.Round(initialPrice / 0.70, 2);
             return newPrice;
         }
     }
