@@ -10,11 +10,12 @@ PERCENTAGE = 14.95
 
 
 class Product:
-    def __init__(self, name, prixOg, prixNew, code39, weight, unit) -> None:
+    def __init__(self, name, prixOg, prixNew, code39, weight, unit, quantity) -> None:
         self.name = name
         self.prixOg = prixOg
         self.prixNew = prixNew
         self.code39 = code39
+        self.quantity = quantity
         self.weight = weight
         self.unit = unit
 
@@ -45,7 +46,6 @@ def extract_product_upc(product_line: str) -> str:
 
 def extract_product_code(product_line: str) -> str:
     match = re.search(r"\b(\d{7})[A-Za-z]?\b", product_line)
-
     if match:
         return match.group(1)
     else:
@@ -78,22 +78,35 @@ def extract_product_with_details(pdf_path: str) -> list:
 
 def extract_original_price(product_line: str) -> str:
     match = re.findall(r"\b(\d+\.\d+)\s+", product_line)
+
     if len(match) >= 3:
-        return match[2]  # Return the third element (index 2) if at least 3 matches exist
+        if(product_line.__contains__("IMPACT-4") and product_line.__contains__(" VIN ")):
+            return match[1]
+        return match[2]
     else:
         return "No Original Price"
 
 
-def extract_quantity(product_line: str) -> str:
-    match = re.search(r"\d+\s+(\d+)", product_line)
-    return match.group(1) if match else "No Quantity"
+# def extract_quantity(product_line: str) -> str:
+#     match = re.search(r"\d+\s+(\d+)", product_line)
+#     return match.group(1) if match else "No Quantity"
 
+def extract_quantity(product_line: str) -> str:
+  quantity_match = re.search(r"\d+\s+(?!\d+\.)(\d+)(?:\s*[A-Za-z]+)?", product_line)
+  if quantity_match:
+    first_group = quantity_match.group(1)
+    if first_group:
+        return first_group[-1]
+    else:
+            match = re.search(r"\d+\s+(\d+)", product_line)     
+            return match.group(1) if match else "No Quantity"
+  else:
+    return "No Quantity"
 
 def extract_weight(product_line: str) -> tuple:
     match = re.search(r"\d+\s+(\d+)\s+([A-Za-z]+)", product_line)
-
     if match:
-        return match.groups()
+        return match.groups(1)
     else:
         weight_match = re.search(r"(\d+)\D*$", product_line)
         weight = weight_match.group(1) if weight_match else "No Weight"
@@ -103,7 +116,6 @@ def extract_weight(product_line: str) -> tuple:
 
         if weight == "No Weight" and unit == "No Unit":
             print(f"No Weight or Unit: {product_line}")
-
         return (weight, unit)
 
 
@@ -125,7 +137,7 @@ def create_product_pdf(products, output_pdf_path):
         c.setFont("Helvetica", font_size)
 
         product_info = (
-            f"{product.name}, Prix: ${product.prixNew}, Quantité: {extract_quantity(line)}, "
+            f"{product.name}, Prix: ${product.prixNew}, Quantité: {product.quantity}, "
             f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
         )
         c.drawString(50, y_position, product_info)
@@ -156,7 +168,7 @@ def create_product_pdf(products, output_pdf_path):
 
 
 products = []
-pdf_path = "../pdfs/circulaire-metro.pdf"
+pdf_path = "../pdfs/circulaire 1.pdf"
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
@@ -167,6 +179,7 @@ for line in combined_lines:
         prixOg=extract_original_price(line),
         prixNew=calculate_new_price(float(extract_original_price(line))),
         code39=extract_product_code(line),
+        quantity = extract_quantity(line),
         weight=weight,
         unit=unit,
     )
@@ -176,8 +189,8 @@ for line in combined_lines:
 output_pdf_path = "../pdfs/nouveau.pdf"
 create_product_pdf(products, output_pdf_path)
 for product in products:
-    print("Product Name:", product.name)
-    print("Original Price:", product.prixOg)
-    print("New Price:", product.prixNew)
-    print("Product Code:", product.code39)
-    print("-----")
+        print("Product Name:", product.name)
+        print("Quantity:", product.quantity)
+        print("New Price:", product.prixNew)
+        print("Product Code:", product.code39)
+        print("-----")

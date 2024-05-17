@@ -1,11 +1,6 @@
 import re
-import os
 import csv
 import PyPDF2
-from numpy.lib.shape_base import row_stack
-from reportlab.pdfgen import canvas
-from reportlab.graphics.barcode import code39
-from reportlab.lib.colors import black
 import pandas as pd
 
 noCode = 0
@@ -261,7 +256,7 @@ def create_csv(filepath, products):
 
 pdf_products = []
 csv_products = []
-pdf_path = "../pdfs/04-03-2024.pdf"
+pdf_path = "../pdfs/circulaire-metro.pdf"
 new_csv_path = "../../../ProduitsAvecRabais.csv"
 csv_path = "../../../Produits.csv"
 combined_lines = extract_product_with_details(pdf_path)
