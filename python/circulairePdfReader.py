@@ -87,21 +87,21 @@ def extract_original_price(product_line: str) -> str:
         return "No Original Price"
 
 
-# def extract_quantity(product_line: str) -> str:
-#     match = re.search(r"\d+\s+(\d+)", product_line)
-#     return match.group(1) if match else "No Quantity"
-
 def extract_quantity(product_line: str) -> str:
-  quantity_match = re.search(r"\d+\s+(?!\d+\.)(\d+)(?:\s*[A-Za-z]+)?", product_line)
-  if quantity_match:
-    first_group = quantity_match.group(1)
-    if first_group:
-        return first_group[-1]
-    else:
-            match = re.search(r"\d+\s+(\d+)", product_line)     
-            return match.group(1) if match else "No Quantity"
-  else:
-    return "No Quantity"
+    match = re.search(r"\d+\s+(\d+)", product_line)
+    return match.group(1) if match else "No Quantity"
+
+# def extract_quantity(product_line: str) -> str:
+#   quantity_match = re.search(r"\d+\s+(?!\d+\.)(\d+)(?:\s*[A-Za-z]+)?", product_line)
+#   if quantity_match:
+#     first_group = quantity_match.group(1)
+#     if first_group:
+#         return first_group[-1]
+#     else:
+#             match = re.search(r"\d+\s+(\d+)", product_line)     
+#             return match.group(1) if match else "No Quantity"
+#   else:
+#     return "No Quantity"
 
 def extract_weight(product_line: str) -> tuple:
     match = re.search(r"\d+\s+(\d+)\s+([A-Za-z]+)", product_line)
@@ -191,6 +191,7 @@ create_product_pdf(products, output_pdf_path)
 for product in products:
         print("Product Name:", product.name)
         print("Quantity:", product.quantity)
+        print("Weight and unit:", product.weight, " ", product.unit)
         print("New Price:", product.prixNew)
         print("Product Code:", product.code39)
         print("-----")
