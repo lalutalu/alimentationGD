@@ -95,7 +95,6 @@ def extract_quantity(product_line: str) -> str:
         matches = reversed(list(matches))
         for m in matches:
             if matches:
-                print(m)
                 last_match = m
                 if last_match.group(1):
                     return last_match.group(1)
@@ -106,16 +105,20 @@ def extract_quantity(product_line: str) -> str:
 
 
 def extract_weight(product_line: str) -> tuple:
+    weight = "No Weight"
     match = re.search(r"\d+\s+(\d+)\s+([A-Za-z]+)", product_line)
     if match:
         return match.groups(1)
     else:
         weight_match = re.search(r"(\d+)\D*$", product_line)
-        weight = weight_match.group(1) if weight_match else "No Weight"
+        if weight_match:
+            weight = weight_match.group(1)
+        weight_match = re.search(r"(\d+\D+\d+)\D*$", product_line)
+        if weight_match:
+            weight = weight_match.group(1)
 
         unit_match = re.search(r"([^\d]+)$", product_line)
         unit = unit_match.group(1).strip() if unit_match else "No Unit"
-
         return (weight, unit)
 
 
@@ -124,48 +127,89 @@ def calculate_new_price(ogPrice: float) -> float:
     return round(new_price, 2)
 
 
+# def create_product_pdf(products, output_pdf_path):
+#     c = canvas.Canvas(output_pdf_path)
+#
+#     y_position = 750
+#     page_height = 800
+#     line_height = 20
+#     font_size = 10
+#     text_field_width = 30
+#
+#     for product_index, product in enumerate(products):
+#         c.setFont("Helvetica", font_size)
+#
+#         product_info = (
+#             f"{product.name}, Prix: ${product.prixNew}, Quantité: {product.quantity}, "
+#             f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
+#         )
+#         c.drawString(50, y_position, product_info)
+#
+#         barcode = code39.Standard39(product.code39, barHeight=25)
+#         barcode.drawOn(c, 50, y_position+line_height)
+#
+#         form = c.acroForm
+#         field_name = f"{product_index}"
+#         form.textfield(
+#             name=field_name,
+#             tooltip=f"{product.name}",
+#             x=10,
+#             y=y_position,
+#             width=text_field_width,
+#             height=font_size,
+#             textColor=black,
+#             forceBorder=True,
+#         )
+#
+#         y_position -= 3 * line_height
+#
+#         if y_position <= 0:
+#             c.showPage()
+#             y_position = page_height
+#
+#     c.save()
+
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
 
-    y_position = 750
     page_height = 800
     line_height = 20
     font_size = 10
-    text_field_width = 30
+    text_field_width = 40
+    y_position = page_height-150 
+
+    form = c.acroForm
 
     for product_index, product in enumerate(products):
         c.setFont("Helvetica", font_size)
+        c.drawString(50, y_position, product.name)
+        c.drawString(50, y_position - 10, f"${product.prixNew:.2f}")
+        c.drawString(50, y_position - 20, f"{product.quantity}")
+        c.drawString(50, y_position - 30, f"{product.weight} {product.unit}")
+        c.drawString(330, y_position - 25, f"{product.code39}")
 
-        product_info = (
-            f"{product.name}, Prix: ${product.prixNew}, Quantité: {product.quantity}, "
-            f"Unité: {product.weight} {product.unit}, Code39: {product.code39}"
-        )
-        c.drawString(50, y_position, product_info)
+        barcode = code39.Standard39(product.code39, barHeight=25)
+        barcode.drawOn(c, 300, y_position - 5)
 
-        barcode = code39.Standard39(product.code39)
-        barcode.drawOn(c, 50 + +440, y_position)
-
-        form = c.acroForm
-        field_name = f"zip_code_{product_index}"
+        field_name = f"product_{product_index}"
         form.textfield(
             name=field_name,
-            tooltip=f"Zip Code for {product.name}",
-            x=10,
-            y=y_position,
+            tooltip=product.name,
+            x=50,
+            y=y_position - 45,
             width=text_field_width,
             height=font_size,
             textColor=black,
             forceBorder=True,
         )
 
-        y_position -= 3 * line_height
+        y_position -= 5 * line_height
 
         if y_position <= 0:
             c.showPage()
             y_position = page_height
 
     c.save()
-
 
 products = []
 pdf_path = "../pdfs/circulaire 1.pdf"
