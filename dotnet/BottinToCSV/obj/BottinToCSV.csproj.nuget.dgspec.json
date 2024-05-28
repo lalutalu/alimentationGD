@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {}
+    "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {
+    "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCSV\\BottinToCSV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
+        "projectUniqueName": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
         "projectName": "BottinToCSV",
-        "projectPath": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
+        "projectPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
         "packagesPath": "C:\\Users\\lalutalu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lalutalu\\dev\\alimentationgd\\dotnet\\BottinToCSV\\obj\\",
+        "outputPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCSV\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lalutalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -70,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

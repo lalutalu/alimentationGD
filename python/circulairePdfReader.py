@@ -1,7 +1,6 @@
 import re
 import PyPDF2
 from reportlab.pdfgen import canvas
-from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.graphics.barcode import code39
 from reportlab.lib.colors import black
 
@@ -88,20 +87,23 @@ def extract_original_price(product_line: str) -> str:
 
 
 def extract_quantity(product_line: str) -> str:
-    match = re.search(r"\d+\s+(\d+)", product_line)
-    return match.group(1) if match else "No Quantity"
+    match = re.search(r"(\d+D?)\s+(\d+)\s+([A-Za-z]+)", product_line)
+    if match:
+        return match[1]
+    else:
+        matches = re.finditer(r"\d+(?:D)?\s+([0-9.]+)(?:\s+([A-Za-z]+))?", product_line)
+        matches = reversed(list(matches))
+        for m in matches:
+            if matches:
+                print(m)
+                last_match = m
+                if last_match.group(1):
+                    return last_match.group(1)
+                else:
+                    print(product_line)
+                    return "No Quantity - Group 1 not found"
+    return "No Quantity"    
 
-# def extract_quantity(product_line: str) -> str:
-#   quantity_match = re.search(r"\d+\s+(?!\d+\.)(\d+)(?:\s*[A-Za-z]+)?", product_line)
-#   if quantity_match:
-#     first_group = quantity_match.group(1)
-#     if first_group:
-#         return first_group[-1]
-#     else:
-#             match = re.search(r"\d+\s+(\d+)", product_line)     
-#             return match.group(1) if match else "No Quantity"
-#   else:
-#     return "No Quantity"
 
 def extract_weight(product_line: str) -> tuple:
     match = re.search(r"\d+\s+(\d+)\s+([A-Za-z]+)", product_line)
@@ -114,8 +116,6 @@ def extract_weight(product_line: str) -> tuple:
         unit_match = re.search(r"([^\d]+)$", product_line)
         unit = unit_match.group(1).strip() if unit_match else "No Unit"
 
-        if weight == "No Weight" and unit == "No Unit":
-            print(f"No Weight or Unit: {product_line}")
         return (weight, unit)
 
 
@@ -151,14 +151,14 @@ def create_product_pdf(products, output_pdf_path):
             name=field_name,
             tooltip=f"Zip Code for {product.name}",
             x=10,
-            y=y_position,  # Adjust the y-coordinate
+            y=y_position,
             width=text_field_width,
             height=font_size,
             textColor=black,
             forceBorder=True,
         )
 
-        y_position -= 3 * line_height  # Adjust line spacing
+        y_position -= 3 * line_height
 
         if y_position <= 0:
             c.showPage()
@@ -172,6 +172,7 @@ pdf_path = "../pdfs/circulaire 1.pdf"
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
+    print()
     weight, unit = extract_weight(line)
 
     product = Product(
@@ -188,10 +189,10 @@ for line in combined_lines:
 
 output_pdf_path = "../pdfs/nouveau.pdf"
 create_product_pdf(products, output_pdf_path)
-for product in products:
-        print("Product Name:", product.name)
-        print("Quantity:", product.quantity)
-        print("Weight and unit:", product.weight, " ", product.unit)
-        print("New Price:", product.prixNew)
-        print("Product Code:", product.code39)
-        print("-----")
+# for product in products:
+#         print("Product Name:", product.name)
+#         print("Quantity:", product.quantity)
+#         print("Weight and unit:", product.weight, " ", product.unit)
+#         print("New Price:", product.prixNew)
+#         print("Product Code:", product.code39)
+#         print("-----")

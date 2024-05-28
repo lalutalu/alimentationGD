@@ -37,6 +37,7 @@ namespace BottinToCSV
                             Prix = double.Parse(fields[8])
                         };
                         products.Add(product);
+                        Console.WriteLine(product);
                     }
                 }
                 return products;
