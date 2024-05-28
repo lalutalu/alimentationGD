@@ -183,7 +183,7 @@ def create_product_pdf(products, output_pdf_path):
     line_height = 20
     font_size = 10
     text_field_width = 40
-    y_position = page_height-150 
+    y_position = page_height-20 
 
     form = c.acroForm
 
