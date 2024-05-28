@@ -30,35 +30,35 @@ namespace BottinToCSV
         //}
 
         public static List<string> ParsePdf(string filePath)
-{
-  List<string> dataObjects = new List<string>();
-  bool startAddingProducts = false; // Flag to control product line capturing
+        {
+            List<string> dataObjects = new List<string>();
+            bool startAddingProducts = false; // Flag to control product line capturing
 
-  using (PdfReader reader = new PdfReader(filePath))
-  {
-    int totalPages = reader.NumberOfPages;
+            using (PdfReader reader = new PdfReader(filePath))
+            {
+                int totalPages = reader.NumberOfPages;
 
-    for (int i = 1; i <= totalPages; i++) // Start from page 1
-    {
-      string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
+                for (int i = 1; i <= totalPages; i++) // Start from page 1
+                {
+                    string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
 
-      // Check if page contains "BOTTIN DE COMMANDE" (case-insensitive)
-      if (pageText.ToUpper().Contains("BOTTIN DE COMMANDE"))
-      {
-        startAddingProducts = true;
-        //Console.WriteLine($"Found 'BOTTIN DE COMMANDE' on page {i}");
-      }
+                    // Check if page contains "BOTTIN DE COMMANDE" (case-insensitive)
+                    if (pageText.ToUpper().Contains("BOTTIN DE COMMANDE"))
+                    {
+                        startAddingProducts = true;
+                        //Console.WriteLine($"Found 'BOTTIN DE COMMANDE' on page {i}");
+                    }
 
-      if (startAddingProducts)
-      {
-        List<string> lines = LineSplitter.SplitLines(pageText);
-        dataObjects.AddRange(lines);
-      }
-    }
-  }
+                    if (startAddingProducts)
+                    {
+                        List<string> lines = LineSplitter.SplitLines(pageText);
+                        dataObjects.AddRange(lines);
+                    }
+                }
+            }
 
-  return dataObjects;
-}
+            return dataObjects;
+        }
 
         public static List<string> ParsePdfDelete(string filePath)
         {
@@ -193,16 +193,17 @@ namespace BottinToCSV
             {
                 var newPrice = double.Parse(match.Value) / 100;
                 newPrice = CalculateNewPrice(newPrice);
-                return Math.Round(newPrice,2);
+                return Math.Round(newPrice, 2);
             }
             string pattern1 = @"\d{1,4}";
             MatchCollection matches = Regex.Matches(dataString, pattern1);
-            if (matches.Count > 0) { 
+            if (matches.Count > 0)
+            {
                 Match lastMatch = matches[matches.Count - 1];
                 Console.WriteLine(lastMatch.Value);
                 var newPrice = double.Parse(lastMatch.Value) / 100;
                 newPrice = CalculateNewPrice(newPrice);
-                return Math.Round(newPrice,2);
+                return Math.Round(newPrice, 2);
             }
             return 0;
         }
@@ -249,7 +250,7 @@ namespace BottinToCSV
 
         public double CalculateNewPrice(double initialPrice)
         {
-            double newPrice = Math.Round(initialPrice / 0.70, 2);
+            double newPrice = Math.Round(initialPrice / 0.80, 2);
             return newPrice;
         }
     }

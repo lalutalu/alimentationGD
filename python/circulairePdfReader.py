@@ -99,7 +99,6 @@ def extract_quantity(product_line: str) -> str:
                 if last_match.group(1):
                     return last_match.group(1)
                 else:
-                    print(product_line)
                     return "No Quantity - Group 1 not found"
     return "No Quantity"    
 
@@ -112,10 +111,18 @@ def extract_weight(product_line: str) -> tuple:
     else:
         weight_match = re.search(r"(\d+)\D*$", product_line)
         if weight_match:
+            print(weight_match.group(1))
             weight = weight_match.group(1)
         weight_match = re.search(r"(\d+\D+\d+)\D*$", product_line)
         if weight_match:
+            print(product_line)
+            print("second option: "+ weight_match.group(1))
             weight = weight_match.group(1)
+            numbers = weight.split()
+            if len(numbers) >= 2:
+                last_digits = numbers[1]
+                print(last_digits)
+                weight = last_digits
 
         unit_match = re.search(r"([^\d]+)$", product_line)
         unit = unit_match.group(1).strip() if unit_match else "No Unit"
@@ -202,7 +209,7 @@ def create_product_pdf(products, output_pdf_path):
             textColor=black,
             forceBorder=True,
         )
-
+        c.line(50, y_position - 50, 400, y_position - 50)
         y_position -= 5 * line_height
 
         if y_position <= 0:
@@ -212,7 +219,7 @@ def create_product_pdf(products, output_pdf_path):
     c.save()
 
 products = []
-pdf_path = "../pdfs/circulaire 1.pdf"
+pdf_path = "../pdfs/circulaire 2.pdf"
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
