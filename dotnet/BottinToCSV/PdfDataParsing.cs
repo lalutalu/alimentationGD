@@ -250,8 +250,10 @@ namespace BottinToCSV
 
         public double CalculateNewPrice(double initialPrice)
         {
-            double newPrice = Math.Round(initialPrice / 0.80, 2);
+            double newPrice = Math.Round(initialPrice / 0.87, 2);
             return newPrice;
         }
+
+        //fruit et legumes 20
     }
 }
