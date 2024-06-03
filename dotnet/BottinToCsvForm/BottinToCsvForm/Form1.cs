@@ -37,11 +37,13 @@ namespace BottinToCsvForm
         {
             if (selectedFiles.Count == 0 && textBox1.Text == "")
             {
-                MessageBox.Show("Veuillez choisir un bottin...");
+                MessageBox.Show("Veuillez choisir un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else if (selectedFiles.Count < 1)
+            else if (selectedFiles.Count > 1)
             {
-                MessageBox.Show("Veuillez sélectionner un bottin a la fois.");
+                MessageBox.Show("Veuillez sélectionner un bottin à la fois.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             PdfDataParsing pdfDataParsing = new PdfDataParsing();
             FileCreation fileCreation = new FileCreation();
@@ -64,17 +66,16 @@ namespace BottinToCsvForm
                     Product product = pdfDataParsing.ParseProducts(datastring);
                     product.HandleID = $"Produit_{counter}";
                     products.Add(product);
-
                 }
                 //CSVFile.UpdatePrices(lastWeek, products);
                 //CSVFile.DeleteProducts(products, productsToBeDeleted);
                 Console.WriteLine(products.Count);
-                fileCreation.CreateFile(products);
-                MessageBox.Show("Produits.csv crée sur le bureau!");
+                string filepath = fileCreation.CreateFile(products);
+                MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error parsing PDF: {ex.Message}");
+                MessageBox.Show($"Oops, une erreur est survenue: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

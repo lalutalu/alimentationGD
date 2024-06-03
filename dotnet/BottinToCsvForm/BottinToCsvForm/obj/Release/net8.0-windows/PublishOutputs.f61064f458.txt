@@ -1,0 +1,8 @@
+C:\Users\lalutalu\dev\Bottin to CSV\BottinToCsvForm.exe
+C:\Users\lalutalu\dev\Bottin to CSV\BottinToCsvForm.dll
+C:\Users\lalutalu\dev\Bottin to CSV\BottinToCsvForm.deps.json
+C:\Users\lalutalu\dev\Bottin to CSV\BottinToCsvForm.runtimeconfig.json
+C:\Users\lalutalu\dev\Bottin to CSV\BottinToCsvForm.pdb
+C:\Users\lalutalu\dev\Bottin to CSV\BouncyCastle.Crypto.dll
+C:\Users\lalutalu\dev\Bottin to CSV\CsvHelper.dll
+C:\Users\lalutalu\dev\Bottin to CSV\itextsharp.dll

@@ -20,3 +20,4 @@ C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\
 C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Debug\net8.0-windows\BottinToCsvForm.pdb
 C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Debug\net8.0-windows\BottinToCsvForm.genruntimeconfig.cache
 C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Debug\net8.0-windows\ref\BottinToCsvForm.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Debug\net8.0-windows\BottinToCsvForm.Properties.Resources.resources
