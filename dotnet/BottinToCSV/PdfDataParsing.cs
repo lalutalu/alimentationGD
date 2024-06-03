@@ -6,29 +6,6 @@ namespace BottinToCSV
 {
     public class PdfDataParsing
     {
-        //public static List<string> ParsePdf(string filePath)
-        //{
-        //    List<string> dataObjects = new List<string>();
-        //    using (PdfReader reader = new PdfReader(filePath))
-        //    {
-        //        int totalPages = reader.NumberOfPages;
-        //        Console.WriteLine("Entrez le numéro de la page avec le titre commande du bottin: ");
-        //        int startOfProducts = int.Parse(Console.ReadLine());
-        //        for (int i = startOfProducts; i <= totalPages; i++)
-        //        {
-        //            string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
-        //            Console.WriteLine(pageText);
-        //            List<string> lines = LineSplitter.SplitLines(pageText);
-        //            List<string> linesToProcess = new List<string>(lines);
-        //            foreach (string line in linesToProcess)
-        //            {
-        //                dataObjects.Add(line);
-        //            }
-        //        }
-        //    }
-        //    return dataObjects;
-        //}
-
         public static List<string> ParsePdf(string filePath)
         {
             List<string> dataObjects = new List<string>();

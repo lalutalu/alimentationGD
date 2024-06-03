@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "E8wtQ1oFjmo=",
+  "dgSpecHash": "DgUDDMuOsDc=",
   "success": true,
   "projectFilePath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCSV\\BottinToCSV.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lalutalu\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
-    "C:\\Users\\lalutalu\\.nuget\\packages\\csvhelper\\32.0.2\\csvhelper.32.0.2.nupkg.sha512",
+    "C:\\Users\\lalutalu\\.nuget\\packages\\csvhelper\\32.0.3\\csvhelper.32.0.3.nupkg.sha512",
     "C:\\Users\\lalutalu\\.nuget\\packages\\itextsharp\\5.5.13.3\\itextsharp.5.5.13.3.nupkg.sha512"
   ],
   "logs": [
