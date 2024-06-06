@@ -10,6 +10,7 @@
         public string DiscountMode { get; set; }
         public string Nom { get; set; }
         public string Quantite { get; set; }
+        public string Category { get; set; }
         public string Format { get; set; }
         public double Prix { get; set; }
         public Product()

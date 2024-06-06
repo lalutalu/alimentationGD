@@ -21,3 +21,9 @@ C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\
 C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Debug\net8.0-windows\BottinToCsvForm.genruntimeconfig.cache
 C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Debug\net8.0-windows\ref\BottinToCsvForm.dll
 C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Debug\net8.0-windows\BottinToCsvForm.Properties.Resources.resources
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Debug\net8.0-windows\ClosedXML.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Debug\net8.0-windows\ExcelNumberFormat.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Debug\net8.0-windows\Irony.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Debug\net8.0-windows\SixLabors.Fonts.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Debug\net8.0-windows\XLParser.dll

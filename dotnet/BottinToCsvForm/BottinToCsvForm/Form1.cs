@@ -5,6 +5,8 @@ namespace BottinToCsvForm
     public partial class Form1 : Form
     {
         private List<String> selectedFiles = new List<String>();
+        private string selectedFolder;
+        private List<Product> currentProducts = new List<Product>();
         public Form1()
         {
             InitializeComponent();
@@ -16,8 +18,20 @@ namespace BottinToCsvForm
             selectedFiles.Clear();
         }
 
+        private void effacerCSV_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = "";
+            selectedFolder = "";
+        }
+
         private void parcourir_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text != "")
+            {
+                MessageBox.Show("Vous avez deja choisis un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
             OpenFileDialog dialog = new OpenFileDialog
             {
                 Multiselect = false,
@@ -30,7 +44,21 @@ namespace BottinToCsvForm
                 selectedFiles.Clear();
                 selectedFiles.Add(dialog.FileName);
                 textBox1.Text = dialog.FileName;
+            }
+        }
+        private void parcourirCSV_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog
+            {
+                Description = "Sélectionner un dossier contenant des fichiers CSV ou XLSX"
             };
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                selectedFolder = dialog.SelectedPath;
+                textBox2.Text = selectedFolder;
+                MessageBox.Show($"Selected Folder: {selectedFolder}");
+            }
         }
 
         private void soumettre_Click(object sender, EventArgs e)
@@ -40,43 +68,49 @@ namespace BottinToCsvForm
                 MessageBox.Show("Veuillez choisir un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (selectedFiles.Count > 1)
-            {
-                MessageBox.Show("Veuillez sélectionner un bottin à la fois.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+
             PdfDataParsing pdfDataParsing = new PdfDataParsing();
             FileCreation fileCreation = new FileCreation();
-            CSVFile file = new CSVFile();
-            int counter = 0;
-            List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(selectedFiles[0]));
+            CSVDataParsing csvDataParsing = new CSVDataParsing();
+            int counter = 1;
+
             try
             {
-                //    List<Product> productsToBeDeleted = new List<Product>();
-                //    foreach (var datastring in deleteData)
-                //    {
-                //        Product product = pdfDataParsing.ParseProducts(datastring);
-                //        productsToBeDeleted.Add(product);
-                //    }
+                List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(selectedFiles[0]));
+                currentProducts.Clear();
 
-                List<Product> products = new List<Product>();
                 foreach (var datastring in parsedData)
                 {
-                    counter++;
                     Product product = pdfDataParsing.ParseProducts(datastring);
                     product.HandleID = $"Produit_{counter}";
-                    products.Add(product);
+                    product.Category = "Produits Secs";
+                    currentProducts.Add(product);
+                    counter++;
                 }
-                //CSVFile.UpdatePrices(lastWeek, products);
-                //CSVFile.DeleteProducts(products, productsToBeDeleted);
-                Console.WriteLine(products.Count);
-                string filepath = fileCreation.CreateFile(products);
+
+                if (!string.IsNullOrEmpty(selectedFolder))
+                {
+                    var files = Directory.GetFiles(selectedFolder, "*.*").Where(s => s.EndsWith(".csv") || s.EndsWith(".xlsx"));
+                    foreach (var file in files)
+                    {
+                        List<Product> fileProducts = csvDataParsing.ReadFile(file);
+                        counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
+                    }
+                }
+
+                string filepath = fileCreation.CreateFile(currentProducts);
                 MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Oops, une erreur est survenue: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void effacer_Click_1(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            selectedFiles.Clear();
         }
     }
 }

@@ -33,7 +33,7 @@
                         product.Nom,
                         description,
                         "",  // productImageUrl
-                        "metro",
+                        product.Category,
                         product.Code39,
                         "",  // ribbon
                         product.Prix.ToString(),
