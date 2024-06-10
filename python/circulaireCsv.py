@@ -3,6 +3,7 @@ import re
 import csv
 import PyPDF2
 import pandas as pd
+import argparse
 
 noCode = 0
 PERCENTAGE = 14.95
@@ -257,10 +258,16 @@ def create_csv(filepath, products):
 
 pdf_products = []
 csv_products = []
-pdf_path = "../pdfs/circulaire-metro.pdf"
+
+parser = argparse.ArgumentParser(description="circulaire file path")
+parser.add_argument("circulaire_path", nargs='?', default="../pdfs/circulaire 1.pdf", type=str)
+parser.add_argument("csv_path", nargs='?', default="../../../Desktop/test.csv", type=str)
+args = parser.parse_args()
+pdf_path = args.circulaire_path 
+
 home_dir = os.path.expanduser("~")
 desktop_dir = os.path.join(home_dir, "Desktop")
-csv_path = os.path.join(desktop_dir, "Produits_2024-06-07.csv")
+csv_path = args.csv_path
 new_csv_path = os.path.join(desktop_dir,"ProduitsAvecRabais.csv")
 combined_lines = extract_product_with_details(pdf_path)
 
