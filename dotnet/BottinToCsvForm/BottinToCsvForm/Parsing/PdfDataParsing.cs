@@ -95,7 +95,7 @@ namespace BottinToCsvForm.Parsing
             Match match = Regex.Match(InitialString, pattern);
             if (match.Success)
             {
-                return match.Groups[1].Value;
+                return match.Groups[1].Value.Replace(",", ".");
             }
             return "";
         }
@@ -164,10 +164,6 @@ namespace BottinToCsvForm.Parsing
 
         public double ParsePrix(string dataString)
         {
-            if (dataString.Contains("MARQ.METO SIMPLE"))
-            {
-                MessageBox.Show(dataString);
-            }
             string pattern = @"\d{1,6}$";
             Match match = Regex.Match(dataString, pattern);
 

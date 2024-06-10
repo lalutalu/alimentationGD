@@ -142,7 +142,6 @@ namespace BottinToCsvForm.Parsing
                     string[] values = line.Split(',');
                     string handleId = values[0];
                     string name = values[2];
-                    double prixOg = double.Parse(values[6]);
                     double prixNew = double.Parse(values[8]);
                     string code39 = values[6];
                     string weight = values[3].Split('X')[0];
@@ -155,7 +154,6 @@ namespace BottinToCsvForm.Parsing
                     products.Add(product);
                 }
             }
-            MessageBox.Show($"{products.Count}");
             return products;
         }
     }

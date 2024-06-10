@@ -10,7 +10,7 @@ PERCENTAGE = 14.95
 
 
 class Product:
-    def __init__(self, name, prixOg, prixNew, code39, weight, unit, handleid) -> None:
+    def __init__(self, name, prixNew, code39, weight, unit, handleid) -> None:
         self.name = name
         self.prixOg = prixOg
         self.prixNew = prixNew
@@ -112,12 +112,9 @@ def calculate_new_price(ogPrice: float) -> float:
 def create_product_from_row(row):
     handleid = row.get("handleId", None)
     name = row.get("name", None)
-    prixOg = row.get("prixOriginal", None)
     prixNew = row.get("price", None)
     code39 = row.get("sku", None)
     weight = row.get("description", None)
-    unit = row.get("unit", "")
-
     product = Product(
         name, prixOg, prixNew, code39, weight, unit, handleid 
     )
@@ -256,10 +253,10 @@ def create_csv(filepath, products):
 
 
 
-pdf_products = []
-csv_products = []
 
-parser = argparse.ArgumentParser(description="circulaire file path")
+
+
+
 parser.add_argument("circulaire_path", nargs='?', default="../pdfs/circulaire 1.pdf", type=str)
 parser.add_argument("csv_path", nargs='?', default="../../../Desktop/test.csv", type=str)
 args = parser.parse_args()
