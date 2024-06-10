@@ -1,13 +1,12 @@
 using BottinToCsvForm.Parsing;
-
 namespace BottinToCsvForm
 {
     public partial class Form1 : Form
     {
-        private List<String> selectedFiles = new List<String>();
         private string selectedFolder;
-        private List<Product> currentProducts = new List<Product>();
         private string circulaireFilePath;
+        private List<String> selectedFiles = new List<String>();
+        private List<Product> currentProducts = new List<Product>();
         public Form1()
         {
             InitializeComponent();
@@ -111,6 +110,7 @@ namespace BottinToCsvForm
             PdfDataParsing pdfDataParsing = new PdfDataParsing();
             FileCreation fileCreation = new FileCreation();
             CSVDataParsing csvDataParsing = new CSVDataParsing();
+            CirculaireToCSV circulaireToCSV = new CirculaireToCSV();
             int counter = 1;
 
             try
@@ -135,6 +135,11 @@ namespace BottinToCsvForm
                         List<Product> fileProducts = csvDataParsing.ReadFile(file);
                         counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
                     }
+                }
+                if (!string.IsNullOrEmpty(circulairePath.Text))
+                {
+                    List<Product> circulaireProducts = circulaireToCSV.ReadProductsFromCsv(circulairePath.Text);
+                    counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
                 }
 
                 string filepath = fileCreation.CreateFile(currentProducts);

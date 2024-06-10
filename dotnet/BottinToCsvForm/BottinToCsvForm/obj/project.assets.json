@@ -4855,11 +4855,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
+      "projectUniqueName": "C:\\Users\\2064662\\Desktop\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
       "projectName": "BottinToCsvForm",
-      "projectPath": "E:\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
+      "projectPath": "C:\\Users\\2064662\\Desktop\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
       "packagesPath": "C:\\Users\\2064662\\.nuget\\packages\\",
-      "outputPath": "E:\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\obj\\",
+      "outputPath": "C:\\Users\\2064662\\Desktop\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

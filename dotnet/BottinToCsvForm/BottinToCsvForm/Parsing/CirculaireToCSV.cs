@@ -7,7 +7,7 @@ namespace BottinToCsvForm.Parsing
     {
         private const double PERCENTAGE = 14.95;
 
-        public static string ExtractProductName(string productLine)
+        public string ExtractProductName(string productLine)
         {
             string pattern = @"IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})";
             Match match = Regex.Match(productLine, pattern);
@@ -22,7 +22,7 @@ namespace BottinToCsvForm.Parsing
             }
         }
 
-        public static string ExtractProductUpc(string productLine)
+        public string ExtractProductUpc(string productLine)
         {
             string pattern = @"IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})";
             Match match = Regex.Match(productLine, pattern);
@@ -37,7 +37,7 @@ namespace BottinToCsvForm.Parsing
             }
         }
 
-        public static string ExtractProductCode(string productLine)
+        public string ExtractProductCode(string productLine)
         {
             Match match = Regex.Match(productLine, @"\b(\d{7})[A-Za-z]?\b");
             if (match.Success)
@@ -51,7 +51,7 @@ namespace BottinToCsvForm.Parsing
             }
         }
 
-        public static List<string> ExtractProductWithDetails(string pdfPath)
+        public List<string> ExtractProductWithDetails(string pdfPath)
         {
             List<string> productLines = new List<string>();
             using (PdfReader reader = new PdfReader(pdfPath))
@@ -82,19 +82,19 @@ namespace BottinToCsvForm.Parsing
             return productLines;
         }
 
-        public static string ExtractOriginalPrice(string productLine)
+        public string ExtractOriginalPrice(string productLine)
         {
             Match match = Regex.Match(productLine, @"\b(\d+\.\d+)\s+");
             return match.Success ? match.Groups[1].Value : "No Original Price";
         }
 
-        public static string ExtractQuantity(string productLine)
+        public string ExtractQuantity(string productLine)
         {
             Match match = Regex.Match(productLine, @"\d+\s+(\d+)");
             return match.Success ? match.Groups[1].Value : "No Quantity";
         }
 
-        public static (string Weight, string Unit) ExtractWeight(string productLine)
+        public (string Weight, string Unit) ExtractWeight(string productLine)
         {
             Match match = Regex.Match(productLine, @"\d+\s+(\d+)\s+([A-Za-z]+)");
 
@@ -119,13 +119,13 @@ namespace BottinToCsvForm.Parsing
             }
         }
 
-        public static double CalculateNewPrice(double ogPrice)
+        public double CalculateNewPrice(double ogPrice)
         {
             double newPrice = ogPrice * (1 + PERCENTAGE / 100);
             return Math.Round(newPrice, 2);
         }
 
-        public static List<Product> ReadProductsFromCsv(string filePath)
+        public List<Product> ReadProductsFromCsv(string filePath)
         {
             List<Product> products = new List<Product>();
             using (StreamReader reader = new StreamReader(filePath))
@@ -155,6 +155,7 @@ namespace BottinToCsvForm.Parsing
                     products.Add(product);
                 }
             }
+            MessageBox.Show($"{products.Count}");
             return products;
         }
     }
