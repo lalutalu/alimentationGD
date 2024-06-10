@@ -7,6 +7,7 @@ namespace BottinToCsvForm
         private List<String> selectedFiles = new List<String>();
         private string selectedFolder;
         private List<Product> currentProducts = new List<Product>();
+        private string circulaireFilePath;
         public Form1()
         {
             InitializeComponent();
@@ -18,10 +19,21 @@ namespace BottinToCsvForm
             selectedFiles.Clear();
         }
 
+        private void effacer_Click_1(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            selectedFiles.Clear();
+        }
+
         private void effacerCSV_Click(object sender, EventArgs e)
         {
             textBox2.Text = "";
             selectedFolder = "";
+        }
+        private void effacerCirculaire_Click(object sender, EventArgs e)
+        {
+            circulairePath.Text = "";
+            circulaireFilePath = "";
         }
 
         private void parcourir_Click(object sender, EventArgs e)
@@ -48,6 +60,12 @@ namespace BottinToCsvForm
         }
         private void parcourirCSV_Click(object sender, EventArgs e)
         {
+            if (textBox2.Text != "")
+            {
+                MessageBox.Show("Vous avez deja choisi un dossier...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
             FolderBrowserDialog dialog = new FolderBrowserDialog
             {
                 Description = "Sélectionner un dossier contenant des fichiers CSV ou XLSX"
@@ -57,7 +75,28 @@ namespace BottinToCsvForm
             {
                 selectedFolder = dialog.SelectedPath;
                 textBox2.Text = selectedFolder;
-                MessageBox.Show($"Selected Folder: {selectedFolder}");
+            }
+        }
+        private void parcourirCirculaire_Click(object sender, EventArgs e)
+        {
+            if (circulairePath.Text != "")
+            {
+                MessageBox.Show("Vous avez deja choisi un circulaire...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Filter = "Fichiers PDF|*.pdf|Tous les fichiers|*.*",
+                Title = "Selectionner un Circulaire format PDF"
+            };
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                selectedFiles.Clear();
+                selectedFiles.Add(dialog.FileName);
+                circulairePath.Text = dialog.FileName;
             }
         }
 
@@ -107,10 +146,5 @@ namespace BottinToCsvForm
             }
         }
 
-        private void effacer_Click_1(object sender, EventArgs e)
-        {
-            textBox1.Text = "";
-            selectedFiles.Clear();
-        }
     }
 }

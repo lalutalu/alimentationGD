@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {
+    "net7.0-windows7.0": {
       "BouncyCastle/1.8.9": {
         "type": "package",
         "compile": {
@@ -36,12 +36,12 @@
       "CsvHelper/32.0.3": {
         "type": "package",
         "compile": {
-          "lib/net8.0/CsvHelper.dll": {
+          "lib/net7.0/CsvHelper.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/CsvHelper.dll": {
+          "lib/net7.0/CsvHelper.dll": {
             "related": ".xml"
           }
         }
@@ -4842,30 +4842,35 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": [
+    "net7.0-windows7.0": [
       "ClosedXML >= 0.102.2",
       "CsvHelper >= 32.0.3",
       "iTextSharp >= 5.5.13.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lalutalu\\.nuget\\packages\\": {}
+    "C:\\Users\\2064662\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
+      "projectUniqueName": "E:\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
       "projectName": "BottinToCsvForm",
-      "projectPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
-      "packagesPath": "C:\\Users\\lalutalu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\obj\\",
+      "projectPath": "E:\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
+      "packagesPath": "C:\\Users\\2064662\\.nuget\\packages\\",
+      "outputPath": "E:\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\lalutalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\2064662\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0-windows"
+        "net7.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -4873,8 +4878,8 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0-windows7.0": {
-          "targetAlias": "net8.0-windows",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
           "projectReferences": {}
         }
       },
@@ -4882,16 +4887,11 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
-      "net8.0-windows7.0": {
-        "targetAlias": "net8.0-windows",
+      "net7.0-windows7.0": {
+        "targetAlias": "net7.0-windows",
         "dependencies": {
           "ClosedXML": {
             "target": "Package",
@@ -4925,7 +4925,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -4934,20 +4934,20 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "message": "Le package 'BouncyCastle 1.8.9' a été restauré en utilisant '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' au lieu du framework cible du projet 'net7.0-windows7.0'. Ce package n'est peut-être pas totalement compatible avec votre projet.",
       "libraryId": "BouncyCastle",
       "targetGraphs": [
-        "net8.0-windows7.0"
+        "net7.0-windows7.0"
       ]
     },
     {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'iTextSharp 5.5.13.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "message": "Le package 'iTextSharp 5.5.13.3' a été restauré en utilisant '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' au lieu du framework cible du projet 'net7.0-windows7.0'. Ce package n'est peut-être pas totalement compatible avec votre projet.",
       "libraryId": "iTextSharp",
       "targetGraphs": [
-        "net8.0-windows7.0"
+        "net7.0-windows7.0"
       ]
     }
   ]

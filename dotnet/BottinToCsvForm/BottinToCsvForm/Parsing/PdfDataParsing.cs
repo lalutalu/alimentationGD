@@ -27,11 +27,14 @@ namespace BottinToCsvForm.Parsing
                     if (startAddingProducts)
                     {
                         List<string> lines = LineSplitter.SplitLines(pageText);
-                        dataObjects.AddRange(lines);
+                        foreach (String line in lines)
+                        {
+                            string cleanedLine = line.Replace("**", "").Replace("*", "");
+                            dataObjects.Add(cleanedLine);
+                        }
                     }
                 }
             }
-
             return dataObjects;
         }
 
@@ -161,7 +164,11 @@ namespace BottinToCsvForm.Parsing
 
         public double ParsePrix(string dataString)
         {
-            string pattern = @"\d{1,4}$";
+            if (dataString.Contains("MARQ.METO SIMPLE"))
+            {
+                MessageBox.Show(dataString);
+            }
+            string pattern = @"\d{1,6}$";
             Match match = Regex.Match(dataString, pattern);
 
             if (match.Success)
@@ -170,7 +177,7 @@ namespace BottinToCsvForm.Parsing
                 newPrice = CalculateNewPrice(newPrice);
                 return Math.Round(newPrice, 2);
             }
-            string pattern1 = @"\d{1,4}";
+            string pattern1 = @"\d{1,6}";
             MatchCollection matches = Regex.Matches(dataString, pattern1);
             if (matches.Count > 0)
             {

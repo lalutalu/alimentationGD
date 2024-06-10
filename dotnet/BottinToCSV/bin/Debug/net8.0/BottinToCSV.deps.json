@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "BottinToCSV/1.0.0": {
         "dependencies": {
-          "CsvHelper": "32.0.2",
+          "CsvHelper": "32.0.3",
           "iTextSharp": "5.5.13.3"
         },
         "runtime": {
@@ -23,11 +23,11 @@
           }
         }
       },
-      "CsvHelper/32.0.2": {
+      "CsvHelper/32.0.3": {
         "runtime": {
           "lib/net8.0/CsvHelper.dll": {
             "assemblyVersion": "32.0.0.0",
-            "fileVersion": "32.0.2.21"
+            "fileVersion": "32.0.3.22"
           }
         }
       },
@@ -57,12 +57,12 @@
       "path": "bouncycastle/1.8.9",
       "hashPath": "bouncycastle.1.8.9.nupkg.sha512"
     },
-    "CsvHelper/32.0.2": {
+    "CsvHelper/32.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-h+Ilvdqr2kE2+SMJiRB6Cerf4CCXR5pFgcNsCLj2t3TgzIDuGlchqJaVLHqL8ZIyBdDyMq125LL6shC0ZtFnUw==",
-      "path": "csvhelper/32.0.2",
-      "hashPath": "csvhelper.32.0.2.nupkg.sha512"
+      "sha512": "sha512-JNDkd4Wc2Tim5IuyL8Ai13RhzRvaHItseEvlJ2YRkx2SMBFrIsW8a5+/o4/O1jsb6mlviihR6Hfyn+nqY6CurA==",
+      "path": "csvhelper/32.0.3",
+      "hashPath": "csvhelper.32.0.3.nupkg.sha512"
     },
     "iTextSharp/5.5.13.3": {
       "type": "package",

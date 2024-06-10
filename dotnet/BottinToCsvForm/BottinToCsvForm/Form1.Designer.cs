@@ -40,13 +40,17 @@
             effacerCSV = new Button();
             label1 = new Label();
             label2 = new Label();
+            circulairePath = new TextBox();
+            parcourirCirculaire = new Button();
+            effacerCirculaire = new Button();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // effacer
             // 
             effacer.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            effacer.Location = new Point(554, 126);
+            effacer.Location = new Point(235, 270);
             effacer.Name = "effacer";
             effacer.Size = new Size(94, 28);
             effacer.TabIndex = 0;
@@ -58,7 +62,7 @@
             // 
             soumettre.BackColor = Color.FromArgb(0, 192, 0);
             soumettre.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            soumettre.Location = new Point(325, 334);
+            soumettre.Location = new Point(118, 342);
             soumettre.Name = "soumettre";
             soumettre.Size = new Size(114, 51);
             soumettre.TabIndex = 1;
@@ -69,7 +73,7 @@
             // parcourir
             // 
             parcourir.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            parcourir.Location = new Point(554, 92);
+            parcourir.Location = new Point(48, 270);
             parcourir.Name = "parcourir";
             parcourir.Size = new Size(94, 28);
             parcourir.TabIndex = 2;
@@ -92,7 +96,7 @@
             // 
             textBox1.BackColor = Color.White;
             textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(228, 92);
+            textBox1.Location = new Point(48, 199);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
@@ -113,7 +117,7 @@
             // 
             textBox2.BackColor = Color.White;
             textBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(228, 205);
+            textBox2.Location = new Point(456, 301);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
@@ -123,7 +127,7 @@
             // parcourirCSV
             // 
             parcourirCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            parcourirCSV.Location = new Point(554, 207);
+            parcourirCSV.Location = new Point(456, 367);
             parcourirCSV.Name = "parcourirCSV";
             parcourirCSV.Size = new Size(94, 28);
             parcourirCSV.TabIndex = 9;
@@ -134,7 +138,7 @@
             // effacerCSV
             // 
             effacerCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            effacerCSV.Location = new Point(554, 241);
+            effacerCSV.Location = new Point(643, 367);
             effacerCSV.Name = "effacerCSV";
             effacerCSV.Size = new Size(94, 28);
             effacerCSV.TabIndex = 8;
@@ -147,7 +151,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.White;
             label1.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
-            label1.Location = new Point(228, 161);
+            label1.Location = new Point(35, 165);
             label1.Name = "label1";
             label1.Size = new Size(294, 23);
             label1.TabIndex = 10;
@@ -158,11 +162,55 @@
             label2.AutoSize = true;
             label2.BackColor = Color.White;
             label2.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
-            label2.Location = new Point(139, 276);
+            label2.Location = new Point(379, 275);
             label2.Name = "label2";
             label2.Size = new Size(409, 23);
             label2.TabIndex = 11;
             label2.Text = "Dossier contenant des fichiers CSV supplémentaires";
+            // 
+            // circulairePath
+            // 
+            circulairePath.BackColor = Color.White;
+            circulairePath.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            circulairePath.Location = new Point(459, 113);
+            circulairePath.Multiline = true;
+            circulairePath.Name = "circulairePath";
+            circulairePath.ReadOnly = true;
+            circulairePath.Size = new Size(281, 60);
+            circulairePath.TabIndex = 12;
+            // 
+            // parcourirCirculaire
+            // 
+            parcourirCirculaire.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            parcourirCirculaire.Location = new Point(459, 179);
+            parcourirCirculaire.Name = "parcourirCirculaire";
+            parcourirCirculaire.Size = new Size(94, 28);
+            parcourirCirculaire.TabIndex = 13;
+            parcourirCirculaire.Text = "Parcourir";
+            parcourirCirculaire.UseVisualStyleBackColor = true;
+            parcourirCirculaire.Click += parcourirCirculaire_Click;
+            // 
+            // effacerCirculaire
+            // 
+            effacerCirculaire.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            effacerCirculaire.Location = new Point(625, 179);
+            effacerCirculaire.Name = "effacerCirculaire";
+            effacerCirculaire.Size = new Size(94, 28);
+            effacerCirculaire.TabIndex = 14;
+            effacerCirculaire.Text = "Effacer";
+            effacerCirculaire.UseVisualStyleBackColor = true;
+            effacerCirculaire.Click += effacerCirculaire_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.White;
+            label3.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
+            label3.Location = new Point(529, 87);
+            label3.Name = "label3";
+            label3.Size = new Size(142, 23);
+            label3.TabIndex = 15;
+            label3.Text = "Fichier Circulaire";
             // 
             // Form1
             // 
@@ -170,6 +218,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(800, 450);
+            Controls.Add(label3);
+            Controls.Add(effacerCirculaire);
+            Controls.Add(parcourirCirculaire);
+            Controls.Add(circulairePath);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(parcourirCSV);
@@ -202,5 +254,9 @@
         private Button effacerCSV;
         private Label label1;
         private Label label2;
+        private TextBox circulairePath;
+        private Button parcourirCirculaire;
+        private Button effacerCirculaire;
+        private Label label3;
     }
 }

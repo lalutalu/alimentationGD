@@ -1,3 +1,4 @@
+import os
 import re
 import csv
 import PyPDF2
@@ -257,8 +258,10 @@ def create_csv(filepath, products):
 pdf_products = []
 csv_products = []
 pdf_path = "../pdfs/circulaire-metro.pdf"
-new_csv_path = "../../../ProduitsAvecRabais.csv"
-csv_path = "../../../Produits.csv"
+home_dir = os.path.expanduser("~")
+desktop_dir = os.path.join(home_dir, "Desktop")
+csv_path = os.path.join(desktop_dir, "Produits_2024-06-07.csv")
+new_csv_path = os.path.join(desktop_dir,"ProduitsAvecRabais.csv")
 combined_lines = extract_product_with_details(pdf_path)
 
 for line in combined_lines:
@@ -288,4 +291,4 @@ for line in combined_lines:
                 csv_product.handleid = csv_product.handleid
                 break
     create_csv(new_csv_path, csv_products)
-    print(f"CSV file '{new_csv_path}' created successfully.")
+print(f"CSV file '{new_csv_path}' created successfully.")
