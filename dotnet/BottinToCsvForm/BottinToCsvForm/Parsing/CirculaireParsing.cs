@@ -40,6 +40,16 @@ namespace BottinToCsvForm.Parsing
             return "No Original Price";
         }
 
+        private string ExtractQuantity(string productLine)
+        {
+            var match = Regex.Match(productLine, @"\d+\s+(\d+)");
+            if (match.Success)
+            {
+                string capturedText = match.Groups[1].Value.Trim();
+                return capturedText;
+            }
+            return "No Quantity";
+        }
         private double CalculateNewPrice(double ogPrice)
         {
             double newPrice = ogPrice * (1 + PERCENTAGE / 100);
@@ -84,7 +94,7 @@ namespace BottinToCsvForm.Parsing
 
                     foreach (string line in lines)
                     {
-                        if (System.Text.RegularExpressions.Regex.IsMatch(line, @"^IMPACT-\d+\s+"))
+                        if (Regex.IsMatch(line, @"^IMPACT-\d+\s+"))
                         {
                             productLine = line;
                         }
@@ -99,6 +109,7 @@ namespace BottinToCsvForm.Parsing
                 return productLines;
             }
         }
+
         public List<Product> ExtractCirculaireProducts(string filePath)
         {
             List<Product> circulaireProducts = new List<Product>();
@@ -111,6 +122,7 @@ namespace BottinToCsvForm.Parsing
                 string originalPriceStr = ExtractOriginalPrice(line);
                 double originalPrice = Convert.ToDouble(originalPriceStr);
                 double newPrice = CalculateNewPrice(originalPrice);
+                string quantity = ExtractQuantity(line);
                 Tuple<string, string> weightAndUnit = ExtractWeightAndUnit(line);
 
                 Product product = new Product
@@ -118,14 +130,13 @@ namespace BottinToCsvForm.Parsing
                     Code39 = productCode.PadLeft(7, '0'),
                     Nom = productName,
                     Prix = newPrice,
+                    Quantite = quantity,
                     Category = "Produits Secs",
-                    Quantite = $"{weightAndUnit.Item1}",
-                    Format = $"{weightAndUnit.Item2}"
+                    Format = $"{weightAndUnit.Item1} {weightAndUnit.Item2}"
                 };
 
                 circulaireProducts.Add(product);
             }
-
             return circulaireProducts;
         }
     }

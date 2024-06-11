@@ -105,8 +105,6 @@ namespace BottinToCsvForm
             try
             {
                 currentProducts.Clear();
-
-                // Process all selected files
                 foreach (var file in selectedFiles)
                 {
                     List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(file));
@@ -120,7 +118,6 @@ namespace BottinToCsvForm
                     }
                 }
 
-                // Process CSV/XLSX files from the selected folder
                 if (!string.IsNullOrEmpty(selectedFolder))
                 {
                     var files = Directory.GetFiles(selectedFolder, "*.*").Where(s => s.EndsWith(".csv") || s.EndsWith(".xlsx"));
@@ -131,14 +128,12 @@ namespace BottinToCsvForm
                     }
                 }
 
-                // Process the circulaire file
                 if (!string.IsNullOrEmpty(circulaireFilePath))
                 {
                     List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(circulaireFilePath);
                     counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
                 }
 
-                // Create the new file
                 string filepath = fileCreation.CreateFile(currentProducts);
                 MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

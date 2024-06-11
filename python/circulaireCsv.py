@@ -170,7 +170,7 @@ def create_csv(filepath, products):
                     "handleId": product.handleid,
                     "fieldType": product.fieldType,
                     "name": product.name,
-                    "description": f"{product.weight}",
+                    "description": f"{product.weight} {product.unit}",
                     "productImageUrl": "",
                     "collection": "metro",
                     "sku": product.code39,
@@ -204,7 +204,6 @@ def create_csv(filepath, products):
                     "additionalInfoTitle1": "",
                     "additionalInfoDescription1": "",
                     "additionalInfoTitle2": "",
-
                     "additionalInfoDescription2": "",
                     "additionalInfoTitle3": "",
                     "additionalInfoDescription3": "",
