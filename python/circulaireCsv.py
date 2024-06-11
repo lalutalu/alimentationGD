@@ -10,10 +10,9 @@ PERCENTAGE = 14.95
 
 
 class Product:
-    def __init__(self, name, prixNew, code39, weight, unit, handleid) -> None:
+    def __init__(self, name, prixOg, code39, weight, unit, handleid) -> None:
         self.name = name
         self.prixOg = prixOg
-        self.prixNew = prixNew
         self.code39 = code39
         self.weight = weight
         self.unit = unit
@@ -80,11 +79,9 @@ def extract_original_price(product_line: str) -> str:
     match = re.search(r"\b(\d+\.\d+)\s+", product_line)
     return match.group(1) if match else "No Original Price"
 
-
 def extract_quantity(product_line: str) -> str:
     match = re.search(r"\d+\s+(\d+)", product_line)
     return match.group(1) if match else "No Quantity"
-
 
 def extract_weight(product_line: str) -> tuple:
     match = re.search(r"\d+\s+(\d+)\s+([A-Za-z]+)", product_line)
@@ -108,18 +105,16 @@ def calculate_new_price(ogPrice: float) -> float:
     new_price = ogPrice * (1 + PERCENTAGE / 100)
     return round(new_price, 2)
 
-
 def create_product_from_row(row):
     handleid = row.get("handleId", None)
     name = row.get("name", None)
-    prixNew = row.get("price", None)
+    prixOg = row.get("price", None)
     code39 = row.get("sku", None)
     weight = row.get("description", None)
     product = Product(
-        name, prixOg, prixNew, code39, weight, unit, handleid 
+        name, prixOg, code39, weight, unit, handleid 
     )
     return product
-
 
 def search_csv(filepath, create_products=False):
     data = pd.read_csv(filepath)
@@ -251,26 +246,24 @@ def create_csv(filepath, products):
                 }
             )
 
-
-
-
-
-
-
+parser = argparse.ArgumentParser()
 parser.add_argument("circulaire_path", nargs='?', default="../pdfs/circulaire 1.pdf", type=str)
 parser.add_argument("csv_path", nargs='?', default="../../../Desktop/test.csv", type=str)
 args = parser.parse_args()
-pdf_path = args.circulaire_path 
 
+pdf_path = args.circulaire_path
+csv_path = args.csv_path
 home_dir = os.path.expanduser("~")
 desktop_dir = os.path.join(home_dir, "Desktop")
-csv_path = args.csv_path
-new_csv_path = os.path.join(desktop_dir,"ProduitsAvecRabais.csv")
+new_csv_path = os.path.join(desktop_dir, "ProduitsAvecRabais.csv")
+
 combined_lines = extract_product_with_details(pdf_path)
+
+pdf_products = []
+csv_products = search_csv(csv_path)
 
 for line in combined_lines:
     weight, unit = extract_weight(line)
-
     product = Product(
         handleid="",
         name=extract_product_name(line),
@@ -280,19 +273,20 @@ for line in combined_lines:
         weight=weight,
         unit=unit,
     )
-
     pdf_products.append(product)
-    csv_products = search_csv(csv_path)
-    for csv_product in csv_products:
-        for pdf_product in pdf_products:
-            if csv_product.code39 == pdf_product.code39:
-                csv_product.name = pdf_product.name
-                csv_product.prixOg = pdf_product.prixOg
-                csv_product.prixNew = pdf_product.prixNew
-                csv_product.code39 = pdf_product.code39
-                csv_product.weight = pdf_product.weight
-                csv_product.unit = pdf_product.unit
-                csv_product.handleid = csv_product.handleid
-                break
-    create_csv(new_csv_path, csv_products)
+
+for csv_product in csv_products:
+    for pdf_product in pdf_products:
+        if csv_product.code39 == pdf_product.code39:
+            csv_product.name = pdf_product.name
+            csv_product.prixOg = pdf_product.prixOg
+            csv_product.prixNew = pdf_product.prixNew
+            csv_product.code39 = pdf_product.code39
+            csv_product.weight = pdf_product.weight
+            csv_product.unit = pdf_product.unit
+            csv_product.handleid = csv_product.handleid
+            break
+
+create_csv(new_csv_path, csv_products)
+
 print(f"CSV file '{new_csv_path}' created successfully.")
