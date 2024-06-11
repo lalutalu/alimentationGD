@@ -69,7 +69,8 @@ namespace BottinToCsvForm.Parsing
         public Product ParseProducts(string dataString)
         {
             Product product = new Product();
-            product.Code39 = ParseCode39(dataString);
+            string code = ParseCode39(dataString);
+            product.Code39 = code.PadLeft(7, '0');
             product.Nom = ParseNames(dataString);
             product.Quantite = ParseQuantity(dataString);
             product.Format = ParseUnit(dataString);

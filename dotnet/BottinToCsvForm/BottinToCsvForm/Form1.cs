@@ -5,8 +5,9 @@ namespace BottinToCsvForm
     {
         private string selectedFolder;
         private string circulaireFilePath;
-        private List<String> selectedFiles = new List<String>();
+        private List<string> selectedFiles = new List<string>();
         private List<Product> currentProducts = new List<Product>();
+
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace BottinToCsvForm
             textBox2.Text = "";
             selectedFolder = "";
         }
+
         private void effacerCirculaire_Click(object sender, EventArgs e)
         {
             circulairePath.Text = "";
@@ -37,12 +39,6 @@ namespace BottinToCsvForm
 
         private void parcourir_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "")
-            {
-                MessageBox.Show("Vous avez deja choisis un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-
-            }
             OpenFileDialog dialog = new OpenFileDialog
             {
                 Multiselect = false,
@@ -52,18 +48,17 @@ namespace BottinToCsvForm
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                selectedFiles.Clear();
                 selectedFiles.Add(dialog.FileName);
                 textBox1.Text = dialog.FileName;
             }
         }
+
         private void parcourirCSV_Click(object sender, EventArgs e)
         {
             if (textBox2.Text != "")
             {
                 MessageBox.Show("Vous avez deja choisi un dossier...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-
             }
             FolderBrowserDialog dialog = new FolderBrowserDialog
             {
@@ -76,14 +71,9 @@ namespace BottinToCsvForm
                 textBox2.Text = selectedFolder;
             }
         }
+
         private void parcourirCirculaire_Click(object sender, EventArgs e)
         {
-            if (circulairePath.Text != "")
-            {
-                MessageBox.Show("Vous avez deja choisi un circulaire...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-
-            }
             OpenFileDialog dialog = new OpenFileDialog
             {
                 Multiselect = false,
@@ -93,8 +83,7 @@ namespace BottinToCsvForm
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                selectedFiles.Clear();
-                selectedFiles.Add(dialog.FileName);
+                circulaireFilePath = dialog.FileName;
                 circulairePath.Text = dialog.FileName;
             }
         }
@@ -110,23 +99,28 @@ namespace BottinToCsvForm
             PdfDataParsing pdfDataParsing = new PdfDataParsing();
             FileCreation fileCreation = new FileCreation();
             CSVDataParsing csvDataParsing = new CSVDataParsing();
-            CirculaireToCSV circulaireToCSV = new CirculaireToCSV();
+            CirculaireParsing circulaireToCSV = new CirculaireParsing();
             int counter = 1;
 
             try
             {
-                List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(selectedFiles[0]));
                 currentProducts.Clear();
 
-                foreach (var datastring in parsedData)
+                // Process all selected files
+                foreach (var file in selectedFiles)
                 {
-                    Product product = pdfDataParsing.ParseProducts(datastring);
-                    product.HandleID = $"Produit_{counter}";
-                    product.Category = "Produits Secs";
-                    currentProducts.Add(product);
-                    counter++;
+                    List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(file));
+                    foreach (var datastring in parsedData)
+                    {
+                        Product product = pdfDataParsing.ParseProducts(datastring);
+                        product.HandleID = $"Produit_{counter}";
+                        product.Category = "Produits Secs";
+                        currentProducts.Add(product);
+                        counter++;
+                    }
                 }
 
+                // Process CSV/XLSX files from the selected folder
                 if (!string.IsNullOrEmpty(selectedFolder))
                 {
                     var files = Directory.GetFiles(selectedFolder, "*.*").Where(s => s.EndsWith(".csv") || s.EndsWith(".xlsx"));
@@ -136,12 +130,15 @@ namespace BottinToCsvForm
                         counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
                     }
                 }
-                if (!string.IsNullOrEmpty(circulairePath.Text))
+
+                // Process the circulaire file
+                if (!string.IsNullOrEmpty(circulaireFilePath))
                 {
-                    List<Product> circulaireProducts = circulaireToCSV.ReadProductsFromCsv(circulairePath.Text);
+                    List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(circulaireFilePath);
                     counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
                 }
 
+                // Create the new file
                 string filepath = fileCreation.CreateFile(currentProducts);
                 MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -150,6 +147,5 @@ namespace BottinToCsvForm
                 MessageBox.Show($"Oops, une erreur est survenue: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }

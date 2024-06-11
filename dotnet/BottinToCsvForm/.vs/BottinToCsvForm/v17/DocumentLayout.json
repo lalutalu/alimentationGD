@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\parsing\\circulairetocsv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\parsing\\circulairetocsv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\parsing\\circulaireparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\parsing\\circulaireparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\parsing\\csvdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\parsing\\csvdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\parsing\\pdfdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\parsing\\pdfdataparsing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\parsing\\filecreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\parsing\\filecreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,33 +30,48 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FileCreation.cs",
-              "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\FileCreation.cs",
-              "RelativeDocumentMoniker": "BottinToCsvForm\\Parsing\\FileCreation.cs",
-              "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\FileCreation.cs",
-              "RelativeToolTip": "BottinToCsvForm\\Parsing\\FileCreation.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAcAAAA",
+              "DocumentIndex": 1,
+              "Title": "CirculaireParsing.cs",
+              "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\CirculaireParsing.cs",
+              "RelativeDocumentMoniker": "BottinToCsvForm\\Parsing\\CirculaireParsing.cs",
+              "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\CirculaireParsing.cs",
+              "RelativeToolTip": "BottinToCsvForm\\Parsing\\CirculaireParsing.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwBMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T19:30:02.609Z",
+              "WhenOpened": "2024-06-10T14:18:38.087Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Product.cs",
+              "RelativeDocumentMoniker": "BottinToCsvForm\\Product.cs",
+              "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Product.cs",
+              "RelativeToolTip": "BottinToCsvForm\\Product.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAxwAwAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-11T17:57:52.711Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Form1.cs",
               "RelativeDocumentMoniker": "BottinToCsvForm\\Form1.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Form1.cs",
               "RelativeToolTip": "BottinToCsvForm\\Form1.cs",
-              "ViewState": "AQIAAHQAAAAAAAAAAAAIwJUAAAAAAAAA",
+              "ViewState": "AQIAAHQAAAAAAAAAAAAAAIIAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-03T13:24:46.17Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -60,28 +79,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CirculaireToCSV.cs",
-              "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\CirculaireToCSV.cs",
-              "RelativeDocumentMoniker": "BottinToCsvForm\\Parsing\\CirculaireToCSV.cs",
-              "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\CirculaireToCSV.cs",
-              "RelativeToolTip": "BottinToCsvForm\\Parsing\\CirculaireToCSV.cs",
-              "ViewState": "AQIAAFwAAAAAAAAAAAAAAGIAAABQAAAA",
+              "DocumentIndex": 2,
+              "Title": "CSVDataParsing.cs",
+              "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\CSVDataParsing.cs",
+              "RelativeDocumentMoniker": "BottinToCsvForm\\Parsing\\CSVDataParsing.cs",
+              "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\CSVDataParsing.cs",
+              "RelativeToolTip": "BottinToCsvForm\\Parsing\\CSVDataParsing.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T14:18:38.087Z",
+              "WhenOpened": "2024-06-11T18:35:37.636Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "PdfDataParsing.cs",
               "DocumentMoniker": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\PdfDataParsing.cs",
               "RelativeDocumentMoniker": "BottinToCsvForm\\Parsing\\PdfDataParsing.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\PdfDataParsing.cs",
               "RelativeToolTip": "BottinToCsvForm\\Parsing\\PdfDataParsing.cs",
-              "ViewState": "AQIAAIcAAAAAAAAAAIAwwKMAAAAAAAAA",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAawEsAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T12:13:00.466Z"
+              "WhenOpened": "2024-06-10T12:13:00.466Z",
+              "EditorCaption": ""
             }
           ]
         }
