@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             effacer = new Button();
             soumettre = new Button();
@@ -44,13 +45,14 @@
             parcourirCirculaire = new Button();
             effacerCirculaire = new Button();
             label3 = new Label();
+            toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // effacer
             // 
-            effacer.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            effacer.Location = new Point(235, 270);
+            effacer.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            effacer.Location = new Point(235, 252);
             effacer.Name = "effacer";
             effacer.Size = new Size(94, 28);
             effacer.TabIndex = 0;
@@ -61,7 +63,7 @@
             // soumettre
             // 
             soumettre.BackColor = Color.FromArgb(0, 192, 0);
-            soumettre.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            soumettre.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             soumettre.Location = new Point(118, 342);
             soumettre.Name = "soumettre";
             soumettre.Size = new Size(114, 51);
@@ -72,8 +74,8 @@
             // 
             // parcourir
             // 
-            parcourir.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            parcourir.Location = new Point(48, 270);
+            parcourir.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            parcourir.Location = new Point(48, 252);
             parcourir.Name = "parcourir";
             parcourir.Size = new Size(94, 28);
             parcourir.TabIndex = 2;
@@ -85,8 +87,8 @@
             // 
             titre.AutoSize = true;
             titre.BackColor = Color.White;
-            titre.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            titre.Location = new Point(472, 26);
+            titre.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            titre.Location = new Point(451, 30);
             titre.Name = "titre";
             titre.Size = new Size(289, 30);
             titre.TabIndex = 3;
@@ -95,8 +97,8 @@
             // textBox1
             // 
             textBox1.BackColor = Color.White;
-            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(48, 199);
+            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            textBox1.Location = new Point(48, 181);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
@@ -116,17 +118,18 @@
             // textBox2
             // 
             textBox2.BackColor = Color.White;
-            textBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             textBox2.Location = new Point(456, 301);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
             textBox2.Size = new Size(281, 60);
             textBox2.TabIndex = 6;
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // parcourirCSV
             // 
-            parcourirCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            parcourirCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             parcourirCSV.Location = new Point(456, 367);
             parcourirCSV.Name = "parcourirCSV";
             parcourirCSV.Size = new Size(94, 28);
@@ -137,7 +140,7 @@
             // 
             // effacerCSV
             // 
-            effacerCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            effacerCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             effacerCSV.Location = new Point(643, 367);
             effacerCSV.Name = "effacerCSV";
             effacerCSV.Size = new Size(94, 28);
@@ -150,28 +153,28 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.White;
-            label1.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
-            label1.Location = new Point(35, 165);
+            label1.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(102, 155);
             label1.Name = "label1";
-            label1.Size = new Size(294, 23);
+            label1.Size = new Size(173, 23);
             label1.TabIndex = 10;
-            label1.Text = "Sélectionnez le bottin en format PDF";
+            label1.Text = "Fichier Bottin en PDF";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.White;
-            label2.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
-            label2.Location = new Point(379, 275);
+            label2.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(431, 275);
             label2.Name = "label2";
-            label2.Size = new Size(409, 23);
+            label2.Size = new Size(330, 23);
             label2.TabIndex = 11;
-            label2.Text = "Dossier contenant des fichiers CSV supplémentaires";
+            label2.Text = "Fichiers supplémentaires en XLSX ou CSV";
             // 
             // circulairePath
             // 
             circulairePath.BackColor = Color.White;
-            circulairePath.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            circulairePath.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             circulairePath.Location = new Point(459, 113);
             circulairePath.Multiline = true;
             circulairePath.Name = "circulairePath";
@@ -181,7 +184,7 @@
             // 
             // parcourirCirculaire
             // 
-            parcourirCirculaire.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            parcourirCirculaire.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             parcourirCirculaire.Location = new Point(459, 179);
             parcourirCirculaire.Name = "parcourirCirculaire";
             parcourirCirculaire.Size = new Size(94, 28);
@@ -192,7 +195,7 @@
             // 
             // effacerCirculaire
             // 
-            effacerCirculaire.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            effacerCirculaire.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             effacerCirculaire.Location = new Point(625, 179);
             effacerCirculaire.Name = "effacerCirculaire";
             effacerCirculaire.Size = new Size(94, 28);
@@ -205,12 +208,12 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.White;
-            label3.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
-            label3.Location = new Point(529, 87);
+            label3.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.Location = new Point(502, 87);
             label3.Name = "label3";
-            label3.Size = new Size(142, 23);
+            label3.Size = new Size(202, 23);
             label3.TabIndex = 15;
-            label3.Text = "Fichier Circulaire";
+            label3.Text = "Fichier Circulaire en PDF";
             // 
             // Form1
             // 
@@ -258,5 +261,6 @@
         private Button parcourirCirculaire;
         private Button effacerCirculaire;
         private Label label3;
+        private ToolTip toolTip1;
     }
 }

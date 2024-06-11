@@ -3,16 +3,42 @@ namespace BottinToCsvForm
 {
     public partial class Form1 : Form
     {
-        private string selectedFolder;
+        private List<string> extraFiles = new List<string>();
         private string circulaireFilePath;
         private List<string> selectedFiles = new List<string>();
         private List<Product> currentProducts = new List<Product>();
+        private ToolTip toolTip;
 
         public Form1()
         {
             InitializeComponent();
+            //InitializeTooltips();
         }
 
+        //private void InitializeTooltips()
+        //{
+        //    toolTip = new ToolTip
+        //    {
+        //        AutoPopDelay = 5000,
+        //        InitialDelay = 1000,
+        //        ReshowDelay = 500,
+        //        ShowAlways = true
+        //    };
+
+        //    textBox2.Width = 1000;
+        //    textBox1.TextChanged += (sender, e) => toolTip.SetToolTip(textBox1, textBox1.Text);
+        //    textBox2.TextChanged += (sender, e) => toolTip.SetToolTip(textBox2, textBox2.Text);
+        //    circulairePath.TextChanged += (sender, e) => toolTip.SetToolTip(circulairePath, FormatTooltipText(circulairePath.Text));
+
+        //    toolTip.SetToolTip(textBox1, textBox1.Text);
+        //    toolTip.SetToolTip(textBox2, textBox2.Text);
+        //    toolTip.SetToolTip(circulairePath, FormatTooltipText(circulairePath.Text));
+        //}
+
+        private string FormatTooltipText(string text)
+        {
+            return string.Join(Environment.NewLine, text.Split(new[] { ';' }, StringSplitOptions.None));
+        }
         private void effacer_click(object sender, EventArgs e)
         {
             textBox1.Text = "";
@@ -28,7 +54,7 @@ namespace BottinToCsvForm
         private void effacerCSV_Click(object sender, EventArgs e)
         {
             textBox2.Text = "";
-            selectedFolder = "";
+            extraFiles.Clear();
         }
 
         private void effacerCirculaire_Click(object sender, EventArgs e)
@@ -39,6 +65,11 @@ namespace BottinToCsvForm
 
         private void parcourir_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text != "")
+            {
+                MessageBox.Show("Vous avez déjà choisi un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             OpenFileDialog dialog = new OpenFileDialog
             {
                 Multiselect = false,
@@ -49,31 +80,42 @@ namespace BottinToCsvForm
             if (result == DialogResult.OK)
             {
                 selectedFiles.Add(dialog.FileName);
-                textBox1.Text = dialog.FileName;
+                textBox1.Text = Path.GetFileName(dialog.FileName);
             }
         }
 
         private void parcourirCSV_Click(object sender, EventArgs e)
         {
-            if (textBox2.Text != "")
+            if (extraFiles.Count > 0)
             {
-                MessageBox.Show("Vous avez deja choisi un dossier...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vous avez déjà choisi des fichiers...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            FolderBrowserDialog dialog = new FolderBrowserDialog
+
+            OpenFileDialog dialog = new OpenFileDialog
             {
-                Description = "Sélectionner un dossier contenant des fichiers CSV ou XLSX"
+                Multiselect = true,
+                Filter = "Fichiers XLSX|*.xlsx|Fichiers CSV|*.csv|Tous les fichiers|*.*",
+                Title = "Sélectionner des fichiers CSV ou XLSX"
             };
+
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                selectedFolder = dialog.SelectedPath;
-                textBox2.Text = selectedFolder;
+                extraFiles.AddRange(dialog.FileNames);
+                textBox2.Text = string.Join(";", dialog.FileNames.Select(Path.GetFileName));
+                textBox2.Multiline = true;
             }
         }
 
+
         private void parcourirCirculaire_Click(object sender, EventArgs e)
         {
+            if (circulairePath.Text != "")
+            {
+                MessageBox.Show("Vous avez déjà choisi des fichiers...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             OpenFileDialog dialog = new OpenFileDialog
             {
                 Multiselect = false,
@@ -84,7 +126,7 @@ namespace BottinToCsvForm
             if (result == DialogResult.OK)
             {
                 circulaireFilePath = dialog.FileName;
-                circulairePath.Text = dialog.FileName;
+                circulairePath.Text = Path.GetFileName(dialog.FileName);
             }
         }
 
@@ -118,10 +160,9 @@ namespace BottinToCsvForm
                     }
                 }
 
-                if (!string.IsNullOrEmpty(selectedFolder))
+                if (extraFiles.Count == 0)
                 {
-                    var files = Directory.GetFiles(selectedFolder, "*.*").Where(s => s.EndsWith(".csv") || s.EndsWith(".xlsx"));
-                    foreach (var file in files)
+                    foreach (var file in extraFiles)
                     {
                         List<Product> fileProducts = csvDataParsing.ReadFile(file);
                         counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
@@ -141,6 +182,11 @@ namespace BottinToCsvForm
             {
                 MessageBox.Show($"Oops, une erreur est survenue: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(textBox2, FormatTooltipText(textBox2.Text));
         }
     }
 }
