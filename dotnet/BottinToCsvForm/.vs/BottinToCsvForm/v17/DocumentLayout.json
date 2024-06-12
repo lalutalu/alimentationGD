@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|c:\\users\\lalutalu\\dev\\alimentationgd\\dotnet\\bottintocsvform\\bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D1401B72-5547-41FD-B9D0-69AAC9614706}|BottinToCsvForm\\BottinToCsvForm.csproj|solutionrelative:bottintocsvform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -43,8 +43,7 @@
               "ViewState": "AQIAAAIAAAAAAAAAAAAxwAwAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-11T17:57:52.711Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -54,7 +53,7 @@
               "RelativeDocumentMoniker": "BottinToCsvForm\\Form1.cs",
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Form1.cs",
               "RelativeToolTip": "BottinToCsvForm\\Form1.cs",
-              "ViewState": "AQIAAKUAAAAAAAAAAAAgwLIAAABXAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAAA4AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-03T13:24:46.17Z",
               "IsPinned": true,
@@ -73,8 +72,7 @@
               "ToolTip": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Form1.cs [Design]",
               "RelativeToolTip": "BottinToCsvForm\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T23:28:26.853Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-06-11T23:28:26.853Z"
             },
             {
               "$type": "Document",

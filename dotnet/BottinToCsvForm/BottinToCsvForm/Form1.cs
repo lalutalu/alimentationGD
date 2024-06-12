@@ -12,37 +12,10 @@ namespace BottinToCsvForm
         public Form1()
         {
             InitializeComponent();
-            //InitializeTooltips();
         }
-
-        //private void InitializeTooltips()
-        //{
-        //    toolTip = new ToolTip
-        //    {
-        //        AutoPopDelay = 5000,
-        //        InitialDelay = 1000,
-        //        ReshowDelay = 500,
-        //        ShowAlways = true
-        //    };
-
-        //    textBox2.Width = 1000;
-        //    textBox1.TextChanged += (sender, e) => toolTip.SetToolTip(textBox1, textBox1.Text);
-        //    textBox2.TextChanged += (sender, e) => toolTip.SetToolTip(textBox2, textBox2.Text);
-        //    circulairePath.TextChanged += (sender, e) => toolTip.SetToolTip(circulairePath, FormatTooltipText(circulairePath.Text));
-
-        //    toolTip.SetToolTip(textBox1, textBox1.Text);
-        //    toolTip.SetToolTip(textBox2, textBox2.Text);
-        //    toolTip.SetToolTip(circulairePath, FormatTooltipText(circulairePath.Text));
-        //}
-
         private string FormatTooltipText(string text)
         {
             return string.Join(Environment.NewLine, text.Split(new[] { ';' }, StringSplitOptions.None));
-        }
-        private void effacer_click(object sender, EventArgs e)
-        {
-            textBox1.Text = "";
-            selectedFiles.Clear();
         }
 
         private void effacer_Click_1(object sender, EventArgs e)
