@@ -132,7 +132,6 @@ namespace BottinToCsvForm
                         counter++;
                     }
                 }
-
                 if (extraFiles.Count == 0)
                 {
                     foreach (var file in extraFiles)

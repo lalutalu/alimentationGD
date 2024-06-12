@@ -6,6 +6,7 @@ namespace BottinToCsvForm.Parsing
 {
     public class PdfDataParsing
     {
+        private LineSplitter _lineSplitter;
         public static List<string> ParsePdf(string filePath)
         {
             List<string> dataObjects = new List<string>();
@@ -29,8 +30,8 @@ namespace BottinToCsvForm.Parsing
                         List<string> lines = LineSplitter.SplitLines(pageText);
                         foreach (String line in lines)
                         {
-                            string cleanedLine = line.Replace("**", "").Replace("*", "");
-                            dataObjects.Add(cleanedLine);
+                            //string cleanedLine = line.Replace("**", "").Replace("*", "");
+                            dataObjects.Add(line);
                         }
                     }
                 }
@@ -165,13 +166,14 @@ namespace BottinToCsvForm.Parsing
 
         public double ParsePrix(string dataString)
         {
+            double taxes = LineSplitter.GetProductTaxes(dataString);
             string pattern = @"\d{1,6}$";
             Match match = Regex.Match(dataString, pattern);
 
             if (match.Success)
             {
                 var newPrice = double.Parse(match.Value) / 100;
-                newPrice = CalculateNewPrice(newPrice);
+                newPrice = CalculateNewPrice(newPrice, taxes);
                 return Math.Round(newPrice, 2);
             }
             string pattern1 = @"\d{1,6}";
@@ -181,7 +183,7 @@ namespace BottinToCsvForm.Parsing
                 Match lastMatch = matches[matches.Count - 1];
                 Console.WriteLine(lastMatch.Value);
                 var newPrice = double.Parse(lastMatch.Value) / 100;
-                newPrice = CalculateNewPrice(newPrice);
+                newPrice = CalculateNewPrice(newPrice, taxes);
                 return Math.Round(newPrice, 2);
             }
             return 0;
@@ -227,10 +229,11 @@ namespace BottinToCsvForm.Parsing
         //}
 
 
-        public double CalculateNewPrice(double initialPrice)
+        public double CalculateNewPrice(double initialPrice, double taxes)
         {
             double newPrice = Math.Round(initialPrice / 0.87, 2);
-            return newPrice;
+            double taxPercentage = newPrice * taxes;
+            return newPrice + taxPercentage;
         }
     }
 }
