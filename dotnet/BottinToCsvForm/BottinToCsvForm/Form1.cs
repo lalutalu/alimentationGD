@@ -40,7 +40,7 @@ namespace BottinToCsvForm
         {
             if (textBox1.Text != "")
             {
-                MessageBox.Show("Vous avez déjà choisi un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vous avez déjà choisi un bottin...\nVeuillez appuyez sur Effacer", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             OpenFileDialog dialog = new OpenFileDialog
@@ -61,7 +61,7 @@ namespace BottinToCsvForm
         {
             if (extraFiles.Count > 0)
             {
-                MessageBox.Show("Vous avez déjà choisi des fichiers...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vous avez déjà choisi des fichiers...\nVeuillez appuyez sur Effacer", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -86,7 +86,7 @@ namespace BottinToCsvForm
         {
             if (circulairePath.Text != "")
             {
-                MessageBox.Show("Vous avez déjà choisi des fichiers...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vous avez déjà choisi des fichiers...\nVeuillez appuyez sur Effacer", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             OpenFileDialog dialog = new OpenFileDialog
@@ -127,12 +127,11 @@ namespace BottinToCsvForm
                     {
                         Product product = pdfDataParsing.ParseProducts(datastring);
                         product.HandleID = $"Produit_{counter}";
-                        product.Category = "Produits Secs";
                         currentProducts.Add(product);
                         counter++;
                     }
                 }
-                if (extraFiles.Count == 0)
+                if (extraFiles.Count > 0)
                 {
                     foreach (var file in extraFiles)
                     {

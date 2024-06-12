@@ -76,6 +76,7 @@ namespace BottinToCsvForm.Parsing
             product.Quantite = ParseQuantity(dataString);
             product.Format = ParseUnit(dataString);
             product.Prix = ParsePrix(dataString);
+            product.Category = "Produits Secs";
 
             return product;
         }

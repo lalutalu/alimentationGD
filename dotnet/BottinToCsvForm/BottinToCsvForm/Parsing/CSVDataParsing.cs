@@ -73,38 +73,49 @@ namespace BottinToCsvForm.Parsing
         private List<Product> ReadXLSXFile(string filePath)
         {
             List<Product> products = new List<Product>();
+            string category;
+            if (filePath.Contains("viande"))
+            {
+                category = "Viande";
+            }
+            else if (filePath.Contains("fruit"))
+            {
+                category = "Fruits et Legumes";
+            }
+            else
+            {
+                category = "Produits Secs";
+            }
+
+
+            // Ensure PEPSI is NOT added to the list of files.
+            //if (filePath.Contains("2.5-Produit Pepsi"))
+            //{
+            //    return;
+            //}
 
             using (var workbook = new XLWorkbook(filePath))
             {
                 var worksheet = workbook.Worksheet(1);
                 var rows = worksheet.RangeUsed().RowsUsed();
-                string category;
 
                 foreach (var row in rows.Skip(1))
                 {
-                    if (filePath.Contains("viande-"))
-                    {
-                        category = "Viande";
-                    }
-                    if (filePath.Contains("fruit"))
-                    {
-                        category = "Fruits et Legumes";
-                    }
-                    else
-                    {
-                        category = "Produits Secs";
-                    }
-                    string code39 = row.Cell(1).GetString();
+                    string code39 = row.Cell(1).GetString().PadLeft(7, '0');
                     string nom = row.Cell(2).GetString();
                     string quantite = row.Cell(3).GetString();
                     string format = row.Cell(4).GetString();
                     string formattedString = row.Cell(6).GetString().Replace("$", "").Replace(",", ".").Trim();
-
                     double prix;
                     if (!double.TryParse(formattedString, NumberStyles.Any, CultureInfo.InvariantCulture, out prix))
                     {
                         MessageBox.Show($"Le prix '{formattedString}' n'est pas dans un format valide.");
                         continue;
+                    }
+
+                    if (nom.Contains("COUPER"))
+                    {
+                        category = "Viande Couper";
                     }
                     prix = Math.Round(prix, 2);
                     Product product = new Product
