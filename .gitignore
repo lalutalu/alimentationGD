@@ -1,1 +1,4 @@
 python/googleSheets/credentials.json
+js/backupCommercial/.env
+js/backupCommercial/node_modules
+js/backupCommercial/package-lock.json
