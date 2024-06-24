@@ -73,34 +73,14 @@ namespace BottinToCsvForm.Parsing
         private List<Product> ReadXLSXFile(string filePath)
         {
             List<Product> products = new List<Product>();
-            string category;
-            if (filePath.Contains("viande"))
-            {
-                category = "Viande";
-            }
-            else if (filePath.Contains("fruit"))
-            {
-                category = "Fruits et Legumes";
-            }
-            else
-            {
-                category = "Produits Secs";
-            }
-
-
-            // Ensure PEPSI is NOT added to the list of files.
-            //if (filePath.Contains("2.5-Produit Pepsi"))
-            //{
-            //    return;
-            //}
 
             using (var workbook = new XLWorkbook(filePath))
             {
                 var worksheet = workbook.Worksheet(1);
                 var rows = worksheet.RangeUsed().RowsUsed();
-
                 foreach (var row in rows.Skip(1))
                 {
+                    List<string> categories = new List<string>();
                     string code39 = row.Cell(1).GetString().PadLeft(7, '0');
                     string nom = row.Cell(2).GetString();
                     string quantite = row.Cell(3).GetString();
@@ -113,9 +93,25 @@ namespace BottinToCsvForm.Parsing
                         continue;
                     }
 
-                    if (nom.Contains("COUPER"))
+                    if (filePath.Contains("viande"))
                     {
-                        category = "Viande Couper";
+                        if (nom.Contains("COUPER"))
+                        {
+
+                            categories.Add("Viande Couper");
+                        }
+                        else
+                        {
+                            categories.Add("Viande");
+                        }
+                    }
+                    else if (filePath.Contains("fruit"))
+                    {
+                        categories.Add("Fruits et Legumes");
+                    }
+                    else
+                    {
+                        categories.Add("Produits Secs");
                     }
                     prix = Math.Round(prix, 2);
                     Product product = new Product
@@ -125,7 +121,7 @@ namespace BottinToCsvForm.Parsing
                         Quantite = quantite,
                         Format = format,
                         Prix = prix,
-                        Category = category,
+                        Categories = categories
                     };
 
                     products.Add(product);

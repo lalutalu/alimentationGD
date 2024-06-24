@@ -125,13 +125,18 @@ namespace BottinToCsvForm.Parsing
                 string quantity = ExtractQuantity(line);
                 Tuple<string, string> weightAndUnit = ExtractWeightAndUnit(line);
 
+                List<string> categories = new List<string>
+                {
+                    "Produits Secs",
+
+                };
                 Product product = new Product
                 {
                     Code39 = productCode.PadLeft(7, '0'),
                     Nom = productName,
                     Prix = newPrice,
                     Quantite = quantity,
-                    Category = "Produits Secs",
+                    Categories = categories,
                     Format = $"{weightAndUnit.Item1} {weightAndUnit.Item2}"
                 };
 

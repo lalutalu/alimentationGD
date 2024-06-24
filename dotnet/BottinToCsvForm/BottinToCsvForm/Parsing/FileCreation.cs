@@ -27,13 +27,14 @@
                 foreach (var product in products)
                 {
                     string description = $"{product.Quantite}X{product.Format}";
+                    string categories = string.Join(";", product.Categories);
                     string[] productValues = {
                         product.HandleID,
                         product.fieldType,
                         product.Nom,
                         description,
                         "",  // productImageUrl
-                        product.Category,
+                        categories,
                         product.Code39,
                         "",  // ribbon
                         product.Prix.ToString(),

@@ -21,11 +21,8 @@ namespace BottinToCsvForm.Parsing
             return lines;
         }
 
-        public static double GetProductTaxes(string line)
+        public static string GetProductTaxes(string line)
         {
-            const double FederalTaxes = 0.09975;
-            const double BothTaxes = 0.14975;
-
             Match match = Regex.Match(line, @"\*{1,2}");
 
             if (match.Success)
@@ -34,14 +31,14 @@ namespace BottinToCsvForm.Parsing
                 switch (asterisks)
                 {
                     case "*":
-                        return FederalTaxes;
+                        return "FederalTaxes";
                     case "**":
-                        return BothTaxes;
+                        return "BothTaxes";
                     default:
                         break;
                 }
             }
-            return 0.0;
+            return "NoTaxes";
         }
     }
 }

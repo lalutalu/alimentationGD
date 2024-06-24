@@ -15,7 +15,6 @@ namespace BottinToCsvForm.Parsing
             using (PdfReader reader = new PdfReader(filePath))
             {
                 int totalPages = reader.NumberOfPages;
-
                 for (int i = 1; i <= totalPages; i++)
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
@@ -39,45 +38,64 @@ namespace BottinToCsvForm.Parsing
             return dataObjects;
         }
 
-        public static List<string> ParsePdfDelete(string filePath)
-        {
-            List<string> dataObjects = new List<string>();
-            using (PdfReader reader = new PdfReader(filePath))
-            {
-                int totalPages = reader.NumberOfPages;
-                Console.WriteLine("Entrez le numéro de la page de PRODUITS ENLEVES: ");
-                int startDelete = int.Parse(Console.ReadLine());
-                Console.WriteLine("Entrez le numéro de la dernière page de PRODUITS ENLEVES: ");
-                int endDelete = int.Parse(Console.ReadLine());
-                for (int i = startDelete; i <= endDelete; i++)
-                {
-                    string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
-                    List<string> lines = LineSplitter.SplitLines(pageText);
-                    List<string> linesToProcess = new List<string>(lines);
-                    foreach (string line in linesToProcess)
-                    {
-                        dataObjects.Add(line);
-                        if (line.Contains(@"PRODUITS RETIRES TEMPORAIREMENT\r\n"))
-                        {
-                            Console.WriteLine(dataObjects.Count);
-                            return dataObjects;
-                        };
-                    }
-                }
-            }
-            return dataObjects;
-        }
+        //public static List<string> ParsePdfDelete(string filePath)
+        //{
+        //    List<string> dataObjects = new List<string>();
+        //    using (PdfReader reader = new PdfReader(filePath))
+        //    {
+        //        int totalPages = reader.NumberOfPages;
+        //        Console.WriteLine("Entrez le numéro de la page de PRODUITS ENLEVES: ");
+        //        int startDelete = int.Parse(Console.ReadLine());
+        //        Console.WriteLine("Entrez le numéro de la dernière page de PRODUITS ENLEVES: ");
+        //        int endDelete = int.Parse(Console.ReadLine());
+        //        for (int i = startDelete; i <= endDelete; i++)
+        //        {
+        //            string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
+        //            List<string> lines = LineSplitter.SplitLines(pageText);
+        //            List<string> linesToProcess = new List<string>(lines);
+        //            foreach (string line in linesToProcess)
+        //            {
+        //                dataObjects.Add(line);
+        //                if (line.Contains(@"PRODUITS RETIRES TEMPORAIREMENT\r\n"))
+        //                {
+        //                    Console.WriteLine(dataObjects.Count);
+        //                    return dataObjects;
+        //                };
+        //            }
+        //        }
+        //    }
+        //    return dataObjects;
+        //}
         public Product ParseProducts(string dataString)
         {
             Product product = new Product();
             string code = ParseCode39(dataString);
+            List<string> categories = new List<string>();
             product.Code39 = code.PadLeft(7, '0');
             product.Nom = ParseNames(dataString);
             product.Quantite = ParseQuantity(dataString);
+            product.Taxes = LineSplitter.GetProductTaxes(dataString);
             product.Format = ParseUnit(dataString);
             product.Prix = ParsePrix(dataString);
-            product.Category = "Produits Secs";
-
+            string[] cigaretteWords = { "tabac", "copenhagen", "skoal", "cigar", "zig-zag", "bull", "ocb", "tube", "filtre", "itsa", "menth" };
+            string newProductName = product.Nom.ToLower();
+            foreach (string cigaretteWord in cigaretteWords)
+            {
+                if (newProductName.Contains(cigaretteWord))
+                {
+                    categories.Add("Cigarettes");
+                    break;
+                }
+            }
+            if (product.Taxes != "NoTaxes" && !categories.Any(c => c.Contains("Cigarettes")))
+            {
+                categories.Add("Taxes");
+            }
+            if (categories.Count == 0)
+            {
+                categories.Add("Produits Secs");
+            }
+            product.Categories = categories.ToList();
             return product;
         }
 
@@ -161,80 +179,40 @@ namespace BottinToCsvForm.Parsing
                     return number + " " + unit;
                 }
             }
-
             return "";
         }
 
+        //public string GetTaxes(string dataString)
+        //{
+        //    string taxes = LineSplitter.GetProductTaxes(dataString);
+        //    return taxes;
+        //}
         public double ParsePrix(string dataString)
         {
-            double taxes = LineSplitter.GetProductTaxes(dataString);
             string pattern = @"\d{1,6}$";
             Match match = Regex.Match(dataString, pattern);
 
             if (match.Success)
             {
                 var newPrice = double.Parse(match.Value) / 100;
-                newPrice = CalculateNewPrice(newPrice, taxes);
-                return Math.Round(newPrice, 2);
+                return Math.Round(newPrice / (1 - 0.13), 2);
             }
             string pattern1 = @"\d{1,6}";
             MatchCollection matches = Regex.Matches(dataString, pattern1);
             if (matches.Count > 0)
             {
                 Match lastMatch = matches[matches.Count - 1];
-                Console.WriteLine(lastMatch.Value);
                 var newPrice = double.Parse(lastMatch.Value) / 100;
-                newPrice = CalculateNewPrice(newPrice, taxes);
-                return Math.Round(newPrice, 2);
+                return Math.Round(newPrice / (1 - 0.13), 2);
             }
             return 0;
         }
 
-        //public double ParsePrix(string dataString)
+        //public double CalculateNewPrice(double initialPrice, double taxes)
         //{
-        //    // Try with the first pattern for end-of-line prices
-        //    //string pattern1 = @"\d{1,4}$";
-        //    string pattern1 = @"\d+(?:\*\*)?$";
-        //    Match match = Regex.Match(dataString, pattern1);
-
-        //    if (match.Success)
-        //    {
-        //        var newPrice = double.Parse(match.Value) / 100;
-        //        Console.WriteLine(newPrice);
-        //        newPrice = CalculateNewPrice(newPrice);
-        //        return newPrice;
-        //    }
-        //    //Console.WriteLine(dataString + ": " + 0);
-        //    return 0;
+        //    double newPrice = Math.Round(initialPrice / 0.87, 2);
+        //    double taxPercentage = newPrice * taxes;
+        //    return newPrice + taxPercentage;
         //}
-
-        //public double ParsePrix(string dataString)
-        //{
-        //    // Regex to capture digits, optionally followed by "**"
-        //    string pattern = @"\d+(?:\*\*)?";
-        //    Match match = Regex.Match(dataString, pattern);
-
-        //    if (match.Success)
-        //    {
-        //        // Extract only the digits from the captured value
-        //        string priceString = Regex.Match(match.Value, @"\d+").Value;
-        //        Console.WriteLine(priceString);
-        //        double price = double.Parse(priceString) / 100;
-        //        // Round the price to two decimal places
-        //        price = Math.Round(price, 2);
-        //        return price;
-        //    }
-
-        //    // Handle cases where no match is found (return 0)
-        //    return 0;
-        //}
-
-
-        public double CalculateNewPrice(double initialPrice, double taxes)
-        {
-            double newPrice = Math.Round(initialPrice / 0.87, 2);
-            double taxPercentage = newPrice * taxes;
-            return newPrice + taxPercentage;
-        }
     }
 }
