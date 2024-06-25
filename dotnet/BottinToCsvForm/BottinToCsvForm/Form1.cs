@@ -5,6 +5,8 @@ namespace BottinToCsvForm
     {
         private List<string> extraFiles = new List<string>();
         private string circulaireFilePath;
+        private string viandePath;
+        private List<string> viandeToKeep = new List<string>();
         private List<string> selectedFiles = new List<string>();
         private List<Product> currentProducts = new List<Product>();
         private ToolTip toolTip;
@@ -112,7 +114,7 @@ namespace BottinToCsvForm
             }
 
             PdfDataParsing pdfDataParsing = new PdfDataParsing();
-            FileCreation fileCreation = new FileCreation();
+            FileCreation fileCreation = new FileCreation(selectedFiles[0]);
             CSVDataParsing csvDataParsing = new CSVDataParsing();
             CirculaireParsing circulaireToCSV = new CirculaireParsing();
             int counter = 1;
@@ -158,6 +160,34 @@ namespace BottinToCsvForm
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(textBox2, FormatTooltipText(textBox2.Text));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Filter = "Fichiers PDF|*.pdf|Tous les fichiers|*.*",
+                Title = "Selectionner le fichier de viande format PDF"
+            };
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                selectedFiles.Add(dialog.FileName);
+                textBox3.Text = Path.GetFileName(dialog.FileName);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox3.Text = "";
+            viandePath = "";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox4.Text = "";
+            viandeToKeep.Clear();
         }
     }
 }

@@ -21,6 +21,23 @@ namespace BottinToCsvForm.Parsing
             return lines;
         }
 
+        public static List<string> SplitLinesViande(string dataString)
+        {
+            List<string> lines = new List<string>();
+            string pattern = @"(\d{8}\s)(.*)";
+            MatchCollection matches = Regex.Matches(dataString, pattern);
+
+            foreach (Match match in matches)
+            {
+                if (match.Success)
+                {
+                    string line = match.Value;
+                    lines.Add(line);
+                }
+            }
+            return lines;
+        }
+
         public static string GetProductTaxes(string line)
         {
             Match match = Regex.Match(line, @"\*{1,2}");

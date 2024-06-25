@@ -3,6 +3,7 @@
     public class FileCreation
     {
         private string newFilePath;
+        private string dateString = DateTime.Now.ToString("yyyy-MM-dd");
         String separator = ",";
         String[] headings = { "handleId", "fieldType", "name", "description", "productImageUrl", "collection", "sku", "ribbon", "price", "surcharge", "visible",
             "discountMode", "discountValue", "inventory", "weight", "cost", "productOptionName1", "productOptionType1", "productOptionDescription1", "productOptionName2",
@@ -13,12 +14,46 @@
             "additionalInfoTitle6", "additionalInfoDescription6", "customTextField1", "customTextCharLimit1", "customTextMandatory1", "customTextField2", "customTextCharLimit2",
             "customTextMandatory2", "brand" };
 
-        public FileCreation()
+        public FileCreation(string bottin_Nom)
         {
-            string dateString = DateTime.Now.ToString("yyyy-MM-dd");
-            newFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"Produits_{dateString}.csv");
+            string baseFileName = Path.GetFileNameWithoutExtension(bottin_Nom);
+            string nameToCheck = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{baseFileName}_{dateString}.csv");
+            newFilePath = GetUniqueFilePath(nameToCheck, bottin_Nom);
         }
 
+        private string GetUniqueFilePath(string filePath, string bottinNom)
+        {
+            int counter = 0;
+            bool promptOverwrite = true;
+
+            if (!File.Exists(filePath))
+            {
+                return filePath;
+            }
+
+            string baseName = Path.GetFileNameWithoutExtension(filePath);
+
+            while (File.Exists(filePath))
+            {
+                if (promptOverwrite)
+                {
+                    var result = MessageBox.Show($"Le fichier '{baseName}' existe deja, Voulez-vous écraser ce fichier?", "Fichier Existant",
+                                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    promptOverwrite = false;
+
+                    if (result == DialogResult.Yes)
+                    {
+                        return filePath;
+                    }
+                }
+
+                counter++;
+                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{baseName}_{dateString}_({counter.ToString()}).csv");
+            }
+
+            return filePath;
+        }
         public string CreateFile(List<Product> products)
         {
             using (var writer = new StreamWriter(newFilePath))

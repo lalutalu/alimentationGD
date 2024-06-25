@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from requests.auth import HTTPBasicAuth
 import dotenv
 
@@ -7,23 +8,23 @@ dotenv.load_dotenv()
 
 CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
+AUTH_CODE = os.environ.get("AUTH_CODE")
 
-def get_access_token(client_id, client_secret):
-    token_url = 'https://www.wix.com/oauth/access'
+def get_access_token():
+    token_url = 'https://www.wixapis.com/oauth/access'
 
     headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
     }
 
     data = {
-        'grant_type': 'client_credentials',
-        'client_id': client_id,
-        'client_secret': client_secret
+        "grant_type": "authorization_code",
+        "clientId": CLIENT_ID,
+        "clientSecret": CLIENT_SECRET,
+        "code": AUTH_CODE
     }
 
-    encoded_data = '&'.join([f"{key}={value}" for key, value in data.items()])
-
-    response = requests.post(token_url, headers=headers, data=encoded_data)
+    response = requests.post(token_url, headers=headers, json=data)
 
     if response.status_code == 200:
         return response.json()['access_token']
@@ -57,7 +58,7 @@ def fetch_products(access_token):
         return None
 
 def main():
-    access_token = get_access_token(CLIENT_ID, CLIENT_SECRET)
+    access_token = get_access_token()
 
     if access_token:
         products = fetch_products(access_token)

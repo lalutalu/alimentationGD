@@ -29,7 +29,6 @@ namespace BottinToCsvForm.Parsing
                         List<string> lines = LineSplitter.SplitLines(pageText);
                         foreach (String line in lines)
                         {
-                            //string cleanedLine = line.Replace("**", "").Replace("*", "");
                             dataObjects.Add(line);
                         }
                     }
@@ -37,6 +36,7 @@ namespace BottinToCsvForm.Parsing
             }
             return dataObjects;
         }
+
 
         //public static List<string> ParsePdfDelete(string filePath)
         //{
@@ -70,35 +70,67 @@ namespace BottinToCsvForm.Parsing
         {
             Product product = new Product();
             string code = ParseCode39(dataString);
-            List<string> categories = new List<string>();
             product.Code39 = code.PadLeft(7, '0');
             product.Nom = ParseNames(dataString);
             product.Quantite = ParseQuantity(dataString);
             product.Taxes = LineSplitter.GetProductTaxes(dataString);
             product.Format = ParseUnit(dataString);
             product.Prix = ParsePrix(dataString);
-            string[] cigaretteWords = { "tabac", "copenhagen", "skoal", "cigar", "zig-zag", "bull", "ocb", "tube", "filtre", "itsa", "menth" };
-            string newProductName = product.Nom.ToLower();
+            List<string> categories = AssignCategories(product.Nom.ToLower(), product.Taxes);
+            product.Categories = categories.ToList();
+            return product;
+        }
+
+        private bool IsCigarette(string nom)
+        {
+            string[] cigaretteWords = {
+                "tabac",
+                "copenhagen",
+                "skoal",
+                "cig",
+                "itsa",
+                "butane",
+                "briquet",
+                "medico",
+                "david ross",
+                "export",
+                "macdonald",
+                "seville",
+                "lighter",
+                "clipper",
+                "geomet",
+                "cone"
+            };
             foreach (string cigaretteWord in cigaretteWords)
             {
-                if (newProductName.Contains(cigaretteWord))
+                if (nom.Contains(cigaretteWord))
                 {
-                    categories.Add("Cigarettes");
-                    break;
+                    return true;
                 }
             }
-            if (product.Taxes != "NoTaxes" && !categories.Any(c => c.Contains("Cigarettes")))
+            return false;
+        }
+
+        private List<string> AssignCategories(string nom, string taxes)
+        {
+            bool isCigarette = IsCigarette(nom);
+            var categories = new List<string>();
+            if (isCigarette)
             {
+                categories.Add("Cigarette");
+            }
+            else if (taxes != "NoTaxes" && isCigarette == false)
+            {
+                categories.Add("Produits Secs");
                 categories.Add("Taxes");
             }
             if (categories.Count == 0)
             {
                 categories.Add("Produits Secs");
             }
-            product.Categories = categories.ToList();
-            return product;
-        }
+            return categories;
 
+        }
         public string ParseCode39(string InitialString)
         {
             string pattern = @"\d{7}";
