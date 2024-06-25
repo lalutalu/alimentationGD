@@ -49,7 +49,7 @@
                 }
 
                 counter++;
-                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{baseName}_{dateString}_({counter.ToString()}).csv");
+                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"({counter.ToString()})_{baseName}_{dateString}.csv");
             }
 
             return filePath;
