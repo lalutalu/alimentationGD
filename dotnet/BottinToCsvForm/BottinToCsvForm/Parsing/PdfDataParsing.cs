@@ -37,7 +37,6 @@ namespace BottinToCsvForm.Parsing
             return dataObjects;
         }
 
-
         //public static List<string> ParsePdfDelete(string filePath)
         //{
         //    List<string> dataObjects = new List<string>();

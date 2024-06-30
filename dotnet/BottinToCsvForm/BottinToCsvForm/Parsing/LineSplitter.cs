@@ -21,17 +21,37 @@ namespace BottinToCsvForm.Parsing
             return lines;
         }
 
-        public static List<string> SplitLinesViande(string dataString)
+        //public static List<string> SplitLinesViande(string dataString, string sectionCode)
+        //{
+        //    List<string> lines = new List<string>();
+        //    string pattern = @"(\d{8}\s.*)";
+        //    string sectionPattern = @"^\s*\d{5}\s";
+        //    MatchCollection matches = Regex.Matches(dataString, pattern);
+        //    MatchCollection collectionMatches = Regex.Matches(sectionCode, pattern);
+        //    foreach (Match match in matches)
+        //    {
+        //        if (match.Success)
+        //        {
+        //            string line = match.Value;
+        //            lines.Add(line);
+        //        }
+        //    }
+        //    return lines;
+        //}
+
+        public static List<string> SplitLinesViande(string dataString, string sectionCode)
         {
             List<string> lines = new List<string>();
-            string pattern = @"(\d{8}\s)(.*)";
-            MatchCollection matches = Regex.Matches(dataString, pattern);
-
-            foreach (Match match in matches)
+            string productCodePattern = @"\s\d{5}\s.*";
+            string code39Digits = @"\d{8}";
+            foreach (string line in dataString.Split('\n'))
             {
-                if (match.Success)
+                if (Regex.IsMatch(line, productCodePattern) && !line.Contains(sectionCode))
                 {
-                    string line = match.Value;
+                    return lines;
+                }
+                if (Regex.IsMatch(line, code39Digits))
+                {
                     lines.Add(line);
                 }
             }

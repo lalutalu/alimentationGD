@@ -62,6 +62,10 @@
                 foreach (var product in products)
                 {
                     string description = $"{product.Quantite}X{product.Format}";
+                    if (product.Categories.Contains("Viande"))
+                    {
+                        description = $"{product.Format}";
+                    }
                     string categories = string.Join(";", product.Categories);
                     string[] productValues = {
                         product.HandleID,

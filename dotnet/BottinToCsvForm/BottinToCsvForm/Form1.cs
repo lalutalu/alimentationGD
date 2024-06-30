@@ -3,6 +3,7 @@ namespace BottinToCsvForm
 {
     public partial class Form1 : Form
     {
+        private ViandeParsing viandeParsing;
         private List<string> extraFiles = new List<string>();
         private string circulaireFilePath;
         private string viandePath;
@@ -114,11 +115,11 @@ namespace BottinToCsvForm
             }
 
             PdfDataParsing pdfDataParsing = new PdfDataParsing();
+            ViandeParsing viandeParsing = new ViandeParsing();
             FileCreation fileCreation = new FileCreation(selectedFiles[0]);
             CSVDataParsing csvDataParsing = new CSVDataParsing();
             CirculaireParsing circulaireToCSV = new CirculaireParsing();
             int counter = 1;
-
             try
             {
                 currentProducts.Clear();
@@ -148,6 +149,28 @@ namespace BottinToCsvForm
                     counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
                 }
 
+                if (!string.IsNullOrEmpty(textBox3.Text))
+                {
+                    if (string.IsNullOrEmpty(textBox4.Text))
+                    {
+                        MessageBox.Show("Veuillez choisir une plage de numéros pour la viande souhaitée", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    var sections = textBox4.Text.Split(";");
+                    foreach (var section in sections)
+                    {
+                        viandeToKeep.Add(section);
+                    }
+                    //MessageBox.Show(sections[0].ToString(), "lol", MessageBoxButtons.OK);
+
+                    List<string> viandeStrings = ViandeParsing.ParsePdf(viandePath, viandeToKeep);
+                    List<Product> viandeProducts = new List<Product>();
+                    foreach (var viandeString in viandeStrings)
+                    {
+                        viandeProducts.Add(viandeParsing.ParseViande(viandeString));
+                    }
+                    counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProducts, counter);
+                }
                 string filepath = fileCreation.CreateFile(currentProducts);
                 MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -173,7 +196,7 @@ namespace BottinToCsvForm
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                selectedFiles.Add(dialog.FileName);
+                viandePath = dialog.FileName;
                 textBox3.Text = Path.GetFileName(dialog.FileName);
             }
         }
