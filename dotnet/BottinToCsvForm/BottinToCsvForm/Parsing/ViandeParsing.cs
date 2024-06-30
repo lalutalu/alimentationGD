@@ -10,6 +10,7 @@ namespace BottinToCsvForm.Parsing
         public static List<string> ParsePdf(string filePath, List<string> codes)
         {
             List<string> dataObjects = new List<string>();
+            List<string> oldCodes = new List<string>();
             bool startAddingProducts = false;
             string currentProductCode = null;
 
@@ -19,22 +20,23 @@ namespace BottinToCsvForm.Parsing
                 for (int i = 1; i <= totalPages; i++)
                 {
                     string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
-
-                    if (pageText.ToUpper().Contains("BOTTIN") && codes.Any(code => pageText.Contains(code)))
+                    foreach (string code in codes)
                     {
-                        currentProductCode = codes.FirstOrDefault(code => pageText.Contains(code));
-                        codes.Remove(currentProductCode);
-                        startAddingProducts = true;
-                    }
-                    if (startAddingProducts)
-                    {
-                        foreach (String line in LineSplitter.SplitLinesViande(pageText, currentProductCode))
+                        if (pageText.ToUpper().Contains("BOTTIN") && pageText.Contains(code))
                         {
-                            dataObjects.Add(line);
+                            currentProductCode = code;
+                            oldCodes.Add(code);
+                            //codes.Remove(currentProductCode);
+                            startAddingProducts = true;
                         }
-                        if (codes.Count == 0)
+                        if (startAddingProducts)
                         {
-                            break;
+                            foreach (String line in LineSplitter.SplitLinesViande(pageText, currentProductCode, oldCodes))
+                            {
+                                dataObjects.Add(line);
+                            }
+                            startAddingProducts = false;
+                            currentProductCode = null;
                         }
                     }
                 }

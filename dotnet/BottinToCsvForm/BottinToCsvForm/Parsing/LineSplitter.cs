@@ -39,14 +39,14 @@ namespace BottinToCsvForm.Parsing
         //    return lines;
         //}
 
-        public static List<string> SplitLinesViande(string dataString, string sectionCode)
+        public static List<string> SplitLinesViande(string dataString, string sectionCode, List<string> oldCodes)
         {
             List<string> lines = new List<string>();
             string productCodePattern = @"\s\d{5}\s.*";
             string code39Digits = @"\d{8}";
             foreach (string line in dataString.Split('\n'))
             {
-                if (Regex.IsMatch(line, productCodePattern) && !line.Contains(sectionCode))
+                if (Regex.IsMatch(line, productCodePattern) && !line.Contains(sectionCode) && !oldCodes.Any(code => line.Contains(code)))
                 {
                     return lines;
                 }

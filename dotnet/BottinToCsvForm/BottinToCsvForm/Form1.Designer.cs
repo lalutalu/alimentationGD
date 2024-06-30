@@ -52,6 +52,7 @@
             label4 = new Label();
             button2 = new Button();
             button3 = new Button();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -287,12 +288,24 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.White;
+            label5.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
+            label5.Location = new Point(741, 405);
+            label5.Name = "label5";
+            label5.Size = new Size(118, 23);
+            label5.TabIndex = 22;
+            label5.Text = "Separateur \";\"";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(1123, 533);
+            Controls.Add(label5);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label4);
@@ -346,5 +359,6 @@
         private Label label4;
         private Button button2;
         private Button button3;
+        private Label label5;
     }
 }
