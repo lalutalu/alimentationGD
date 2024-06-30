@@ -70,14 +70,22 @@ namespace BottinToCsvForm.Parsing
             return "";
         }
 
-
         public string ParseNames(string initialString)
         {
             string pattern = @"(?<=^\d+\s+\d+\s+)(.*?)(?=\s+\d+K)"; // Capture between digits and \d+K
+            string pattern1 = @"^\d+\s+\d+\s+(.*?)(?=\s+\d{3,}g\s+\d+\s+\d+\.\d{2}\s+\d+\.\d{2}\s+\d+\.\d{2})";
             Match match = Regex.Match(initialString, pattern);
+            Match match1 = Regex.Match(initialString, pattern1);
             if (match.Success)
             {
                 return match.Groups[1].Value.Trim(); // Capture group 1 and trim whitespace
+            }
+            else
+            {
+                if (match1.Success)
+                {
+                    return match1.Groups[1].Value.Trim();
+                }
             }
             return "";
         }
@@ -120,12 +128,12 @@ namespace BottinToCsvForm.Parsing
 
         public double ParsePrix(string dataString)
         {
-            string pattern = @"\d+(?=\s+\d+$)";
+            string pattern = @"\d+\.\d{2}(?=\s+\d+\.\d{2}\s*$)";
             Match match = Regex.Match(dataString, pattern);
 
             if (match.Success)
             {
-                var price = double.Parse(match.Value) / 100;
+                var price = double.Parse(match.Value);
                 return Math.Round(price / (1 - 0.20), 2);
             }
 
