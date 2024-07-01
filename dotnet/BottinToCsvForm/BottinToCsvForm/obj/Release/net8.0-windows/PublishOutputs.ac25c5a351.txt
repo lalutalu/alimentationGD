@@ -1,0 +1,14 @@
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\BottinToCsvForm.exe
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\BottinToCsvForm.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\BottinToCsvForm.deps.json
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\BottinToCsvForm.runtimeconfig.json
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\BottinToCsvForm.pdb
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\BouncyCastle.Crypto.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\ClosedXML.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\CsvHelper.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\DocumentFormat.OpenXml.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\ExcelNumberFormat.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\Irony.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\itextsharp.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\SixLabors.Fonts.dll
+C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\app.publish\XLParser.dll
