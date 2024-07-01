@@ -7,7 +7,8 @@ namespace BottinToCsvForm
         private List<string> extraFiles = new List<string>();
         private string circulaireFilePath;
         private string viandePath;
-        private List<string> viandeToKeep = new List<string>();
+        private List<string> viandeToKeepOriginal = new List<string>();
+        private List<string> viandeToKeepSurgele = new List<string>();
         private List<string> selectedFiles = new List<string>();
         private List<Product> currentProducts = new List<Product>();
         private ToolTip toolTip;
@@ -156,20 +157,37 @@ namespace BottinToCsvForm
                         MessageBox.Show("Veuillez choisir une plage de numéros pour la viande souhaitée", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
+                    if (string.IsNullOrEmpty(sugelerText.Text))
+                    {
+                        MessageBox.Show("Veuillez choisir une plage de numéros pour la viande surgelé", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                     var sections = textBox4.Text.Split(";");
                     foreach (var section in sections)
                     {
-                        viandeToKeep.Add(section);
+                        viandeToKeepOriginal.Add(section);
                     }
-                    //MessageBox.Show(sections[0].ToString(), "lol", MessageBoxButtons.OK);
+                    var sectionsSurgeler = sugelerText.Text.Split(";");
+                    foreach (var section in sectionsSurgeler)
+                    {
+                        viandeToKeepSurgele.Add(section);
+                    }
 
-                    List<string> viandeStrings = ViandeParsing.ParsePdf(viandePath, viandeToKeep);
-                    List<Product> viandeProducts = new List<Product>();
+                    List<string> viandeStrings = ViandeParsing.ParsePdf(viandePath, viandeToKeepOriginal);
+                    List<Product> viandeProductsOriginal = new List<Product>();
                     foreach (var viandeString in viandeStrings)
                     {
-                        viandeProducts.Add(viandeParsing.ParseViande(viandeString));
+                        viandeProductsOriginal.Add(viandeParsing.ParseViande(viandeString.Trim(), "Viande et produit frais"));
                     }
-                    counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProducts, counter);
+
+                    List<string> viandeStringSurgeler = ViandeParsing.ParsePdf(viandePath, viandeToKeepSurgele);
+                    List<Product> viandeProductsSurgeler = new List<Product>();
+                    foreach (var codeSurgeler in viandeStringSurgeler)
+                    {
+                        viandeProductsSurgeler.Add(viandeParsing.ParseViande(codeSurgeler, "Viande Surgele"));
+                    }
+                    counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsOriginal, counter);
+                    counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsSurgeler, counter);
                 }
                 string filepath = fileCreation.CreateFile(currentProducts);
                 MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -210,7 +228,13 @@ namespace BottinToCsvForm
         private void button3_Click(object sender, EventArgs e)
         {
             textBox4.Text = "";
-            viandeToKeep.Clear();
+            viandeToKeepOriginal.Clear();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            sugelerText.Text = "";
+            viandeToKeepSurgele.Clear();
         }
     }
 }

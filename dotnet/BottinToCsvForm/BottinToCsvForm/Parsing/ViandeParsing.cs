@@ -26,7 +26,6 @@ namespace BottinToCsvForm.Parsing
                         {
                             currentProductCode = code;
                             oldCodes.Add(code);
-                            //codes.Remove(currentProductCode);
                             startAddingProducts = true;
                         }
                         if (startAddingProducts)
@@ -44,12 +43,16 @@ namespace BottinToCsvForm.Parsing
             return dataObjects;
         }
 
-        public Product ParseViande(string dataString)
+        public Product ParseViande(string dataString, string categorie)
         {
             Product product = new Product();
             string code = ParseCode39(dataString);
+            if (code == "30182701")
+            {
+                Console.WriteLine(code);
+            }
             List<string> categories = new List<string>();
-            categories.Add("Viande");
+            categories.Add(categorie);
             product.Code39 = code.PadLeft(8, '0');
             product.Nom = ParseNames(dataString).Replace("é", "e").Replace("â", "a").Replace("à", "a").
                 Replace("ô", "o").Replace("ê", "e").Replace("è", "e").Replace("û", "u").Replace("ù", "u").ToUpper();
@@ -107,7 +110,7 @@ namespace BottinToCsvForm.Parsing
         public string ParseUnit(string initialString)
         {
             string[] patterns = {
-                @"\d{7}\s.*?(?=\s\d{1,2}\s\d+)\s\d+\s((\d+x)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
+                @"\d{8}\s.*?(?=\s\d{1,2}\s\d+)\s\d+\s((\d+x)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
                 @"((\d+X)*\d+(\.\d+)?)\s*(G|g|l|L|KG|K|UN|U|ML|M|PQ)\b",
                 @"^(\d{8})\s+(\d{10,11})?\s*(.+)\b[a-zA-z]{0,12}(?=((\d+x)?\d+(g|mg|kg|ml|l|k)))"
         };
@@ -115,52 +118,104 @@ namespace BottinToCsvForm.Parsing
 
             foreach (string pattern in patterns)
             {
-                Match match = Regex.Match(initialString, pattern);
-                if (match.Success)
+                if (pattern == patterns[1])
                 {
-
-                    string unit = match.Groups[4].Value.ToUpper();
-                    string number = match.Groups[1].Value;
-
-                    if (number.EndsWith("x") || number.EndsWith("X"))
+                    MatchCollection matches = Regex.Matches(initialString, pattern);
+                    if (matches.Count > 0)
                     {
-                        int startIndex = match.Index + match.Length;
-                        Match nextNumberMatch = Regex.Match(initialString.Substring(startIndex), @"\d+(\.\d+)?");
-                        if (nextNumberMatch.Success)
+                        var lastMatch = matches[matches.Count - 1].Value;
+                        if (lastMatch == "06M")
                         {
-                            number += "x" + nextNumberMatch.Value;
+                            return matches[0].Value;
                         }
-                    }
-                    if (match.Groups.Count > 5 && match.Groups[5].Success)
-                    {
-                        string extra = match.Groups[5].Value.Trim();
-                        return number + " " + unit + extra;
-                    }
-
-                    // NO UNIT fix
-                    if (match.Groups.Count == 7)
-                    {
-                        string unitMeasure = match.Groups[4].Value;
-                        return unitMeasure;
+                        if (matches[0].Value == "5974998049 M")
+                        {
+                            return "1k";
+                        }
+                        return lastMatch;
                     }
 
-                    return number + " " + unit;
+                }
+                else
+                {
+                    Match match = Regex.Match(initialString, pattern);
+                    if (match.Success)
+                    {
+
+                        string unit = match.Groups[4].Value.ToUpper();
+                        string number = match.Groups[1].Value;
+
+                        if (number.EndsWith("x") || number.EndsWith("X"))
+                        {
+                            int startIndex = match.Index + match.Length;
+                            Match nextNumberMatch = Regex.Match(initialString.Substring(startIndex), @"\d+(\.\d+)?");
+                            if (nextNumberMatch.Success)
+                            {
+                                number += "x" + nextNumberMatch.Value;
+                            }
+                        }
+                        if (match.Groups.Count > 5 && match.Groups[5].Success)
+                        {
+                            string extra = match.Groups[5].Value.Trim();
+                            return number + " " + unit + extra;
+                        }
+
+                        // NO UNIT fix
+                        if (match.Groups.Count == 7)
+                        {
+                            string unitMeasure = match.Groups[4].Value;
+                            return unitMeasure;
+                        }
+
+                        return number + " " + unit;
+                    }
+
                 }
             }
             return "NO UNIT";
         }
 
+        //public double ParsePrix(string dataString)
+        //{
+        //    string pattern = @"\d+\.\d{2}(?=\s+\d+\.\d{2}\s*$)";
+        //    string pattern2 = @"\d+(?:\.\d+)?(?=\s*$)";
+        //    Match match = Regex.Match(dataString, pattern);
+        //    Match match2 = Regex.Match(dataString, pattern2);
+        //    double price = 0.0;
+        //    if (match.Success)
+        //    {
+        //        price = double.Parse(match.Value);
+        //        return Math.Round(price / (1 - 0.20), 2);
+        //    }
+        //    else
+        //    {
+        //        if (match2.Success)
+        //        {
+        //            price = double.Parse(match.Value.Trim());
+        //            MessageBox.Show($"{Math.Round(price / (1 - 0.20), 2)}", "loll", MessageBoxButtons.OK);
+        //            return Math.Round(price / (1 - 0.20), 2);
+        //        }
+        //    }
+        //    return price;
+        //}
+
         public double ParsePrix(string dataString)
         {
             string pattern = @"\d+\.\d{2}(?=\s+\d+\.\d{2}\s*$)";
+            string pattern1 = @"\s+([0-9]+\.[0-9]{0,2})";
             Match match = Regex.Match(dataString, pattern);
+            Match match1 = Regex.Match(dataString, pattern1);
 
             if (match.Success)
             {
-                var price = double.Parse(match.Value);
+                double price = double.Parse(match.Value);
                 return Math.Round(price / (1 - 0.20), 2);
             }
-
+            else if (match1.Success)
+            {
+                double price = double.Parse(match1.Value);
+                return Math.Round(price / (1 - 0.20), 2);
+            }
             return 0;
         }
     }

@@ -21,24 +21,6 @@ namespace BottinToCsvForm.Parsing
             return lines;
         }
 
-        //public static List<string> SplitLinesViande(string dataString, string sectionCode)
-        //{
-        //    List<string> lines = new List<string>();
-        //    string pattern = @"(\d{8}\s.*)";
-        //    string sectionPattern = @"^\s*\d{5}\s";
-        //    MatchCollection matches = Regex.Matches(dataString, pattern);
-        //    MatchCollection collectionMatches = Regex.Matches(sectionCode, pattern);
-        //    foreach (Match match in matches)
-        //    {
-        //        if (match.Success)
-        //        {
-        //            string line = match.Value;
-        //            lines.Add(line);
-        //        }
-        //    }
-        //    return lines;
-        //}
-
         public static List<string> SplitLinesViande(string dataString, string sectionCode, List<string> oldCodes)
         {
             List<string> lines = new List<string>();
