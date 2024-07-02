@@ -5,14 +5,14 @@ namespace BottinToCsvForm
     public partial class Form1 : Form
     {
         private ViandeParsing viandeParsing;
-        private List<string> extraFiles = new List<string>();
-        private string circulaireFilePath;
+        private ToolTip toolTip;
+        private List<string> circualairePaths = new List<string>();
         private string viandePath;
         private List<string> viandeToKeepOriginal = new List<string>();
         private List<string> viandeToKeepSurgele = new List<string>();
         private List<string> selectedFiles = new List<string>();
+        private List<string> extraFiles = new List<string>();
         private List<Product> currentProducts = new List<Product>();
-        private ToolTip toolTip;
 
         public Form1()
         {
@@ -38,7 +38,7 @@ namespace BottinToCsvForm
         private void effacerCirculaire_Click(object sender, EventArgs e)
         {
             circulairePath.Text = "";
-            circulaireFilePath = "";
+            circualairePaths.Clear();
         }
 
         private void parcourir_Click(object sender, EventArgs e)
@@ -61,7 +61,26 @@ namespace BottinToCsvForm
                 textBox1.Text = Path.GetFileName(dialog.FileName);
             }
         }
-
+        private void parcourirCirculaire_Click(object sender, EventArgs e)
+        {
+            if (circulairePath.Text != "")
+            {
+                MessageBox.Show("Vous avez déjà choisi des fichiers...\nVeuillez appuyez sur Effacer", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Multiselect = true,
+                Filter = "Fichiers PDF|*.pdf|Tous les fichiers|*.*",
+                Title = "Selectionner un Circulaire format PDF"
+            };
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                circualairePaths.AddRange(dialog.FileNames);
+                circulairePath.Text = string.Join(";", dialog.FileNames.Select(Path.GetFileName));
+            }
+        }
         private void parcourirCSV_Click(object sender, EventArgs e)
         {
             if (extraFiles.Count > 0)
@@ -83,28 +102,6 @@ namespace BottinToCsvForm
                 extraFiles.AddRange(dialog.FileNames);
                 textBox2.Text = string.Join(";", dialog.FileNames.Select(Path.GetFileName));
                 textBox2.Multiline = true;
-            }
-        }
-
-
-        private void parcourirCirculaire_Click(object sender, EventArgs e)
-        {
-            if (circulairePath.Text != "")
-            {
-                MessageBox.Show("Vous avez déjà choisi des fichiers...\nVeuillez appuyez sur Effacer", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            OpenFileDialog dialog = new OpenFileDialog
-            {
-                Multiselect = true,
-                Filter = "Fichiers PDF|*.pdf|Tous les fichiers|*.*",
-                Title = "Selectionner un Circulaire format PDF"
-            };
-            DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                circulaireFilePath = dialog.FileName;
-                circulairePath.Text = Path.GetFileName(dialog.FileName);
             }
         }
 
@@ -136,10 +133,13 @@ namespace BottinToCsvForm
                         counter++;
                     }
                 }
-                if (!string.IsNullOrEmpty(circulaireFilePath))
+                if (circualairePaths.Count > 0)
                 {
-                    List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(circulaireFilePath);
-                    counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
+                    foreach (var file in circualairePaths)
+                    {
+                        List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(file);
+                        counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
+                    }
                 }
 
                 if (extraFiles.Count > 0)
