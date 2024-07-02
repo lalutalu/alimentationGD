@@ -50,7 +50,3 @@ C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToC
 C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\BottinToCsvForm.pdb
 C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\BottinToCsvForm.genruntimeconfig.cache
 C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\ref\BottinToCsvForm.dll
-C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\BottinToCsvForm.dll.manifest
-C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\BottinToCsvForm.application
-C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\BottinToCsvForm.dll.manifest
-C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\BottinToCsvForm.application

@@ -15,13 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_39CE45403B3645B6A62AD3913980B385"
+        "MsmKey" = "8:_034A04015C3641569EBEC7F8D3793FC4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_77154246D8844D6EA05B997AD58D0221"
+        "MsmKey" = "8:_169DCD3FCA19494AB6D3F63BC78D3005"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CC665773DFD54BF795C09B92B3A0465A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,7 +39,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\setup_MAJ_Commercial.msi"
+        "OutputFilename" = "8:Release\\setup_MAJ_Commercial.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -43,6 +49,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.8.0.x86"
+                    {
+                    "Name" = "8:.NET Runtime 8.0.6 (x86)"
+                    "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.8.0.x86"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -59,6 +86,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -76,13 +119,43 @@
         {
             "LaunchCondition"
             {
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_60BB8F8AFBD0436FB83A12646BAF0B79"
+                {
+                "Name" = "8:.NET Core"
+                "Message" = "8:[VSDNETCOREMSG]"
+                "AllowLaterVersions" = "11:FALSE"
+                "InstallUrl" = "8:https://dotnet.microsoft.com/download/dotnet-core/[NetCoreVerMajorDotMinor]"
+                "IsNETCore" = "11:TRUE"
+                "Architecture" = "2:0"
+                "Runtime" = "2:0"
+                }
             }
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_77154246D8844D6EA05B997AD58D0221"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_034A04015C3641569EBEC7F8D3793FC4"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\..\\Downloads\\Logo_Icone_CercleRouge_4x.ico"
+            "SourcePath" = "8:..\\BottinToCsvForm\\files\\Format des fichiers supplémentaires.pdf"
+            "TargetName" = "8:Format des fichiers supplémentaires.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC665773DFD54BF795C09B92B3A0465A"
+            {
+            "SourcePath" = "8:D:\\work\\Logo_Icone_CercleRouge_4x.ico"
             "TargetName" = "8:Logo_Icone_CercleRouge_4x.ico"
             "Tag" = "8:"
             "Folder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
@@ -155,9 +228,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:setup_MAJ_Commercial"
+        "ProductName" = "8:MAJ_Commercial"
         "ProductCode" = "8:{DFDBEA03-5DD9-49AA-A24E-EB55CD032957}"
-        "PackageCode" = "8:{EE127CF3-FFE0-453D-8B55-5F9F1325E298}"
+        "PackageCode" = "8:{82B5B3A4-8FFA-40FF-8850-D7EF85E69E60}"
         "UpgradeCode" = "8:{72995D22-897D-476C-9201-C161B2865D96}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -165,12 +238,12 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:GD Alimentation"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:setup_MAJ_Commercial"
+        "Title" = "8:MAJ_Commercial"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:GD Alimentation"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -277,32 +350,32 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5FA0DC9BE63246639E56823B0092E642"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_24293B9486B6454F824E8355C62D9110"
             {
-            "Name" = "8:MAJ_Commercial"
+            "Name" = "8:MAJ Commercial"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_39CE45403B3645B6A62AD3913980B385"
-            "Folder" = "8:_1BAE5A07D8684846A0C1517F9775EC59"
-            "WorkingFolder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
-            "Icon" = "8:_77154246D8844D6EA05B997AD58D0221"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E73A5044962F4514BA9588AC9AFF68E6"
-            {
-            "Name" = "8:MAJ_Commercial"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_39CE45403B3645B6A62AD3913980B385"
+            "Target" = "8:_169DCD3FCA19494AB6D3F63BC78D3005"
             "Folder" = "8:_C2DE49EF536146D399B0834D893D2781"
             "WorkingFolder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
-            "Icon" = "8:_77154246D8844D6EA05B997AD58D0221"
+            "Icon" = "8:_CC665773DFD54BF795C09B92B3A0465A"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34581598DBDD4738AA684C084DF8AA07"
+            {
+            "Name" = "8:MAJ Commercial"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_169DCD3FCA19494AB6D3F63BC78D3005"
+            "Folder" = "8:_1BAE5A07D8684846A0C1517F9775EC59"
+            "WorkingFolder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
+            "Icon" = "8:_CC665773DFD54BF795C09B92B3A0465A"
             "Feature" = "8:"
             }
         }
@@ -704,9 +777,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_39CE45403B3645B6A62AD3913980B385"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_169DCD3FCA19494AB6D3F63BC78D3005"
             {
-            "SourcePath" = "8:..\\BottinToCsvForm\\obj\\Debug\\net8.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\BottinToCsvForm\\obj\\Release\\net8.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"

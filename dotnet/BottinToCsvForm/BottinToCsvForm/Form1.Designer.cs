@@ -57,6 +57,8 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
+            label10 = new Label();
+            linkLabel2 = new LinkLabel();
             tabPage4 = new TabPage();
             label9 = new Label();
             label8 = new Label();
@@ -142,7 +144,7 @@
             // 
             textBox2.BackColor = Color.White;
             textBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            textBox2.Location = new Point(437, 135);
+            textBox2.Location = new Point(435, 116);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
@@ -153,7 +155,7 @@
             // parcourirCSV
             // 
             parcourirCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            parcourirCSV.Location = new Point(437, 220);
+            parcourirCSV.Location = new Point(435, 201);
             parcourirCSV.Name = "parcourirCSV";
             parcourirCSV.Size = new Size(94, 28);
             parcourirCSV.TabIndex = 9;
@@ -164,7 +166,7 @@
             // effacerCSV
             // 
             effacerCSV.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            effacerCSV.Location = new Point(624, 220);
+            effacerCSV.Location = new Point(622, 201);
             effacerCSV.Name = "effacerCSV";
             effacerCSV.Size = new Size(94, 28);
             effacerCSV.TabIndex = 8;
@@ -188,11 +190,11 @@
             label2.AutoSize = true;
             label2.BackColor = Color.White;
             label2.Font = new Font("Segoe UI Semibold", 12.2F, FontStyle.Bold | FontStyle.Italic);
-            label2.Location = new Point(423, 90);
+            label2.Location = new Point(446, 65);
             label2.Name = "label2";
-            label2.Size = new Size(330, 23);
+            label2.Size = new Size(270, 23);
             label2.TabIndex = 11;
-            label2.Text = "Fichiers supplémentaires en XLSX ou CSV";
+            label2.Text = "Fichiers supplémentaires en XLSX";
             // 
             // circulairePath
             // 
@@ -358,6 +360,8 @@
             // tabPage3
             // 
             tabPage3.BackColor = Color.WhiteSmoke;
+            tabPage3.Controls.Add(label10);
+            tabPage3.Controls.Add(linkLabel2);
             tabPage3.Controls.Add(textBox2);
             tabPage3.Controls.Add(effacerCSV);
             tabPage3.Controls.Add(parcourirCSV);
@@ -367,7 +371,29 @@
             tabPage3.Padding = new Padding(3);
             tabPage3.Size = new Size(1191, 376);
             tabPage3.TabIndex = 2;
-            tabPage3.Text = "EXTRAS";
+            tabPage3.Text = "SUPPLÉMENTS";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 12F);
+            label10.Location = new Point(545, 262);
+            label10.Name = "label10";
+            label10.Size = new Size(127, 21);
+            label10.TabIndex = 14;
+            label10.Text = "des fichiers XLSX";
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.Font = new Font("Segoe UI", 12F);
+            linkLabel2.Location = new Point(479, 262);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(60, 21);
+            linkLabel2.TabIndex = 13;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Format";
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // tabPage4
             // 
@@ -521,5 +547,7 @@
         private TextBox sugelerText;
         private Label label9;
         private Label label8;
+        private Label label10;
+        private LinkLabel linkLabel2;
     }
 }

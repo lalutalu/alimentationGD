@@ -1,4 +1,5 @@
 using BottinToCsvForm.Parsing;
+using System.Diagnostics;
 namespace BottinToCsvForm
 {
     public partial class Form1 : Form
@@ -235,6 +236,21 @@ namespace BottinToCsvForm
         {
             sugelerText.Text = "";
             viandeToKeepSurgele.Clear();
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string pdfPath = Path.Combine(baseDir, "Format des fichiers supplémentaires.pdf");
+
+            try
+            {
+                Process.Start(new ProcessStartInfo(pdfPath) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while trying to open the PDF file: " + ex.Message);
+            }
         }
     }
 }
