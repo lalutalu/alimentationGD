@@ -13,24 +13,6 @@
 "SccProvider" = "8:"
     "Hierarchy"
     {
-        "Entry"
-        {
-        "MsmKey" = "8:_034A04015C3641569EBEC7F8D3793FC4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_169DCD3FCA19494AB6D3F63BC78D3005"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CC665773DFD54BF795C09B92B3A0465A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
     }
     "Configurations"
     {
@@ -133,46 +115,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_034A04015C3641569EBEC7F8D3793FC4"
-            {
-            "SourcePath" = "8:..\\BottinToCsvForm\\files\\Format des fichiers supplémentaires.pdf"
-            "TargetName" = "8:Format des fichiers supplémentaires.pdf"
-            "Tag" = "8:"
-            "Folder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC665773DFD54BF795C09B92B3A0465A"
-            {
-            "SourcePath" = "8:D:\\work\\Logo_Icone_CercleRouge_4x.ico"
-            "TargetName" = "8:Logo_Icone_CercleRouge_4x.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -350,34 +292,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_24293B9486B6454F824E8355C62D9110"
-            {
-            "Name" = "8:MAJ Commercial"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_169DCD3FCA19494AB6D3F63BC78D3005"
-            "Folder" = "8:_C2DE49EF536146D399B0834D893D2781"
-            "WorkingFolder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
-            "Icon" = "8:_CC665773DFD54BF795C09B92B3A0465A"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34581598DBDD4738AA684C084DF8AA07"
-            {
-            "Name" = "8:MAJ Commercial"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_169DCD3FCA19494AB6D3F63BC78D3005"
-            "Folder" = "8:_1BAE5A07D8684846A0C1517F9775EC59"
-            "WorkingFolder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
-            "Icon" = "8:_CC665773DFD54BF795C09B92B3A0465A"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {
@@ -777,34 +691,6 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_169DCD3FCA19494AB6D3F63BC78D3005"
-            {
-            "SourcePath" = "8:..\\BottinToCsvForm\\obj\\Release\\net8.0-windows\\apphost.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_BFBC6C9EAF6B42A6BE7BE81189AE2095"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:PublishItems"
-            "OutputProjectGuid" = "8:{D1401B72-5547-41FD-B9D0-69AAC9614706}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
         }
     }
 }

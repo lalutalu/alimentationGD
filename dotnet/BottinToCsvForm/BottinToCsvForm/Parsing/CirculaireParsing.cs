@@ -6,7 +6,6 @@ namespace BottinToCsvForm.Parsing
 {
     public class CirculaireParsing
     {
-        private const double PERCENTAGE = 14.95;
         private string ExtractProductName(string productLine)
         {
             var match = Regex.Match(productLine, @"IMPACT-\d+\s+(.*?)\s+(\d{3}-\d{5}-\d{5})");
@@ -52,7 +51,7 @@ namespace BottinToCsvForm.Parsing
         }
         private double CalculateNewPrice(double ogPrice)
         {
-            double newPrice = ogPrice * (1 + PERCENTAGE / 100);
+            double newPrice = ogPrice / (0.87);
             return newPrice;
         }
 

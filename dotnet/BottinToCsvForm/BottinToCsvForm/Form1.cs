@@ -96,7 +96,7 @@ namespace BottinToCsvForm
             }
             OpenFileDialog dialog = new OpenFileDialog
             {
-                Multiselect = false,
+                Multiselect = true,
                 Filter = "Fichiers PDF|*.pdf|Tous les fichiers|*.*",
                 Title = "Selectionner un Circulaire format PDF"
             };
@@ -136,6 +136,12 @@ namespace BottinToCsvForm
                         counter++;
                     }
                 }
+                if (!string.IsNullOrEmpty(circulaireFilePath))
+                {
+                    List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(circulaireFilePath);
+                    counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
+                }
+
                 if (extraFiles.Count > 0)
                 {
                     foreach (var file in extraFiles)
@@ -143,12 +149,6 @@ namespace BottinToCsvForm
                         List<Product> fileProducts = csvDataParsing.ReadFile(file);
                         counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
                     }
-                }
-
-                if (!string.IsNullOrEmpty(circulaireFilePath))
-                {
-                    List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(circulaireFilePath);
-                    counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
                 }
 
                 if (!string.IsNullOrEmpty(textBox3.Text))
