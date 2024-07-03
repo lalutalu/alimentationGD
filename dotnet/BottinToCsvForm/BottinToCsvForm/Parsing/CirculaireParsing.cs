@@ -30,10 +30,15 @@ namespace BottinToCsvForm.Parsing
 
         private string ExtractOriginalPrice(string productLine)
         {
-            var match = Regex.Match(productLine, @"\b(\d+\.\d+)\s+");
-            if (match.Success)
+            var matches = Regex.Matches(productLine, @"\b(\d+\.\d+)\s+");
+            //if (match.Success)
+            //{
+            //    string capturedText = match.Groups[2].Value.Trim();
+            //    return capturedText;
+            //}
+            if (matches.Count >= 3) // Check if there are at least two matches
             {
-                string capturedText = match.Groups[1].Value.Trim();
+                string capturedText = matches[2].Groups[1].Value.Trim(); // Second match is at index 1
                 return capturedText;
             }
             return "No Original Price";
@@ -52,7 +57,7 @@ namespace BottinToCsvForm.Parsing
         private double CalculateNewPrice(double ogPrice)
         {
             double newPrice = ogPrice / (0.87);
-            return newPrice;
+            return Math.Round(newPrice, 2);
         }
 
         private Tuple<string, string> ExtractWeightAndUnit(string productLine)

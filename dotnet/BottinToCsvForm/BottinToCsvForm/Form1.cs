@@ -225,7 +225,6 @@ namespace BottinToCsvForm
             textBox3.Text = "";
             viandePath = "";
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             textBox4.Text = "";
