@@ -30,7 +30,7 @@ namespace BottinToCsvForm.Parsing
 
         private string ExtractOriginalPrice(string productLine)
         {
-            var matches = Regex.Matches(productLine, @"\b(\d+\.\d+)\s+");
+            var matches = Regex.Matches(productLine, @"\b(\d+\.?\d+)\s+");
             //if (match.Success)
             //{
             //    string capturedText = match.Groups[2].Value.Trim();

@@ -15,19 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_2F4E81F7C201463A92D4361AAE36F3DB"
+        "MsmKey" = "8:_17911E6B9A1341F19DEF17910E0AD1B8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_49FF309D87F6403E92319CF5D3C814A6"
+        "MsmKey" = "8:_5F21DC9560E7414A976ADC43251D1B6C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D91239D5AA564E089610130E7B9FEB44"
+        "MsmKey" = "8:_BEFF3554AC3D465EB91585317BB17A3D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -49,6 +49,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -65,6 +73,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -82,11 +98,21 @@
         {
             "LaunchCondition"
             {
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_3AF31B61BAA94CFD82C3C2523205B04D"
+                {
+                "Name" = "8:.NET Core"
+                "Message" = "8:[VSDNETCOREMSG]"
+                "AllowLaterVersions" = "11:FALSE"
+                "InstallUrl" = "8:https://dotnet.microsoft.com/download/dotnet-core/[NetCoreVerMajorDotMinor]"
+                "IsNETCore" = "11:TRUE"
+                "Architecture" = "2:0"
+                "Runtime" = "2:0"
+                }
             }
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F4E81F7C201463A92D4361AAE36F3DB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_17911E6B9A1341F19DEF17910E0AD1B8"
             {
             "SourcePath" = "8:D:\\work\\Logo_Icone_CercleRouge_4x.ico"
             "TargetName" = "8:Logo_Icone_CercleRouge_4x.ico"
@@ -106,7 +132,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49FF309D87F6403E92319CF5D3C814A6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5F21DC9560E7414A976ADC43251D1B6C"
             {
             "SourcePath" = "8:..\\BottinToCsvForm\\files\\Format des fichiers supplémentaires.pdf"
             "TargetName" = "8:Format des fichiers supplémentaires.pdf"
@@ -303,32 +329,32 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_02A80E8447B54A75B5625D8098085657"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_214B560319EA4870B28D64E1B3CAF71D"
             {
-            "Name" = "8:MAJ Bottin"
+            "Name" = "8:MAJ Commercial"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_D91239D5AA564E089610130E7B9FEB44"
+            "Target" = "8:_BEFF3554AC3D465EB91585317BB17A3D"
             "Folder" = "8:_20F216615C814B2E8C354309C4354617"
             "WorkingFolder" = "8:_32E2037FB94A4ACA8BCB6AD36F5BDFCF"
-            "Icon" = "8:_2F4E81F7C201463A92D4361AAE36F3DB"
+            "Icon" = "8:_17911E6B9A1341F19DEF17910E0AD1B8"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4B55EE69CFDC4FF989A67DEF9C9D5664"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_411E4911EDE74551BBEDDA175C5CE418"
             {
-            "Name" = "8:MAJ Bottin"
+            "Name" = "8:MAJ Commercial"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_D91239D5AA564E089610130E7B9FEB44"
+            "Target" = "8:_BEFF3554AC3D465EB91585317BB17A3D"
             "Folder" = "8:_01DA6A5D7FDE491AA6FDE50854E38486"
             "WorkingFolder" = "8:_32E2037FB94A4ACA8BCB6AD36F5BDFCF"
-            "Icon" = "8:_2F4E81F7C201463A92D4361AAE36F3DB"
+            "Icon" = "8:_17911E6B9A1341F19DEF17910E0AD1B8"
             "Feature" = "8:"
             }
         }
@@ -730,7 +756,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D91239D5AA564E089610130E7B9FEB44"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BEFF3554AC3D465EB91585317BB17A3D"
             {
             "SourcePath" = "8:..\\BottinToCsvForm\\obj\\Release\\net8.0-windows\\apphost.exe"
             "TargetName" = "8:"
