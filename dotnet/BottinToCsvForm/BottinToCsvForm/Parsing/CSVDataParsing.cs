@@ -93,7 +93,7 @@ namespace BottinToCsvForm.Parsing
                         continue;
                     }
 
-                    if (filePath.Contains("viande"))
+                    if (filePath.ToLower().Contains("viande"))
                     {
                         if (nom.Contains("COUPER"))
                         {
@@ -104,7 +104,7 @@ namespace BottinToCsvForm.Parsing
                             categories.Add("Viande");
                         }
                     }
-                    else if (filePath.Contains("fruit"))
+                    else if (filePath.ToLower().Contains("fruit"))
                     {
                         categories.Add("Fruits et Legumes");
                     }

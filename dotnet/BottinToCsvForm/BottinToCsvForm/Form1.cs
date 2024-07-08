@@ -131,209 +131,209 @@ namespace BottinToCsvForm
             counter = 1;
         }
 
-        private bool AlertBottinEmpty()
-        {
-            if (bottinPaths.Count == 0 && textBox1.Text == "")
-            {
-                MessageBox.Show("Veuillez choisir un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return true;
-            }
-            return false;
-        }
-
-        private void ValidateBottin()
-        {
-            currentProducts.Clear();
-            foreach (var file in bottinPaths)
-            {
-                List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(file));
-                foreach (var datastring in parsedData)
-                {
-                    Product product = pdfDataParsing.ParseProducts(datastring);
-                    product.HandleID = $"Produit_{counter}";
-                    currentProducts.Add(product);
-                    counter++;
-                }
-            }
-        }
-
-        private void ValidateCirculaire()
-        {
-            if (circualairePaths.Count > 0)
-            {
-                foreach (var file in circualairePaths)
-                {
-                    List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(file);
-                    counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
-                }
-            }
-        }
-
-        private void ValidateExtraFiles()
-        {
-            if (extraFiles.Count > 0)
-            {
-                foreach (var file in extraFiles)
-                {
-                    List<Product> fileProducts = csvDataParsing.ReadFile(file);
-                    counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
-                }
-            }
-        }
-
-        private async Task<bool> ValidateViande()
-        {
-            if (!string.IsNullOrEmpty(textBox3.Text))
-            {
-                if (string.IsNullOrEmpty(textBox4.Text) || string.IsNullOrEmpty(sugelerText.Text))
-                {
-                    MessageBox.Show("Veuillez choisir une plage de numéros pour la viande souhaitée dans les deux catégories", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
-                var sections = textBox4.Text.Split(";");
-                foreach (var section in sections)
-                {
-                    viandeToKeepOriginal.Add(section);
-                }
-                var sectionsSurgeler = sugelerText.Text.Split(";");
-                foreach (var section in sectionsSurgeler)
-                {
-                    viandeToKeepSurgele.Add(section);
-                }
-
-                List<string> viandeStrings = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepOriginal);
-                List<Product> viandeProductsOriginal = new List<Product>();
-                foreach (var viandeString in viandeStrings)
-                {
-                    viandeProductsOriginal.Add(viandeParsing.ParseViande(viandeString.Trim(), "Viande et produit frais"));
-                }
-
-                List<string> viandeStringSurgeler = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepSurgele);
-                List<Product> viandeProductsSurgeler = new List<Product>();
-                foreach (var codeSurgeler in viandeStringSurgeler)
-                {
-                    viandeProductsSurgeler.Add(viandeParsing.ParseViande(codeSurgeler, "Viande Surgele"));
-                }
-                counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsOriginal, counter);
-                counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsSurgeler, counter);
-                return true;
-            }
-            return false;
-        }
-
-        private async void soumettre_Click(object sender, EventArgs e)
-        {
-            if (AlertBottinEmpty())
-            {
-                return;
-            }
-            InitializeParsers();
-            ValidateBottin();
-            ValidateCirculaire();
-            ValidateExtraFiles();
-            if (!await ValidateViande())
-            {
-                return;
-            }
-            string filepath = fileCreation.CreateFile(currentProducts);
-            MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        //private void soumettre_Click(object sender, EventArgs e)
+        //private bool AlertBottinEmpty()
         //{
         //    if (bottinPaths.Count == 0 && textBox1.Text == "")
         //    {
         //        MessageBox.Show("Veuillez choisir un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
+        //        return true;
         //    }
+        //    return false;
+        //}
 
-        //    PdfDataParsing pdfDataParsing = new PdfDataParsing();
-        //    PdfViandeParsing viandeParsing = new PdfViandeParsing();
-        //    CSVFileCreation fileCreation = new CSVFileCreation(bottinPaths[0]);
-        //    CSVDataParsing csvDataParsing = new CSVDataParsing();
-        //    CirculaireParsing circulaireToCSV = new CirculaireParsing();
-        //    int counter = 1;
-
-        //    try
+        //private void ValidateBottin()
+        //{
+        //    currentProducts.Clear();
+        //    foreach (var file in bottinPaths)
         //    {
-        //        currentProducts.Clear();
-        //        foreach (var file in bottinPaths)
+        //        List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(file));
+        //        foreach (var datastring in parsedData)
         //        {
-        //            List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(file));
-        //            foreach (var datastring in parsedData)
-        //            {
-        //                Product product = pdfDataParsing.ParseProducts(datastring);
-        //                product.HandleID = $"Produit_{counter}";
-        //                currentProducts.Add(product);
-        //                counter++;
-        //            }
+        //            Product product = pdfDataParsing.ParseProducts(datastring);
+        //            product.HandleID = $"Produit_{counter}";
+        //            currentProducts.Add(product);
+        //            counter++;
         //        }
-
-        //        if (circualairePaths.Count > 0)
-        //        {
-        //            foreach (var file in circualairePaths)
-        //            {
-        //                List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(file);
-        //                counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
-        //            }
-        //        }
-
-        //        if (extraFiles.Count > 0)
-        //        {
-        //            foreach (var file in extraFiles)
-        //            {
-        //                List<Product> fileProducts = csvDataParsing.ReadFile(file);
-        //                counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
-        //            }
-        //        }
-
-        //        if (!string.IsNullOrEmpty(textBox3.Text))
-        //        {
-        //            if (string.IsNullOrEmpty(textBox4.Text))
-        //            {
-        //                MessageBox.Show("Veuillez choisir une plage de numéros pour la viande souhaitée", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                return;
-        //            }
-        //            if (string.IsNullOrEmpty(sugelerText.Text))
-        //            {
-        //                MessageBox.Show("Veuillez choisir une plage de numéros pour la viande surgelé", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                return;
-        //            }
-        //            var sections = textBox4.Text.Split(";");
-        //            foreach (var section in sections)
-        //            {
-        //                viandeToKeepOriginal.Add(section);
-        //            }
-        //            var sectionsSurgeler = sugelerText.Text.Split(";");
-        //            foreach (var section in sectionsSurgeler)
-        //            {
-        //                viandeToKeepSurgele.Add(section);
-        //            }
-
-        //            List<string> viandeStrings = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepOriginal);
-        //            List<Product> viandeProductsOriginal = new List<Product>();
-        //            foreach (var viandeString in viandeStrings)
-        //            {
-        //                viandeProductsOriginal.Add(viandeParsing.ParseViande(viandeString.Trim(), "Viande et produit frais"));
-        //            }
-
-        //            List<string> viandeStringSurgeler = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepSurgele);
-        //            List<Product> viandeProductsSurgeler = new List<Product>();
-        //            foreach (var codeSurgeler in viandeStringSurgeler)
-        //            {
-        //                viandeProductsSurgeler.Add(viandeParsing.ParseViande(codeSurgeler, "Viande Surgele"));
-        //            }
-        //            counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsOriginal, counter);
-        //            counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsSurgeler, counter);
-        //        }
-        //        string filepath = fileCreation.CreateFile(currentProducts);
-        //        MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Oops, une erreur est survenue: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
         //    }
         //}
+
+        //private void ValidateCirculaire()
+        //{
+        //    if (circualairePaths.Count > 0)
+        //    {
+        //        foreach (var file in circualairePaths)
+        //        {
+        //            List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(file);
+        //            counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
+        //        }
+        //    }
+        //}
+
+        //private void ValidateExtraFiles()
+        //{
+        //    if (extraFiles.Count > 0)
+        //    {
+        //        foreach (var file in extraFiles)
+        //        {
+        //            List<Product> fileProducts = csvDataParsing.ReadFile(file);
+        //            counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
+        //        }
+        //    }
+        //}
+
+        //private async Task<bool> ValidateViande()
+        //{
+        //    if (!string.IsNullOrEmpty(textBox3.Text))
+        //    {
+        //        if (string.IsNullOrEmpty(textBox4.Text) || string.IsNullOrEmpty(sugelerText.Text))
+        //        {
+        //            MessageBox.Show("Veuillez choisir une plage de numéros pour la viande souhaitée dans les deux catégories", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            return false;
+        //        }
+        //        var sections = textBox4.Text.Split(";");
+        //        foreach (var section in sections)
+        //        {
+        //            viandeToKeepOriginal.Add(section);
+        //        }
+        //        var sectionsSurgeler = sugelerText.Text.Split(";");
+        //        foreach (var section in sectionsSurgeler)
+        //        {
+        //            viandeToKeepSurgele.Add(section);
+        //        }
+
+        //        List<string> viandeStrings = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepOriginal);
+        //        List<Product> viandeProductsOriginal = new List<Product>();
+        //        foreach (var viandeString in viandeStrings)
+        //        {
+        //            viandeProductsOriginal.Add(viandeParsing.ParseViande(viandeString.Trim(), "Viande et produit frais"));
+        //        }
+
+        //        List<string> viandeStringSurgeler = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepSurgele);
+        //        List<Product> viandeProductsSurgeler = new List<Product>();
+        //        foreach (var codeSurgeler in viandeStringSurgeler)
+        //        {
+        //            viandeProductsSurgeler.Add(viandeParsing.ParseViande(codeSurgeler, "Viande Surgele"));
+        //        }
+        //        counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsOriginal, counter);
+        //        counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsSurgeler, counter);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        //private async void soumettre_Click(object sender, EventArgs e)
+        //{
+        //    if (AlertBottinEmpty())
+        //    {
+        //        return;
+        //    }
+        //    InitializeParsers();
+        //    ValidateBottin();
+        //    ValidateCirculaire();
+        //    ValidateExtraFiles();
+        //    if (!await ValidateViande())
+        //    {
+        //        return;
+        //    }
+        //    string filepath = fileCreation.CreateFile(currentProducts);
+        //    MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //}
+
+        private void soumettre_Click(object sender, EventArgs e)
+        {
+            if (bottinPaths.Count == 0 && textBox1.Text == "")
+            {
+                MessageBox.Show("Veuillez choisir un bottin...", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            PdfDataParsing pdfDataParsing = new PdfDataParsing();
+            PdfViandeParsing viandeParsing = new PdfViandeParsing();
+            CSVFileCreation fileCreation = new CSVFileCreation(bottinPaths[0]);
+            CSVDataParsing csvDataParsing = new CSVDataParsing();
+            CirculaireParsing circulaireToCSV = new CirculaireParsing();
+            int counter = 1;
+
+            try
+            {
+                currentProducts.Clear();
+                foreach (var file in bottinPaths)
+                {
+                    List<string> parsedData = new List<string>(PdfDataParsing.ParsePdf(file));
+                    foreach (var datastring in parsedData)
+                    {
+                        Product product = pdfDataParsing.ParseProducts(datastring);
+                        product.HandleID = $"Produit_{counter}";
+                        currentProducts.Add(product);
+                        counter++;
+                    }
+                }
+
+                if (circualairePaths.Count > 0)
+                {
+                    foreach (var file in circualairePaths)
+                    {
+                        List<Product> circulaireProducts = circulaireToCSV.ExtractCirculaireProducts(file);
+                        counter = CSVDataParsing.UpdatePrices(currentProducts, circulaireProducts, counter);
+                    }
+                }
+
+                if (extraFiles.Count > 0)
+                {
+                    foreach (var file in extraFiles)
+                    {
+                        List<Product> fileProducts = csvDataParsing.ReadFile(file);
+                        counter = CSVDataParsing.UpdatePrices(currentProducts, fileProducts, counter);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(textBox3.Text))
+                {
+                    if (string.IsNullOrEmpty(textBox4.Text))
+                    {
+                        MessageBox.Show("Veuillez choisir une plage de numéros pour la viande souhaitée", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    if (string.IsNullOrEmpty(sugelerText.Text))
+                    {
+                        MessageBox.Show("Veuillez choisir une plage de numéros pour la viande surgelé", "Pas de plage!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    var sections = textBox4.Text.Split(";");
+                    foreach (var section in sections)
+                    {
+                        viandeToKeepOriginal.Add(section);
+                    }
+                    var sectionsSurgeler = sugelerText.Text.Split(";");
+                    foreach (var section in sectionsSurgeler)
+                    {
+                        viandeToKeepSurgele.Add(section);
+                    }
+
+                    List<string> viandeStrings = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepOriginal);
+                    List<Product> viandeProductsOriginal = new List<Product>();
+                    foreach (var viandeString in viandeStrings)
+                    {
+                        viandeProductsOriginal.Add(viandeParsing.ParseViande(viandeString.Trim(), "Viande et produit frais"));
+                    }
+
+                    List<string> viandeStringSurgeler = PdfViandeParsing.ParsePdf(viandePath, viandeToKeepSurgele);
+                    List<Product> viandeProductsSurgeler = new List<Product>();
+                    foreach (var codeSurgeler in viandeStringSurgeler)
+                    {
+                        viandeProductsSurgeler.Add(viandeParsing.ParseViande(codeSurgeler, "Viande Surgele"));
+                    }
+                    counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsOriginal, counter);
+                    counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsSurgeler, counter);
+                }
+                string filepath = fileCreation.CreateFile(currentProducts);
+                MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Oops, une erreur est survenue: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
         #region Effacer
         private void effacer_Click_1(object sender, EventArgs e)
