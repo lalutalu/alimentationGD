@@ -62,7 +62,7 @@
                 foreach (var product in products)
                 {
                     string description = $"{product.Quantite}X{product.Format}";
-                    if (product.Categories.Any(c => c.Contains("Viande")))
+                    if (product.Quantite == "No Quantity")
                     {
                         description = $"{product.Format}";
                     }
