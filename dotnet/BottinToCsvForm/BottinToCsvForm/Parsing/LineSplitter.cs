@@ -4,6 +4,7 @@ namespace BottinToCsvForm.Parsing
 {
     public class LineSplitter
     {
+        // Séparer les lignes du bottin en format PDF.
         public static List<string> SplitLines(string dataString)
         {
             List<string> lines = new List<string>();
@@ -40,6 +41,7 @@ namespace BottinToCsvForm.Parsing
             return lines;
         }
 
+        //La fin des lignes contient des astrisques.C'est le nombre de taxes à appliquer au produit.
         public static string GetProductTaxes(string line)
         {
             Match match = Regex.Match(line, @"\*{1,2}");

@@ -36,35 +36,6 @@ namespace BottinToCsvForm.Parsing
             }
             return dataObjects;
         }
-
-        //public static List<string> ParsePdfDelete(string filePath)
-        //{
-        //    List<string> dataObjects = new List<string>();
-        //    using (PdfReader reader = new PdfReader(filePath))
-        //    {
-        //        int totalPages = reader.NumberOfPages;
-        //        Console.WriteLine("Entrez le numéro de la page de PRODUITS ENLEVES: ");
-        //        int startDelete = int.Parse(Console.ReadLine());
-        //        Console.WriteLine("Entrez le numéro de la dernière page de PRODUITS ENLEVES: ");
-        //        int endDelete = int.Parse(Console.ReadLine());
-        //        for (int i = startDelete; i <= endDelete; i++)
-        //        {
-        //            string pageText = PdfTextExtractor.GetTextFromPage(reader, i);
-        //            List<string> lines = LineSplitter.SplitLines(pageText);
-        //            List<string> linesToProcess = new List<string>(lines);
-        //            foreach (string line in linesToProcess)
-        //            {
-        //                dataObjects.Add(line);
-        //                if (line.Contains(@"PRODUITS RETIRES TEMPORAIREMENT\r\n"))
-        //                {
-        //                    Console.WriteLine(dataObjects.Count);
-        //                    return dataObjects;
-        //                };
-        //            }
-        //        }
-        //    }
-        //    return dataObjects;
-        //}
         public Product ParseProducts(string dataString)
         {
             Product product = new Product();
@@ -213,11 +184,6 @@ namespace BottinToCsvForm.Parsing
             return "";
         }
 
-        //public string GetTaxes(string dataString)
-        //{
-        //    string taxes = LineSplitter.GetProductTaxes(dataString);
-        //    return taxes;
-        //}
         public double ParsePrix(string dataString)
         {
             string pattern = @"\d{1,6}$";
@@ -239,11 +205,5 @@ namespace BottinToCsvForm.Parsing
             return 0;
         }
 
-        //public double CalculateNewPrice(double initialPrice, double taxes)
-        //{
-        //    double newPrice = Math.Round(initialPrice / 0.87, 2);
-        //    double taxPercentage = newPrice * taxes;
-        //    return newPrice + taxPercentage;
-        //}
     }
 }

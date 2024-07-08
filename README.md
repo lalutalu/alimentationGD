@@ -1,6 +1,6 @@
 # Languages:
+- CSharp
 - Python
-- Javascript
 
 # Contract
 - Alimentation GD

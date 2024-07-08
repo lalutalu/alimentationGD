@@ -97,7 +97,6 @@ namespace BottinToCsvForm.Parsing
                     {
                         if (nom.Contains("COUPER"))
                         {
-
                             categories.Add("Viande Couper");
                         }
                         else
@@ -150,11 +149,10 @@ namespace BottinToCsvForm.Parsing
 
         public static void DeleteProducts(List<Product> old_products, List<Product> products_deleted)
         {
-            List<Product> productsToKeep = old_products.Where(oldProduct =>
-            {
-                Product newProduct = products_deleted.FirstOrDefault(p => p.Code39 == oldProduct.Code39);
-                return newProduct == null;
-            }).ToList();
+            HashSet<string> deletedProductCodes = new HashSet<string>(products_deleted.Select(p => p.Code39));
+
+            List<Product> productsToKeep = old_products.Where(p => !deletedProductCodes.Contains(p.Code39)).ToList();
+
             old_products.Clear();
             old_products.AddRange(productsToKeep);
         }

@@ -36,7 +36,7 @@
             titre = new Label();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
-            textBox2 = new TextBox();
+            extrasPath = new TextBox();
             parcourirCSV = new Button();
             effacerCSV = new Button();
             label1 = new Label();
@@ -46,26 +46,27 @@
             effacerCirculaire = new Button();
             label3 = new Label();
             toolTip1 = new ToolTip(components);
-            button1 = new Button();
+            parcourirViande = new Button();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
             label4 = new Label();
-            button2 = new Button();
-            button3 = new Button();
+            effacerCheminViande = new Button();
+            effacerViandeFrais = new Button();
             label5 = new Label();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
             label10 = new Label();
-            linkLabel2 = new LinkLabel();
+            formatCSVLabel = new LinkLabel();
             tabPage4 = new TabPage();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
-            button4 = new Button();
+            effacerViandeSurgele = new Button();
             sugelerText = new TextBox();
             label6 = new Label();
+            instructionsLabel = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -140,17 +141,17 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
-            // textBox2
+            // extrasPath
             // 
-            textBox2.BackColor = Color.White;
-            textBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            textBox2.Location = new Point(435, 116);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(281, 60);
-            textBox2.TabIndex = 6;
-            textBox2.TextChanged += textBox2_TextChanged;
+            extrasPath.BackColor = Color.White;
+            extrasPath.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            extrasPath.Location = new Point(435, 116);
+            extrasPath.Multiline = true;
+            extrasPath.Name = "extrasPath";
+            extrasPath.ReadOnly = true;
+            extrasPath.Size = new Size(281, 60);
+            extrasPath.TabIndex = 6;
+            extrasPath.TextChanged += extrasPath_TextChanged;
             // 
             // parcourirCSV
             // 
@@ -240,16 +241,16 @@
             label3.TabIndex = 15;
             label3.Text = "Fichier Circulaire en PDF";
             // 
-            // button1
+            // parcourirViande
             // 
-            button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            button1.Location = new Point(740, 84);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 28);
-            button1.TabIndex = 16;
-            button1.Text = "Parcourir";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            parcourirViande.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            parcourirViande.Location = new Point(740, 84);
+            parcourirViande.Name = "parcourirViande";
+            parcourirViande.Size = new Size(94, 28);
+            parcourirViande.TabIndex = 16;
+            parcourirViande.Text = "Parcourir";
+            parcourirViande.UseVisualStyleBackColor = true;
+            parcourirViande.Click += parcourirViande_Click;
             // 
             // textBox3
             // 
@@ -284,27 +285,27 @@
             label4.TabIndex = 19;
             label4.Text = "Viande";
             // 
-            // button2
+            // effacerCheminViande
             // 
-            button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            button2.Location = new Point(740, 118);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 28);
-            button2.TabIndex = 20;
-            button2.Text = "Effacer";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            effacerCheminViande.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            effacerCheminViande.Location = new Point(740, 118);
+            effacerCheminViande.Name = "effacerCheminViande";
+            effacerCheminViande.Size = new Size(94, 28);
+            effacerCheminViande.TabIndex = 20;
+            effacerCheminViande.Text = "Effacer";
+            effacerCheminViande.UseVisualStyleBackColor = true;
+            effacerCheminViande.Click += effacerCheminViande_Click;
             // 
-            // button3
+            // effacerViandeFrais
             // 
-            button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            button3.Location = new Point(374, 255);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 28);
-            button3.TabIndex = 21;
-            button3.Text = "Effacer";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            effacerViandeFrais.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            effacerViandeFrais.Location = new Point(374, 255);
+            effacerViandeFrais.Name = "effacerViandeFrais";
+            effacerViandeFrais.Size = new Size(94, 28);
+            effacerViandeFrais.TabIndex = 21;
+            effacerViandeFrais.Text = "Effacer";
+            effacerViandeFrais.UseVisualStyleBackColor = true;
+            effacerViandeFrais.Click += effacerViandeFrais_Click;
             // 
             // label5
             // 
@@ -361,8 +362,8 @@
             // 
             tabPage3.BackColor = Color.WhiteSmoke;
             tabPage3.Controls.Add(label10);
-            tabPage3.Controls.Add(linkLabel2);
-            tabPage3.Controls.Add(textBox2);
+            tabPage3.Controls.Add(formatCSVLabel);
+            tabPage3.Controls.Add(extrasPath);
             tabPage3.Controls.Add(effacerCSV);
             tabPage3.Controls.Add(parcourirCSV);
             tabPage3.Controls.Add(label2);
@@ -383,17 +384,17 @@
             label10.TabIndex = 14;
             label10.Text = "des fichiers XLSX";
             // 
-            // linkLabel2
+            // formatCSVLabel
             // 
-            linkLabel2.AutoSize = true;
-            linkLabel2.Font = new Font("Segoe UI", 12F);
-            linkLabel2.Location = new Point(479, 262);
-            linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(60, 21);
-            linkLabel2.TabIndex = 13;
-            linkLabel2.TabStop = true;
-            linkLabel2.Text = "Format";
-            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
+            formatCSVLabel.AutoSize = true;
+            formatCSVLabel.Font = new Font("Segoe UI", 12F);
+            formatCSVLabel.Location = new Point(479, 262);
+            formatCSVLabel.Name = "formatCSVLabel";
+            formatCSVLabel.Size = new Size(60, 21);
+            formatCSVLabel.TabIndex = 13;
+            formatCSVLabel.TabStop = true;
+            formatCSVLabel.Text = "Format";
+            formatCSVLabel.LinkClicked += formatCSVLabel_LinkClicked;
             // 
             // tabPage4
             // 
@@ -401,15 +402,15 @@
             tabPage4.Controls.Add(label9);
             tabPage4.Controls.Add(label8);
             tabPage4.Controls.Add(label7);
-            tabPage4.Controls.Add(button4);
+            tabPage4.Controls.Add(effacerViandeSurgele);
             tabPage4.Controls.Add(sugelerText);
             tabPage4.Controls.Add(label6);
             tabPage4.Controls.Add(textBox3);
             tabPage4.Controls.Add(label5);
-            tabPage4.Controls.Add(button1);
-            tabPage4.Controls.Add(button3);
+            tabPage4.Controls.Add(parcourirViande);
+            tabPage4.Controls.Add(effacerViandeFrais);
             tabPage4.Controls.Add(textBox4);
-            tabPage4.Controls.Add(button2);
+            tabPage4.Controls.Add(effacerCheminViande);
             tabPage4.Controls.Add(label4);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
@@ -451,16 +452,16 @@
             label7.TabIndex = 26;
             label7.Text = "Separateur \";\"";
             // 
-            // button4
+            // effacerViandeSurgele
             // 
-            button4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            button4.Location = new Point(1026, 255);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 28);
-            button4.TabIndex = 25;
-            button4.Text = "Effacer";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            effacerViandeSurgele.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            effacerViandeSurgele.Location = new Point(1026, 255);
+            effacerViandeSurgele.Name = "effacerViandeSurgele";
+            effacerViandeSurgele.Size = new Size(94, 28);
+            effacerViandeSurgele.TabIndex = 25;
+            effacerViandeSurgele.Text = "Effacer";
+            effacerViandeSurgele.UseVisualStyleBackColor = true;
+            effacerViandeSurgele.Click += effacerViandeSurgele_Click;
             // 
             // sugelerText
             // 
@@ -484,12 +485,25 @@
             label6.TabIndex = 23;
             label6.Text = "Chemin";
             // 
+            // instructionsLabel
+            // 
+            instructionsLabel.AutoSize = true;
+            instructionsLabel.Font = new Font("Segoe UI", 12F);
+            instructionsLabel.Location = new Point(1011, 47);
+            instructionsLabel.Name = "instructionsLabel";
+            instructionsLabel.Size = new Size(91, 21);
+            instructionsLabel.TabIndex = 24;
+            instructionsLabel.TabStop = true;
+            instructionsLabel.Text = "Instructions";
+            instructionsLabel.LinkClicked += instructionsLabel_LinkClicked;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1194, 634);
+            Controls.Add(instructionsLabel);
             Controls.Add(tabControl1);
             Controls.Add(pictureBox1);
             Controls.Add(titre);
@@ -519,7 +533,7 @@
         private Label titre;
         private TextBox textBox1;
         private PictureBox pictureBox1;
-        private TextBox textBox2;
+        private TextBox extrasPath;
         private Button parcourirCSV;
         private Button effacerCSV;
         private Label label1;
@@ -529,12 +543,12 @@
         private Button effacerCirculaire;
         private Label label3;
         private ToolTip toolTip1;
-        private Button button1;
+        private Button parcourirViande;
         private TextBox textBox3;
         private TextBox textBox4;
         private Label label4;
-        private Button button2;
-        private Button button3;
+        private Button effacerCheminViande;
+        private Button effacerViandeFrais;
         private Label label5;
         private TabControl tabControl1;
         private TabPage tabPage1;
@@ -543,11 +557,12 @@
         private TabPage tabPage4;
         private Label label6;
         private Label label7;
-        private Button button4;
+        private Button effacerViandeSurgele;
         private TextBox sugelerText;
         private Label label9;
         private Label label8;
         private Label label10;
-        private LinkLabel linkLabel2;
+        private LinkLabel formatCSVLabel;
+        private LinkLabel instructionsLabel;
     }
 }

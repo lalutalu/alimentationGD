@@ -31,14 +31,9 @@ namespace BottinToCsvForm.Parsing
         private string ExtractOriginalPrice(string productLine)
         {
             var matches = Regex.Matches(productLine, @"\b(\d+\.?\d+)\s+");
-            //if (match.Success)
-            //{
-            //    string capturedText = match.Groups[2].Value.Trim();
-            //    return capturedText;
-            //}
-            if (matches.Count >= 3) // Check if there are at least two matches
+            if (matches.Count >= 3)
             {
-                string capturedText = matches[2].Groups[1].Value.Trim(); // Second match is at index 1
+                string capturedText = matches[2].Groups[1].Value.Trim();
                 return capturedText;
             }
             return "No Original Price";
