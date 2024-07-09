@@ -5,6 +5,7 @@
         private string newFilePath;
         private string dateString = DateTime.Now.ToString("yyyy-MM-dd");
         private int fileCounter = 0;
+        string baseFileName = "";
         private int productCounter = 0;
         private string folderPath = "";
         String separator = ",";
@@ -19,10 +20,10 @@
 
         public CSVFileCreation(string bottin_Nom)
         {
-            string baseFileName = Path.GetFileNameWithoutExtension(bottin_Nom);
-            folderPath = GetUniqueFolderPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), baseFileName, dateString));
+            baseFileName = Path.GetFileNameWithoutExtension(bottin_Nom);
+            folderPath = GetUniqueFolderPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{baseFileName}  {dateString}"));
             Directory.CreateDirectory(folderPath);
-            newFilePath = Path.Combine(folderPath, $"{baseFileName}_{dateString}.csv");
+            //newFilePath = Path.Combine(folderPath, $"{baseFileName}_{dateString}.csv");
         }
 
         private string GetUniqueFolderPath(string folderPath)
@@ -51,7 +52,7 @@
                 }
 
                 counter++;
-                folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{folderPath} ({counter})");
+                folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"({counter})_{folderPath}");
             }
 
             return folderPath;
@@ -60,7 +61,9 @@
         private string GetNewFileName()
         {
             fileCounter++;
-            return Path.Combine(folderPath, $"{newFilePath}_{dateString}_{fileCounter}.csv");
+            newFilePath = "";
+            string formattedName = Path.GetFileNameWithoutExtension(baseFileName);
+            return Path.Combine(folderPath, $"{fileCounter}_fichier de remplacement.csv");
 
         }
 
