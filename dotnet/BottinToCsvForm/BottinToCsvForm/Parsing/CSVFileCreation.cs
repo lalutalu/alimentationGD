@@ -6,8 +6,8 @@
         private string dateString = DateTime.Now.ToString("yyyy-MM-dd");
         private int fileCounter = 0;
         string baseFileName = "";
-        private int productCounter = 0;
         private string folderPath = "";
+        private int productCounter = 0;
         String separator = ",";
         String[] headings = { "handleId", "fieldType", "name", "description", "productImageUrl", "collection", "sku", "ribbon", "price", "surcharge", "visible",
             "discountMode", "discountValue", "inventory", "weight", "cost", "productOptionName1", "productOptionType1", "productOptionDescription1", "productOptionName2",
@@ -21,7 +21,7 @@
         public CSVFileCreation(string bottin_Nom)
         {
             baseFileName = Path.GetFileNameWithoutExtension(bottin_Nom);
-            folderPath = GetUniqueFolderPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{baseFileName}  {dateString}"));
+            folderPath = GetUniqueFolderPath($"{baseFileName}  {dateString}");
             Directory.CreateDirectory(folderPath);
             //newFilePath = Path.Combine(folderPath, $"{baseFileName}_{dateString}.csv");
         }
@@ -30,13 +30,13 @@
         {
             int counter = 0;
             bool promptOverwrite = true;
-
-            if (!Directory.Exists(folderPath))
+            string desktopFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), folderPath);
+            if (!Directory.Exists(desktopFolderPath))
             {
-                return folderPath;
+                return desktopFolderPath;
             }
 
-            while (Directory.Exists(folderPath))
+            while (Directory.Exists(desktopFolderPath))
             {
                 if (promptOverwrite)
                 {
@@ -46,16 +46,16 @@
 
                     if (result == DialogResult.Yes)
                     {
-                        Directory.Delete(folderPath, true);
-                        return folderPath;
+                        Directory.Delete(desktopFolderPath, true);
+                        return desktopFolderPath;
                     }
+                    counter++;
+                    string newFolderName = $"({counter})_{folderPath}";
+                    desktopFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), newFolderName);
                 }
-
-                counter++;
-                folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"({counter})_{folderPath}");
             }
 
-            return folderPath;
+            return desktopFolderPath;
         }
 
         private string GetNewFileName()
@@ -149,6 +149,7 @@
             return newFilePath;
         }
 
+        // Cette fonction separe les produits en liste de 4999 ou moins. Wix permet seulement 4999 produits importés a la fois.
         public List<List<Product>> SplitListIntoChunks(List<Product> allProducts, int chunkSize)
         {
             List<List<Product>> chunks = new List<List<Product>>();

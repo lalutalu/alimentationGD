@@ -334,7 +334,6 @@ namespace BottinToCsvForm
                 foreach (var list in products)
                 {
                     string filepath = fileCreation.CreateFile(list);
-                    MessageBox.Show($"{list.Count}", "Fichiers créé sur le bureau!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     message += $"{filepath}\n";
                 }
                 MessageBox.Show(message, "Fichiers créé sur le bureau!", MessageBoxButtons.OK, MessageBoxIcon.Information);
