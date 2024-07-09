@@ -108,6 +108,22 @@ namespace BottinToCsvForm.Parsing
                     {
                         categories.Add("Fruits et Legumes");
                     }
+                    else if (filePath.ToLower().Contains("boeuf"))
+                    {
+                        categories.Add("Boeuf");
+                    }
+                    else if (filePath.ToLower().Contains("poulet"))
+                    {
+                        categories.Add("Poulet");
+                    }
+                    else if (filePath.ToLower().Contains("porc"))
+                    {
+                        categories.Add("Porc");
+                    }
+                    else if (filePath.ToLower().Contains("saumon"))
+                    {
+                        categories.Add("Saumon");
+                    }
                     else
                     {
                         categories.Add("Produits Secs");

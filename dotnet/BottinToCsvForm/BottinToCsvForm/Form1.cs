@@ -247,12 +247,13 @@ namespace BottinToCsvForm
                 return;
             }
 
-            PdfDataParsing pdfDataParsing = new PdfDataParsing();
-            PdfViandeParsing viandeParsing = new PdfViandeParsing();
-            CSVFileCreation fileCreation = new CSVFileCreation(bottinPaths[0]);
-            CSVDataParsing csvDataParsing = new CSVDataParsing();
-            CirculaireParsing circulaireToCSV = new CirculaireParsing();
-            int counter = 1;
+            //PdfDataParsing pdfDataParsing = new PdfDataParsing();
+            //PdfViandeParsing viandeParsing = new PdfViandeParsing();
+            //CSVFileCreation fileCreation = new CSVFileCreation(bottinPaths[0]);
+            //CSVDataParsing csvDataParsing = new CSVDataParsing();
+            //CirculaireParsing circulaireToCSV = new CirculaireParsing();
+            //int counter = 1;
+            InitializeParsers();
 
             try
             {
@@ -326,8 +327,17 @@ namespace BottinToCsvForm
                     counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsOriginal, counter);
                     counter = CSVDataParsing.UpdatePrices(currentProducts, viandeProductsSurgeler, counter);
                 }
-                string filepath = fileCreation.CreateFile(currentProducts);
-                MessageBox.Show($"{filepath} créé sur le bureau!", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                List<List<Product>> products = fileCreation.SplitListIntoChunks(currentProducts, 4999);
+                string message = "";
+                foreach (var list in products)
+                {
+                    string filepath = fileCreation.CreateFile(list);
+                    MessageBox.Show($"{list.Count}", "Fichiers créé sur le bureau!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    message += $"{filepath}\n";
+                }
+                MessageBox.Show(message, "Fichiers créé sur le bureau!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
