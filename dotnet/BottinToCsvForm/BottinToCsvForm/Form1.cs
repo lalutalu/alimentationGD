@@ -334,8 +334,10 @@ namespace BottinToCsvForm
                 foreach (var list in products)
                 {
                     string filepath = fileCreation.CreateFile(list);
+                    filepath = Path.GetFileNameWithoutExtension(filepath);
                     message += $"{filepath}\n";
                 }
+                message += "sur le bureau!";
                 MessageBox.Show(message, "Fichiers créé sur le bureau!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)

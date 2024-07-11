@@ -1,15 +1,20 @@
-﻿namespace BottinToCsvForm.Parsing
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms; // Make sure to include this for MessageBox
+
+namespace BottinToCsvForm.Parsing
 {
     public class CSVFileCreation
     {
         private string newFilePath;
         private string dateString = DateTime.Now.ToString("yyyy-MM-dd");
         private int fileCounter = 0;
-        string baseFileName = "";
+        private string baseFileName = "";
         private string folderPath = "";
         private int productCounter = 0;
-        String separator = ",";
-        String[] headings = { "handleId", "fieldType", "name", "description", "productImageUrl", "collection", "sku", "ribbon", "price", "surcharge", "visible",
+        private string separator = ",";
+        private string[] headings = { "handleId", "fieldType", "name", "description", "productImageUrl", "collection", "sku", "ribbon", "price", "surcharge", "visible",
             "discountMode", "discountValue", "inventory", "weight", "cost", "productOptionName1", "productOptionType1", "productOptionDescription1", "productOptionName2",
             "productOptionType2", "productOptionDescription2", "productOptionName3", "productOptionType3", "productOptionDescription3", "productOptionName4",
             "productOptionType4", "productOptionDescription4", "productOptionName5", "productOptionType5", "productOptionDescription5", "productOptionName6",
@@ -21,34 +26,27 @@
         public CSVFileCreation(string bottin_Nom)
         {
             baseFileName = Path.GetFileNameWithoutExtension(bottin_Nom);
-            folderPath = GetUniqueFolderPath($"{baseFileName}  {dateString}");
+            folderPath = GetUniqueFolderPath($"{baseFileName} {dateString}");
             Directory.CreateDirectory(folderPath);
-            //newFilePath = Path.Combine(folderPath, $"{baseFileName}_{dateString}.csv");
         }
 
         private string GetUniqueFolderPath(string folderPath)
         {
             int counter = 0;
-            bool promptOverwrite = true;
             string desktopFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), folderPath);
-            if (!Directory.Exists(desktopFolderPath))
-            {
-                return desktopFolderPath;
-            }
 
             while (Directory.Exists(desktopFolderPath))
             {
-                if (promptOverwrite)
-                {
-                    var result = MessageBox.Show($"The folder '{folderPath}' already exists. Do you want to overwrite this folder?", "Existing Folder",
-                                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    promptOverwrite = false;
+                var result = MessageBox.Show($"Le dossier '{folderPath}' existe déja. Voulez vous l'écraser?", "Existing Folder",
+                                               MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    if (result == DialogResult.Yes)
-                    {
-                        Directory.Delete(desktopFolderPath, true);
-                        return desktopFolderPath;
-                    }
+                if (result == DialogResult.Yes)
+                {
+                    Directory.Delete(desktopFolderPath, true);
+                    break;
+                }
+                else if (result == DialogResult.No)
+                {
                     counter++;
                     string newFolderName = $"({counter})_{folderPath}";
                     desktopFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), newFolderName);
@@ -61,30 +59,25 @@
         private string GetNewFileName()
         {
             fileCounter++;
-            newFilePath = "";
-            string formattedName = Path.GetFileNameWithoutExtension(baseFileName);
-            return Path.Combine(folderPath, $"{fileCounter}_fichier de remplacement.csv");
-
+            return Path.Combine(folderPath, $"{fileCounter}_fichier_de_remplacement.csv");
         }
 
         public string CreateFile(List<Product> products)
-
         {
             newFilePath = GetNewFileName();
+
             using (var writer = new StreamWriter(newFilePath, true))
             {
                 if (!File.Exists(newFilePath))
                 {
                     writer.WriteLine(string.Join(separator, headings));
                 }
+
                 foreach (var product in products)
                 {
-                    string description = $"{product.Quantite}X{product.Format}";
-                    if (product.Quantite == "No Quantity")
-                    {
-                        description = $"{product.Format}";
-                    }
+                    string description = product.Quantite == "No Quantity" ? product.Format : $"{product.Quantite}X{product.Format}";
                     string categories = string.Join(";", product.Categories);
+
                     string[] productValues = {
                         product.HandleID,
                         product.fieldType,
@@ -146,10 +139,10 @@
                     writer.WriteLine(productRow);
                 }
             }
+
             return newFilePath;
         }
 
-        // Cette fonction separe les produits en liste de 4999 ou moins. Wix permet seulement 4999 produits importés a la fois.
         public List<List<Product>> SplitListIntoChunks(List<Product> allProducts, int chunkSize)
         {
             List<List<Product>> chunks = new List<List<Product>>();
@@ -164,6 +157,7 @@
                     currentChunk = new List<Product>();
                 }
             }
+
             if (currentChunk.Count > 0)
             {
                 chunks.Add(currentChunk);
