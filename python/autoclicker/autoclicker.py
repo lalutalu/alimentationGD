@@ -1,4 +1,5 @@
 import os
+import csv
 import pandas as pd
 import glob
 import pyautogui
@@ -21,7 +22,14 @@ def get_latest_file():
         raise ValueError(f"Pas de fichiers CSV dans {downloads_path}")
     latest_file =max(list_of_files, key=os.path.getctime) 
     return latest_file
+
+
 # Function Read CSV File and parse data
+def read_csv(filePath: str):
+    with open(filePath, mode='r') as file:
+        csvFile = csv.reader(file)
+        for lines in csvFile:
+            print(lines)
 
 # Function export products to google cloud
 

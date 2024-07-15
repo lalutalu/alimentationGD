@@ -31,8 +31,7 @@
               "ViewState": "AQIAAEIBAAAAAAAAAAAgwFEBAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-08T15:22:18.87Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -42,7 +41,7 @@
               "RelativeDocumentMoniker": "BottinToCsvForm\\Parsing\\CSVFileCreation.cs",
               "ToolTip": "C:\\Users\\lalutalu\\Documents\\code\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\Parsing\\CSVFileCreation.cs",
               "RelativeToolTip": "BottinToCsvForm\\Parsing\\CSVFileCreation.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAzwCcAAABrAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAAwCMAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-09T15:09:02.164Z",
               "EditorCaption": ""
