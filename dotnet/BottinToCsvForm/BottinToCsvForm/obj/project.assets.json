@@ -4854,11 +4854,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lalutalu\\Documents\\code\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
+      "projectUniqueName": "C:\\Users\\lalutalu\\Desktop\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
       "projectName": "BottinToCsvForm",
-      "projectPath": "C:\\Users\\lalutalu\\Documents\\code\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
+      "projectPath": "C:\\Users\\lalutalu\\Desktop\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\BottinToCsvForm.csproj",
       "packagesPath": "C:\\Users\\lalutalu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lalutalu\\Documents\\code\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\obj\\",
+      "outputPath": "C:\\Users\\lalutalu\\Desktop\\alimentationGD\\dotnet\\BottinToCsvForm\\BottinToCsvForm\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lalutalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
