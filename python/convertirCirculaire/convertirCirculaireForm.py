@@ -1,6 +1,7 @@
 import os
 from datetime import date
 import re
+from types import TracebackType
 import PyPDF2
 import tkinter as tk
 from tkinter import filedialog
@@ -192,33 +193,41 @@ def create_gui():
     root.mainloop()
 
 def parse_pdf(pdf_path):
-    if(pdf_path == ""):
-        messagebox.showerror("Erreur!", "Veuillez choisir un fichier avant de continuer...")
-        return
-    combined_lines = extract_product_with_details(pdf_path)
+    try:
+        if(pdf_path == ""):
+            messagebox.showerror("Erreur!", "Veuillez choisir un fichier avant de continuer...")
+            return
+        combined_lines = extract_product_with_details(pdf_path)
 
-    for line in combined_lines:
-        print()
-        weight, unit = extract_weight(line)
+        for line in combined_lines:
+            weight, unit = extract_weight(line)
 
-        product = Product(
-            name=extract_product_name(line),
-            prixOg=extract_original_price(line),
-            prixNew=calculate_new_price(float(extract_original_price(line))),
-            code39=extract_product_code(line),
-            quantity = extract_quantity(line),
-            weight=weight,
-            unit=unit,
-        )
+            product = Product(
+                name=extract_product_name(line),
+                prixOg=extract_original_price(line),
+                prixNew=calculate_new_price(float(extract_original_price(line))),
+                code39=extract_product_code(line),
+                quantity = extract_quantity(line),
+                weight=weight,
+                unit=unit,
+            )
 
-        products.append(product)
-    today = date.today()
-    formatted_date = today.strftime("%d-%m-%Y")
-    desktop_dir = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
-    output_file_name = f"circulaire_{formatted_date}.pdf"
-    output_pdf_path = os.path.join(desktop_dir, output_file_name)
-    create_product_pdf(products, output_pdf_path)
-    messagebox.showinfo("Succès", f"Le circulaire fût crée au chemin: \n{output_pdf_path}", icon="info")
+            products.append(product)
+        today = date.today()
+        formatted_date = today.strftime("%d-%m-%Y")
+        desktop_dir_english = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+        desktop_dir = "";
+        if(os.path.exists(desktop_dir_english)):
+            desktop_dir = desktop_dir_english
+        else:
+            desktop_dir = os.path.join(os.environ['USERPROFILE'], 'Bureau')
+        output_file_name = f"circulaire_{formatted_date}.pdf"
+        output_pdf_path = os.path.join(desktop_dir, output_file_name)
+        create_product_pdf(products, output_pdf_path)
+        messagebox.showinfo("Succès", f"Le circulaire fût crée au chemin: \n{output_pdf_path}", icon="info")
+    except Exception as e:
+        error_message = f"Une erreur est survenue : {e}"
+        messagebox.showerror("Erreur", error_message)
 
 def create_product_pdf(products, output_pdf_path):
     c = canvas.Canvas(output_pdf_path)
