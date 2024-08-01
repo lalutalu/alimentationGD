@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "b/3Gatez3Gg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\SERVER\\AutoClicker\\AutoClicker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lalutalu\\.nuget\\packages\\csvhelper\\33.0.1\\csvhelper.33.0.1.nupkg.sha512",
+    "C:\\Users\\lalutalu\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
