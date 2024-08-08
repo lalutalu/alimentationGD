@@ -3,9 +3,4 @@
   <PropertyGroup>
     <_LastSelectedProfileId>C:\Users\lalutalu\Documents\code\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Update="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-  </ItemGroup>
 </Project>

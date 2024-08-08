@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\GetCoordinates\\GetCoordinates.csproj": {}
+    "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\SERVER\\GetCoordinates\\GetCoordinates.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\GetCoordinates\\GetCoordinates.csproj": {
+    "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\SERVER\\GetCoordinates\\GetCoordinates.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\GetCoordinates\\GetCoordinates.csproj",
+        "projectUniqueName": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\SERVER\\GetCoordinates\\GetCoordinates.csproj",
         "projectName": "GetCoordinates",
-        "projectPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\GetCoordinates\\GetCoordinates.csproj",
+        "projectPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\SERVER\\GetCoordinates\\GetCoordinates.csproj",
         "packagesPath": "C:\\Users\\lalutalu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\GetCoordinates\\obj\\",
+        "outputPath": "C:\\Users\\lalutalu\\dev\\alimentationGD\\dotnet\\SERVER\\GetCoordinates\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lalutalu\\AppData\\Roaming\\NuGet\\NuGet.Config",

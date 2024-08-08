@@ -22,3 +22,15 @@ C:\Users\lalutalu\dev\alimentationGD\dotnet\GetCoordinates\obj\Debug\netcoreapp3
 C:\Users\lalutalu\dev\alimentationGD\dotnet\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.dll
 C:\Users\lalutalu\dev\alimentationGD\dotnet\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.pdb
 C:\Users\lalutalu\dev\alimentationGD\dotnet\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.genruntimeconfig.cache
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\bin\Debug\netcoreapp3.1\GetCoordinates.exe
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\bin\Debug\netcoreapp3.1\GetCoordinates.deps.json
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\bin\Debug\netcoreapp3.1\GetCoordinates.runtimeconfig.json
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\bin\Debug\netcoreapp3.1\GetCoordinates.runtimeconfig.dev.json
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\bin\Debug\netcoreapp3.1\GetCoordinates.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\bin\Debug\netcoreapp3.1\GetCoordinates.pdb
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.AssemblyInfoInputs.cache
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.AssemblyInfo.cs
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.csproj.CoreCompileInputs.cache
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.pdb
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\GetCoordinates\obj\Debug\netcoreapp3.1\GetCoordinates.genruntimeconfig.cache

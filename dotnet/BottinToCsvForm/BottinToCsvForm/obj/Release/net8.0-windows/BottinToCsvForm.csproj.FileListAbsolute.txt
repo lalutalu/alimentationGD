@@ -79,3 +79,9 @@ C:\Users\lalutalu\Desktop\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\
 C:\Users\lalutalu\Desktop\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\BottinToCsvForm.pdb
 C:\Users\lalutalu\Desktop\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\BottinToCsvForm.genruntimeconfig.cache
 C:\Users\lalutalu\Desktop\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\obj\Release\net8.0-windows\ref\BottinToCsvForm.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\ClosedXML.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\DocumentFormat.OpenXml.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\ExcelNumberFormat.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\Irony.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\SixLabors.Fonts.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\BottinToCsvForm\BottinToCsvForm\bin\Release\net8.0-windows\XLParser.dll

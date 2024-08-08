@@ -221,10 +221,10 @@ def parse_pdf(pdf_path):
             desktop_dir = desktop_dir_english
         else:
             desktop_dir = os.path.join(os.environ['USERPROFILE'], 'Bureau')
-        output_file_name = f"circulaire_{formatted_date}.pdf"
-        output_pdf_path = os.path.join(desktop_dir, output_file_name)
-        create_product_pdf(products, output_pdf_path)
-        messagebox.showinfo("Succès", f"Le circulaire fût crée au chemin: \n{output_pdf_path}", icon="info")
+            output_file_name = f"circulaire_{formatted_date}.pdf"
+            output_pdf_path = os.path.join(desktop_dir, output_file_name)
+            create_product_pdf(products, output_pdf_path)
+            messagebox.showinfo("Succès", f"Le circulaire fût crée au chemin: \n{output_pdf_path}", icon="info")
     except Exception as e:
         error_message = f"Une erreur est survenue : {e}"
         messagebox.showerror("Erreur", error_message)
