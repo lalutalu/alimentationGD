@@ -31,7 +31,7 @@ namespace GetCoordinates
             var lines = initialString.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             var result = new System.Text.StringBuilder();
 
-            var regex = new Regex(@"^\d{8,12}");
+            var regex = new Regex(@"^\d{7,12}");
             var currentProduct = new System.Text.StringBuilder();
             bool skipLines = false;
 

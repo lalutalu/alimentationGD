@@ -72,3 +72,4 @@ C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\AutoClicker\bin\Debug\netcore
 C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\AutoClicker\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\AutoClicker\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\AutoClicker\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\lalutalu\dev\alimentationGD\dotnet\SERVER\AutoClicker\bin\Debug\netcoreapp3.1\ExtendedNumerics.BigDecimal.dll
